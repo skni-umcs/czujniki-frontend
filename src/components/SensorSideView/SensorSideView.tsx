@@ -3,11 +3,13 @@ import classNames from "./SensorSideView.module.css";
 
 interface IProps {
     sensor: Sensor;
+    setActiveSensor: (value: Sensor | null) => void;
 }
 
-const SensorSideView: React.FC<IProps> = ({ sensor }) => {
+const SensorSideView: React.FC<IProps> = ({ sensor, setActiveSensor }) => {
     return (
         <div className={classNames.root}>
+            <button onClick={() => { setActiveSensor(null); }}>Cofnij</button>
             <h2>Czujnik numer {sensor.sensorId}</h2>
             <p>Wydział: {sensor.location.facultyName}</p>
             <p>Status: {sensor.status}</p>

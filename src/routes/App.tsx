@@ -31,9 +31,8 @@ function App() {
             <AppHeader />
             <div className={classNames.leftRight}>
                 <div className={classNames.sidebar}>
-                    <button onClick={() => { setActiveSensor(null); }}>Cofnij</button>
                     {activeSensor
-                        ? <SensorSideView sensor={activeSensor} />
+                        ? <SensorSideView sensor={activeSensor} setActiveSensor={setActiveSensor} />
                         : <SensorList sensors={sensors} setActiveSensor={setActiveSensor} />}
                 </div>
                 <div className={classNames.mapWrapper}>
@@ -62,9 +61,7 @@ function App() {
                                 eventHandlers={{ click: () => { setActiveSensor(sensor); } }}
                             >
                                 <Popup>
-                                    {sensor.location.facultyName}
-                                    {" "}
-                                    {sensor.location.id}
+                                    {sensor.location.facultyName}{sensor.location.id}
                                 </Popup>
                             </Marker>
                         ))}
