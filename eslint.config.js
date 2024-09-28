@@ -19,8 +19,8 @@ export default tseslint.config(
     eslint.configs.recommended,
     ...tseslint.configs.strictTypeChecked,
     ...tseslint.configs.stylisticTypeChecked,
-    jsxA11y.flatConfigs.recommended,
     {
+        ...jsxA11y.flatConfigs.recommended,
         plugins: {
             "react": reactPlugin,
             "react-hooks": reactHooksPlugin,
@@ -33,6 +33,8 @@ export default tseslint.config(
             ...reactPlugin.configs["jsx-runtime"].rules,
             ...customizedStylistic.rules,
             ...StylisticPlugin.configs["disable-legacy"].rules,
+            "react/prop-types": 0,
+            "@stylistic/jsx-one-expression-per-line": 0,
         },
         settings: {
             react: {
