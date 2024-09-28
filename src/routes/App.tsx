@@ -2,11 +2,11 @@ import { MapContainer, Marker, Popup, TileLayer, useMapEvents } from "react-leaf
 
 import classNames from "./App.module.css";
 import json from "../sensors.json";
-import skniLogo from "../assets/skni_logo.svg";
 import Sensor from "../types/Sensor";
 import { Dispatch, SetStateAction, useState } from "react";
 import SensorSideView from "../components/SensorSideView/SensorSideView";
 import SensorList from "../components/SensorList/SensorList";
+import AppHeader from "../components/AppHeader/AppHeader";
 
 const sensors: Sensor[] = json;
 
@@ -28,10 +28,7 @@ function App() {
 
     return (
         <div className={classNames.appRoot}>
-            <div className={classNames.topBar}>
-                <img className={classNames.logo} src={skniLogo} alt="Logo SKNI" height={51} width={76} />
-                <h1>Czujniki UMCS</h1>
-            </div>
+            <AppHeader />
             <div className={classNames.leftRight}>
                 <div className={classNames.sidebar}>
                     <button onClick={() => { setActiveSensor(null); }}>Cofnij</button>
