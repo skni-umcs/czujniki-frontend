@@ -3,6 +3,7 @@ import ReactDOM from "react-dom/client";
 import { createBrowserRouter, RouterProvider } from "react-router-dom";
 
 import "./index.css";
+import "leaflet/dist/leaflet.css";
 import App from "./routes/App.tsx";
 import ErrorPage from "./routes/ErrorPage.tsx";
 
