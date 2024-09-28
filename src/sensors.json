@@ -1,0 +1,77 @@
+[
+    {
+        "sensorId": 1,
+        "status": "error",
+        "latestDataUpdate": "2024-09-25T12:04:25",
+        "currentTemperature": -15.78,
+        "currentHumidity": 13.45,
+        "currentPressure": 1020.56,
+        "currentGasResistance": 893.99,
+        "location": {
+            "id": 560,
+            "latitude": 51.246038,
+            "longitude": 22.542213,
+            "facultyName": "Business"
+        }
+    },
+    {
+        "sensorId": 2,
+        "status": "inactive",
+        "latestDataUpdate": "2024-09-25T00:07:25",
+        "currentTemperature": 38.97,
+        "currentHumidity": 19.81,
+        "currentPressure": 976.03,
+        "currentGasResistance": 153.81,
+        "location": {
+            "id": 161,
+            "latitude": 51.245038,
+            "longitude": 22.542213,
+            "facultyName": "Medicine"
+        }
+    },
+    {
+        "sensorId": 3,
+        "status": "inactive",
+        "latestDataUpdate": "2024-09-25T09:10:25",
+        "currentTemperature": 4.03,
+        "currentHumidity": 79.92,
+        "currentPressure": 1005.21,
+        "currentGasResistance": 420.73,
+        "location": {
+            "id": 921,
+            "latitude": 51.243038,
+            "longitude": 22.542213,
+            "facultyName": "Medicine"
+        }
+    },
+    {
+        "sensorId": 4,
+        "status": "error",
+        "latestDataUpdate": "2024-09-25T13:20:25",
+        "currentTemperature": 44.31,
+        "currentHumidity": 49.25,
+        "currentPressure": 966.07,
+        "currentGasResistance": 355.93,
+        "location": {
+            "id": 626,
+            "latitude": 51.247038,
+            "longitude": 22.542213,
+            "facultyName": "Engineering"
+        }
+    },
+    {
+        "sensorId": 5,
+        "status": "inactive",
+        "latestDataUpdate": "2024-09-25T13:34:25",
+        "currentTemperature": 10.96,
+        "currentHumidity": 91.2,
+        "currentPressure": 1010.93,
+        "currentGasResistance": 681.69,
+        "location": {
+            "id": 892,
+            "latitude": 51.245641,
+            "longitude": 22.540845,
+            "facultyName": "Medicine"
+        }
+    }
+]
