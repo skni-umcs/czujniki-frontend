@@ -1,0 +1,5 @@
+.root {
+    padding-inline: 32px;
+    padding-block: 16px;
+    box-sizing: border-box;
+}

@@ -1,0 +1,42 @@
+.appRoot {
+    height: 100vh;
+    display: flex;
+    flex-direction: column;
+}
+
+.topBar {
+    padding: 16px;
+    box-sizing: border-box;
+    display: flex;
+    height: 80px;
+}
+
+.topBar>h1 {
+    margin: 0;
+    align-self: center;
+}
+
+.logo {
+    margin-inline-end: 14px;
+    max-width: 100%;
+    height: 100%;
+}
+
+
+.leftRight {
+    display: flex;
+    flex-direction: row;
+    height: calc(100vh - 80px);
+}
+
+.sidebar {
+    width: 350px;
+}
+
+.mapWrapper {
+    flex-grow: 1;
+}
+
+.mapContainer {
+    height: 100%;
+}
