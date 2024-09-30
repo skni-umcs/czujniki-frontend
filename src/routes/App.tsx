@@ -61,7 +61,7 @@ function App() {
                                 eventHandlers={{ click: () => { setActiveSensor(sensor); } }}
                             >
                                 <Popup>
-                                    {sensor.location.facultyName}{sensor.location.id}
+                                    {sensor.location.facultyName} {sensor.location.id}
                                 </Popup>
                             </Marker>
                         ))}

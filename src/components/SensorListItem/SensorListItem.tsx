@@ -9,9 +9,9 @@ interface IProps {
 const SensorListItem: React.FC<IProps> = ({ sensor, onClick }) => {
     return (
         <button className={classNames.root} onClick={onClick}>
-            <h2>Czujnik numer {sensor.sensorId}</h2>
-            <p>Wydział: {sensor.location.facultyName}</p>
-            <p>Temperatura: {sensor.currentTemperature}° C</p>
+            <div className={classNames.heading}>Czujnik {sensor.sensorId}</div>
+            <div>Wydział: {sensor.location.facultyName}</div>
+            <div>Temperatura: {sensor.currentTemperature}° C</div>
         </button>
     );
 };

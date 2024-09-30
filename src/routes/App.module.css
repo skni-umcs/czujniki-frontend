@@ -7,11 +7,13 @@
 .leftRight {
     display: flex;
     flex-direction: row;
-    height: calc(100vh - 80px);
+    flex-grow: 1;
+    contain: strict;
 }
 
 .sidebar {
-    width: 350px;
+    flex: 0 1 350px;
+    overflow: auto;
 }
 
 .mapWrapper {
@@ -20,4 +22,5 @@
 
 .mapContainer {
     height: 100%;
+    width: 100%;
 }

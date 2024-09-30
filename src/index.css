@@ -1,7 +1,14 @@
+*,
+*::before,
+*::after {
+    box-sizing: border-box;
+}
+
 :root {
     font-family: sans-serif;
     color-scheme: light dark;
     color: rgba(255, 255, 255, 0.87);
+    line-height: 1.5;
     background-color: #242424;
 }
 

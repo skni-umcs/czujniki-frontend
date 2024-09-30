@@ -13,3 +13,9 @@
     transition: .3s background-color;
     cursor: pointer;
 }
+
+.heading {
+    font-size: 1.25em;
+    font-weight: bold;
+    margin-block-end: 0.3em;
+}
