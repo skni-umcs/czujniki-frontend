@@ -1,18 +1,22 @@
+import { Link } from "react-router-dom";
+
 import Sensor from "../../types/Sensor";
 import classNames from "./SensorListItem.module.css";
 
 interface IProps {
     sensor: Sensor;
-    onClick?: React.MouseEventHandler<HTMLButtonElement>;
 }
 
-const SensorListItem: React.FC<IProps> = ({ sensor, onClick }) => {
+const SensorListItem: React.FC<IProps> = ({ sensor }) => {
     return (
-        <button className={classNames.root} onClick={onClick}>
+        <Link
+            to={`/sensors/${sensor.sensorId.toString()}`}
+            className={classNames.root}
+        >
             <div className={classNames.heading}>Czujnik {sensor.sensorId}</div>
             <div>Wydział: {sensor.location.facultyName}</div>
             <div>Temperatura: {sensor.currentTemperature}° C</div>
-        </button>
+        </Link>
     );
 };
 

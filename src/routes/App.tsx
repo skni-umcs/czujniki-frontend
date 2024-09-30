@@ -1,39 +1,29 @@
-import { MapContainer, Marker, Popup, TileLayer, useMapEvents } from "react-leaflet";
+import { MapContainer, Marker, Popup, TileLayer, useMapEvent } from "react-leaflet";
+import { Outlet, useLoaderData, useNavigate } from "react-router-dom";
 
 import classNames from "./App.module.css";
-import json from "../sensors.json";
 import Sensor from "../types/Sensor";
-import { Dispatch, SetStateAction, useState } from "react";
-import SensorSideView from "../components/SensorSideView/SensorSideView";
-import SensorList from "../components/SensorList/SensorList";
 import AppHeader from "../components/AppHeader/AppHeader";
 
-const sensors: Sensor[] = json;
-
-const LocationMarker: React.FC<{
-    setActiveSensor: Dispatch<SetStateAction<Sensor | null>>;
-}> = ({ setActiveSensor }) => {
-    const map = useMapEvents({
-        click() {
-            console.log("Map clicked");
-            setActiveSensor(null);
-        },
+const ClickDetector: React.FC = () => {
+    const navigate = useNavigate();
+    useMapEvent("click", () => {
+        console.log("Map clicked");
+        navigate("/");
     });
-
     return null;
 };
 
-function App() {
-    const [activeSensor, setActiveSensor] = useState<Sensor | null>(null);
+const App: React.FC = () => {
+    const sensors = useLoaderData() as Sensor[];
+    const navigate = useNavigate();
 
     return (
         <>
             <AppHeader />
             <div className={classNames.leftRight}>
                 <div className={classNames.sidebar}>
-                    {activeSensor
-                        ? <SensorSideView sensor={activeSensor} setActiveSensor={setActiveSensor} />
-                        : <SensorList sensors={sensors} setActiveSensor={setActiveSensor} />}
+                    <Outlet />
                 </div>
                 <div className={classNames.mapWrapper}>
                     <MapContainer
@@ -58,20 +48,23 @@ function App() {
                             <Marker
                                 position={[sensor.location.latitude, sensor.location.longitude]}
                                 key={sensor.sensorId}
-                                eventHandlers={{ click: () => { setActiveSensor(sensor); } }}
+                                eventHandlers={{
+                                    click: () => {
+                                        navigate(`/sensors/${sensor.sensorId.toString()}`);
+                                    },
+                                }}
                             >
                                 <Popup>
                                     {sensor.location.facultyName} {sensor.location.id}
                                 </Popup>
                             </Marker>
                         ))}
-                        <LocationMarker setActiveSensor={setActiveSensor} />
+                        <ClickDetector />
                     </MapContainer>
                 </div>
             </div>
-
         </>
     );
-}
+};
 
 export default App;

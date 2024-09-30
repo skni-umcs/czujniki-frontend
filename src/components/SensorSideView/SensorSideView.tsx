@@ -1,15 +1,15 @@
-import Sensor from "../../types/Sensor";
+import { useLoaderData, useNavigate } from "react-router-dom";
+
 import classNames from "./SensorSideView.module.css";
+import Sensor from "../../types/Sensor";
 
-interface IProps {
-    sensor: Sensor;
-    setActiveSensor: (value: Sensor | null) => void;
-}
+const SensorSideView: React.FC = () => {
+    const sensor = useLoaderData() as Sensor;
+    const navigate = useNavigate();
 
-const SensorSideView: React.FC<IProps> = ({ sensor, setActiveSensor }) => {
     return (
         <div className={classNames.root}>
-            <button onClick={() => { setActiveSensor(null); }}>Cofnij</button>
+            <button onClick={() => { navigate("/"); }}>Cofnij</button>
             <h2>Czujnik numer {sensor.sensorId}</h2>
             <p>Wydział: {sensor.location.facultyName}</p>
             <p>Status: {sensor.status}</p>
