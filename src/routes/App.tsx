@@ -27,7 +27,7 @@ function App() {
     const [activeSensor, setActiveSensor] = useState<Sensor | null>(null);
 
     return (
-        <div className={classNames.appRoot}>
+        <>
             <AppHeader />
             <div className={classNames.leftRight}>
                 <div className={classNames.sidebar}>
@@ -70,7 +70,7 @@ function App() {
                 </div>
             </div>
 
-        </div>
+        </>
     );
 }
 

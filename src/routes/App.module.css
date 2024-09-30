@@ -1,9 +1,3 @@
-.appRoot {
-    height: 100vh;
-    display: flex;
-    flex-direction: column;
-}
-
 .leftRight {
     display: flex;
     flex-direction: row;
