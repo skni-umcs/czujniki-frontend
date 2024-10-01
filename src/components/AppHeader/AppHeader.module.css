@@ -6,8 +6,27 @@
 
 .root>h1 {
     margin: 0;
+    flex-grow: 1;
 }
 
 .logo {
     margin-inline-end: 16px;
+}
+
+.nav {
+    display: flex;
+}
+
+.nav>a {
+    display: block;
+    padding-inline: 16px;
+    text-decoration: none;
+
+    &:is(:link, :visited) {
+        color: currentColor;
+    }
+
+    &:hover {
+        text-decoration: underline;
+    }
 }
