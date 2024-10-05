@@ -1,4 +1,6 @@
-import { Outlet, useLoaderData } from "react-router-dom";
+import { useEffect, useRef } from "react";
+import { Outlet, useLoaderData, useLocation } from "react-router-dom";
+import { Map as LeafletMap } from "leaflet";
 
 import classNames from "./App.module.css";
 import Sensor from "../types/Sensor";
@@ -8,6 +10,12 @@ import MapWrapper from "../components/MapWrapper/MapWrapper";
 
 const App: React.FC = () => {
     const sensors = useLoaderData() as Sensor[];
+    const leafletMapRef = useRef<LeafletMap>(null);
+    const location = useLocation();
+
+    useEffect(() => {
+        leafletMapRef.current?.invalidateSize();
+    }, [location.pathname]);
 
     return (
         <>
@@ -16,7 +24,7 @@ const App: React.FC = () => {
                 <Navbar />
                 <div className={classNames.leftRight}>
                     <Outlet />
-                    <MapWrapper sensors={sensors} />
+                    <MapWrapper sensors={sensors} leafletMapRef={leafletMapRef} />
                 </div>
             </div>
         </>

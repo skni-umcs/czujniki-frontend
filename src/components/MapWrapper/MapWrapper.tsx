@@ -1,19 +1,22 @@
 import { MapContainer, Marker, Popup, TileLayer } from "react-leaflet";
 import { useNavigate } from "react-router-dom";
+import { Map as LeafletMap } from "leaflet";
 
 import classNames from "./MapWrapper.module.css";
 import Sensor from "../../types/Sensor";
 
 interface IProps {
     sensors: Sensor[];
+    leafletMapRef: React.RefObject<LeafletMap>;
 }
 
-const MapWrapper: React.FC<IProps> = ({ sensors }) => {
+const MapWrapper: React.FC<IProps> = ({ sensors, leafletMapRef }) => {
     const navigate = useNavigate();
 
     return (
         <div className={classNames.root}>
             <MapContainer
+                ref={leafletMapRef}
                 center={[51.244, 22.5415]}
                 zoom={17}
                 minZoom={17}

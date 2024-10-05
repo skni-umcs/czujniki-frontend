@@ -11,7 +11,6 @@ import App from "./routes/App.tsx";
 import ErrorPage from "./routes/ErrorPage.tsx";
 import SensorSideView from "./components/SensorSideView/SensorSideView.tsx";
 import SensorList from "./components/SensorList/SensorList.tsx";
-import Sidebar from "./components/Sidebar/Sidebar.tsx";
 
 const sensors: Sensor[] = json;
 
@@ -24,12 +23,12 @@ const router = createBrowserRouter([
         children: [
             {
                 path: "sensors/",
-                element: <Sidebar><SensorList /></Sidebar>,
+                Component: SensorList,
                 loader: async () => sensors,
             },
             {
                 path: "sensors/:id",
-                element: <Sidebar><SensorSideView /></Sidebar>,
+                Component: SensorSideView,
                 loader: async ({ params }) => {
                     const sensor = sensors.find(s => s.sensorId === Number(params.id));
                     if (!sensor) throw new Error("404 sensorId");
