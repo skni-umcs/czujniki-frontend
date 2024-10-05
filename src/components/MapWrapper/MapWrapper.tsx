@@ -1,6 +1,7 @@
+import { Control, Map as LeafletMap } from "leaflet";
+import { createControlComponent } from "@react-leaflet/core";
 import { MapContainer, Marker, Popup, TileLayer } from "react-leaflet";
 import { useNavigate } from "react-router-dom";
-import { Map as LeafletMap } from "leaflet";
 
 import classNames from "./MapWrapper.module.css";
 import Sensor from "../../types/Sensor";
@@ -9,6 +10,14 @@ interface IProps {
     sensors: Sensor[];
     leafletMapRef: React.RefObject<LeafletMap>;
 }
+
+export const ZoomControl = createControlComponent(
+    () => new Control.Zoom({
+        position: "topright",
+        zoomInTitle: "Powiększ",
+        zoomOutTitle: "Pomniejsz",
+    }),
+);
 
 const MapWrapper: React.FC<IProps> = ({ sensors, leafletMapRef }) => {
     const navigate = useNavigate();
@@ -20,6 +29,7 @@ const MapWrapper: React.FC<IProps> = ({ sensors, leafletMapRef }) => {
                 center={[51.244, 22.5415]}
                 zoom={17}
                 minZoom={17}
+                zoomControl={false}
                 scrollWheelZoom={true}
                 maxBounds={[
                     [51.24, 22.53],
@@ -27,6 +37,7 @@ const MapWrapper: React.FC<IProps> = ({ sensors, leafletMapRef }) => {
                 ]}
                 className={classNames.mapContainer}
             >
+                <ZoomControl />
                 <TileLayer
                     attribution='&copy; <a href="https://www.openstreetmap.org/copyright">OpenStreetMap</a> contributors'
                     url="https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png"

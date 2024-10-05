@@ -1,9 +1,15 @@
 .root {
+    position: absolute;
+    left: 0;
+    top: 0;
+    z-index: 1001;
     width: 350px;
+    height: 100%;
     display: flex;
     flex-direction: column;
     overflow: auto;
     scrollbar-width: thin;
+    background-color: #242424;
 }
 
 @media screen and (max-width: 900px) {
