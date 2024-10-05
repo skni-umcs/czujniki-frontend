@@ -5,6 +5,10 @@
     padding-inline: 32px;
     padding-block: 16px;
 
+    > :not(.heading) {
+        font-size: 0.875em;
+    }
+
     &:is(:link, :visited) {
         color: currentColor;
     }
@@ -17,7 +21,6 @@
 }
 
 .heading {
-    font-size: 1.25em;
     font-weight: bold;
     margin-block-end: 0.3em;
 }

@@ -1,4 +1,5 @@
 import { useLoaderData, useNavigate } from "react-router-dom";
+import { IoArrowBack, IoClose } from "react-icons/io5";
 
 import classNames from "./SensorSideView.module.css";
 import Sensor from "../../types/Sensor";
@@ -9,20 +10,35 @@ const SensorSideView: React.FC = () => {
 
     return (
         <div className={classNames.root}>
-            <button onClick={() => { navigate("/"); }}>Cofnij</button>
-            <h2>Czujnik numer {sensor.sensorId}</h2>
-            <p>Wydział: {sensor.location.facultyName}</p>
-            <p>Status: {sensor.status}</p>
-            <br />
-            <h3>Obecne warunki</h3>
-            <p>Temperatura: {sensor.currentTemperature}° C</p>
-            <p>Ciśnienie: {sensor.currentPressure} hPa</p>
-            <p>Wilgotność: {sensor.currentHumidity}%</p>
-            <p>Rezystancja gazu: {sensor.currentGasResistance}</p>
-            <p>Data aktualizacji: {sensor.latestDataUpdate.toString()}</p>
-            <br />
-            <h3>Dane historyczne</h3>
-            <p>Wykresy???</p>
+            <div className={classNames.firstRow}>
+                <button
+                    className={classNames.backButton}
+                    onClick={() => { navigate("/sensors"); }}
+                >
+                    <IoArrowBack size={24} />
+                </button>
+                <div className={classNames.heading}>
+                    Czujnik {sensor.sensorId}
+                </div>
+                <button
+                    className={classNames.closeBtn}
+                    onClick={() => { navigate("/"); }}
+                >
+                    <IoClose size={24} />
+                </button>
+            </div>
+            <div className={classNames.content}>
+                <div>Wydział: {sensor.location.facultyName}</div>
+                <div>Status: {sensor.status}</div>
+                <div className={classNames.heading2}>Obecne warunki</div>
+                <div>Temperatura: {sensor.currentTemperature}° C</div>
+                <div>Ciśnienie: {sensor.currentPressure} hPa</div>
+                <div>Wilgotność: {sensor.currentHumidity}%</div>
+                <div>Rezystancja gazu: {sensor.currentGasResistance}</div>
+                <div>Data aktualizacji: {sensor.latestDataUpdate.toString()}</div>
+                <div className={classNames.heading2}>Dane historyczne</div>
+                <div>Wykresy???</div>
+            </div>
         </div>
     );
 };

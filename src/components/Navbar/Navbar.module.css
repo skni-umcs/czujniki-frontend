@@ -1,0 +1,49 @@
+.sideMenu {
+    width: 100px;
+    border-right: 1px solid #ffffff0f;
+    display: flex;
+    flex-direction: column;
+    flex-wrap: nowrap;
+    align-items: center;
+}
+
+.sideMenuItem {
+    border: 0;
+    font: inherit;
+    background-color: inherit;
+    cursor: pointer;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    flex-direction: column;
+    width: 100%;
+    padding-block: 16px;
+    font-size: 0.75em;
+}
+
+.sideMenuItem:hover {
+    background-color: green;
+}
+
+.sideMenuItem>div {
+    padding-top: 4px;
+}
+
+.logo {
+    margin: 16px 0;
+    margin-bottom: 10px;
+}
+
+@media screen and (max-width: 700px) {
+    .sideMenu {
+        display: flex;
+        flex-direction: row;
+        width: 100%;
+        z-index: 1001;
+        background-color: #2d2d2d;
+    }
+
+    .logo {
+        display: none;
+    }
+}

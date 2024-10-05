@@ -1,13 +1,13 @@
+.wrapper {
+    display: flex;
+    flex-grow: 1;
+}
+
 .leftRight {
     display: flex;
     flex-direction: row;
     flex-grow: 1;
     contain: strict;
-}
-
-.sidebar {
-    flex: 0 1 350px;
-    overflow: auto;
 }
 
 .mapWrapper {
@@ -17,4 +17,10 @@
 .mapContainer {
     height: 100%;
     width: 100%;
+}
+
+@media screen and (max-width: 700px) {
+    .wrapper {
+        flex-direction: column-reverse;
+    }
 }

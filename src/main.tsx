@@ -5,12 +5,13 @@ import { createBrowserRouter, RouterProvider } from "react-router-dom";
 
 import "./index.css";
 import "leaflet/dist/leaflet.css";
+import json from "./sensors.json";
+import Sensor from "./types/Sensor.ts";
 import App from "./routes/App.tsx";
 import ErrorPage from "./routes/ErrorPage.tsx";
 import SensorSideView from "./components/SensorSideView/SensorSideView.tsx";
-import json from "./sensors.json";
-import Sensor from "./types/Sensor.ts";
 import SensorList from "./components/SensorList/SensorList.tsx";
+import Sidebar from "./components/Sidebar/Sidebar.tsx";
 
 const sensors: Sensor[] = json;
 
@@ -22,13 +23,13 @@ const router = createBrowserRouter([
         loader: async () => sensors,
         children: [
             {
-                path: "/",
-                element: <SensorList />,
+                path: "sensors/",
+                element: <Sidebar><SensorList /></Sidebar>,
                 loader: async () => sensors,
             },
             {
                 path: "sensors/:id",
-                element: <SensorSideView />,
+                element: <Sidebar><SensorSideView /></Sidebar>,
                 loader: async ({ params }) => {
                     const sensor = sensors.find(s => s.sensorId === Number(params.id));
                     if (!sensor) throw new Error("404 sensorId");
