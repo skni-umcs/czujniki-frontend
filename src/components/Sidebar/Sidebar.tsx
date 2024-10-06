@@ -1,4 +1,4 @@
-import classNames from "./Sidebar.module.css";
+import styles from "./Sidebar.module.css";
 
 interface IProps {
     children: React.ReactElement;
@@ -6,7 +6,7 @@ interface IProps {
 
 const Sidebar: React.FC<IProps> = ({ children }) => {
     return (
-        <div className={classNames.root}>
+        <div className={styles.root}>
             {children}
         </div>
     );

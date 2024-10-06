@@ -2,7 +2,7 @@ import { useEffect, useRef } from "react";
 import { Outlet, useLoaderData, useLocation } from "react-router-dom";
 import { Map as LeafletMap } from "leaflet";
 
-import classNames from "./App.module.css";
+import styles from "./App.module.css";
 import Sensor from "../types/Sensor";
 import Navbar from "../components/Navbar/Navbar";
 import AppHeader from "../components/AppHeader/AppHeader";
@@ -20,9 +20,9 @@ const App: React.FC = () => {
     return (
         <>
             <AppHeader />
-            <div className={classNames.wrapper}>
+            <div className={styles.wrapper}>
                 <Navbar />
-                <div className={classNames.leftRight}>
+                <div className={styles.leftRight}>
                     <Outlet />
                     <MapWrapper sensors={sensors} leafletMapRef={leafletMapRef} />
                 </div>

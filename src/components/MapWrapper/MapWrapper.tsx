@@ -3,7 +3,7 @@ import { createControlComponent } from "@react-leaflet/core";
 import { MapContainer, Marker, Popup, TileLayer } from "react-leaflet";
 import { useNavigate } from "react-router-dom";
 
-import classNames from "./MapWrapper.module.css";
+import styles from "./MapWrapper.module.css";
 import Sensor from "../../types/Sensor";
 
 interface IProps {
@@ -23,7 +23,7 @@ const MapWrapper: React.FC<IProps> = ({ sensors, leafletMapRef }) => {
     const navigate = useNavigate();
 
     return (
-        <div className={classNames.root}>
+        <div className={styles.root}>
             <MapContainer
                 ref={leafletMapRef}
                 center={[51.244, 22.5415]}
@@ -35,7 +35,7 @@ const MapWrapper: React.FC<IProps> = ({ sensors, leafletMapRef }) => {
                     [51.24, 22.53],
                     [51.248, 22.55],
                 ]}
-                className={classNames.mapContainer}
+                className={styles.mapContainer}
             >
                 <ZoomControl />
                 <TileLayer

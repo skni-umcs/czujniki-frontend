@@ -1,7 +1,7 @@
 import { useLoaderData, useNavigate } from "react-router-dom";
 import { IoClose } from "react-icons/io5";
 
-import classNames from "./SensorList.module.css";
+import styles from "./SensorList.module.css";
 import Sensor from "../../types/Sensor";
 import SensorListItem from "../SensorListItem/SensorListItem";
 import Sidebar from "../Sidebar/Sidebar";
@@ -12,23 +12,23 @@ const SensorList: React.FC = () => {
 
     return (
         <Sidebar>
-            <div className={classNames.root}>
-                <div className={classNames.firstRow}>
-                    <div className={classNames.backButtonPlaceholder} />
-                    <div className={classNames.heading}>
+            <div className={styles.root}>
+                <div className={styles.firstRow}>
+                    <div className={styles.backButtonPlaceholder} />
+                    <div className={styles.heading}>
                         Lista czujników
                     </div>
                     <button
                         onClick={() => { navigate("/"); }}
-                        className={classNames.closeBtn}
+                        className={styles.closeBtn}
                     >
                         <IoClose size={24} />
                     </button>
                 </div>
-                <div className={classNames.searchBarContainer}>
+                <div className={styles.searchBarContainer}>
                     <input
                         placeholder="Szukaj..."
-                        className={classNames.searchBar}
+                        className={styles.searchBar}
                     />
                 </div>
                 {sensors.map(sensor => (
