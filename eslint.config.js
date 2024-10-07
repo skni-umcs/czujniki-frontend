@@ -19,20 +19,18 @@ export default tseslint.config(
     eslint.configs.recommended,
     ...tseslint.configs.strictTypeChecked,
     ...tseslint.configs.stylisticTypeChecked,
+    StylisticPlugin.configs["disable-legacy"],
+    reactPlugin.configs.flat.recommended,
+    reactPlugin.configs.flat["jsx-runtime"],
+    jsxA11y.flatConfigs.recommended,
     {
-        ...jsxA11y.flatConfigs.recommended,
         plugins: {
             "react": reactPlugin,
             "react-hooks": reactHooksPlugin,
             "@stylistic": StylisticPlugin,
         },
-        // @ts-expect-error wait for fixes
         rules: {
-            ...reactHooksPlugin.configs.recommended.rules,
-            ...reactPlugin.configs.recommended.rules,
-            ...reactPlugin.configs["jsx-runtime"].rules,
             ...customizedStylistic.rules,
-            ...StylisticPlugin.configs["disable-legacy"].rules,
             "react/prop-types": 0,
             "@stylistic/jsx-one-expression-per-line": 0,
         },
