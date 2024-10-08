@@ -1,38 +1,21 @@
 .root {
-    display: none;
+    display: flex;
     padding: 16px;
     align-items: center;
 }
 
-.root>h1 {
-    margin: 0;
-    flex-grow: 1;
+.link {
+    display: flex;
+    align-items: center;
+    text-decoration: none;
+    color: inherit;
 }
 
 .logo {
     margin-inline-end: 16px;
 }
 
-.nav {
-    display: flex;
-}
-
-.nav>a {
-    display: block;
-    padding-inline: 16px;
-    text-decoration: none;
-
-    &:is(:link, :visited) {
-        color: currentColor;
-    }
-
-    &:hover {
-        text-decoration: underline;
-    }
-}
-
-@media screen and (max-width: 700px) {
-    .root {
-        display: flex;
-    }
+.heading {
+    font-size: 2em;
+    font-weight: bold;
 }

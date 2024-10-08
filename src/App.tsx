@@ -22,7 +22,7 @@ const App: React.FC = () => {
 
     return (
         <>
-            <AppHeader />
+            <AppHeader className={styles.appHeader} />
             <div className={styles.wrapper}>
                 <Navbar />
                 <div className={styles.leftRight}>

@@ -5,6 +5,8 @@ import ErrorPage from "./routes/ErrorPage.tsx";
 import MainRoute, { IMainRouteLoaderData } from "./routes/MainRoute/MainRoute.tsx";
 import SensorList, { ISensorListLoaderData } from "./routes/SensorList/SensorList.tsx";
 import SensorSideView, { ISensorSideViewLoaderData } from "./routes/SensorSideView/SensorSideView.tsx";
+import Login from "./routes/Login/Login.tsx";
+import Register from "./routes/Register/Register.tsx";
 import Sensor from "./types/Sensor.ts";
 import json from "./sensors.json";
 import App from "./App.tsx";
@@ -14,6 +16,7 @@ const sensorList: Sensor[] = json;
 const router = createBrowserRouter([
     {
         Component: App,
+        ErrorBoundary: ErrorPage,
         children: [
             {
                 path: "/",
@@ -38,6 +41,16 @@ const router = createBrowserRouter([
                 },
             },
         ],
+    },
+    {
+        path: "/login",
+        Component: Login,
+        ErrorBoundary: ErrorPage,
+    },
+    {
+        path: "/register",
+        Component: Register,
+        ErrorBoundary: ErrorPage,
     },
 ]);
 
