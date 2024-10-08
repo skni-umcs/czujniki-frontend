@@ -1,0 +1,52 @@
+image: node:18
+
+# Define cache to speed up subsequent pipeline runs
+cache:
+  paths:
+    - node_modules/
+    - .pnpm-store/
+
+# Stages of the pipeline
+stages:
+  - install
+  - test
+  - build
+  - deploy
+
+# Install dependencies using pnpm
+install_dependencies:
+  stage: install
+  script:
+    - npm install -g pnpm
+    - pnpm install
+  cache:
+    paths:
+      - node_modules/
+      - .pnpm-store/
+
+# Run tests
+test:
+  stage: test
+  script:
+    - pnpm test
+
+# Build the application
+build:
+  stage: build
+  script:
+    - pnpm build
+  artifacts:
+    paths:
+      - build/
+
+# Deploy (optional step, adjust according to your needs)
+deploy:
+  stage: deploy
+  script:
+    - echo "Deploying your application..."
+    # Add your deployment steps here
+  environment:
+    name: production
+    url: http://your-production-url.com
+  only:
+    - main
