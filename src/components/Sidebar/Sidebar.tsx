@@ -1,10 +1,6 @@
 import styles from "./Sidebar.module.css";
 
-interface IProps {
-    children: React.ReactElement;
-}
-
-const Sidebar: React.FC<IProps> = ({ children }) => {
+const Sidebar: React.FC<React.PropsWithChildren> = ({ children }) => {
     return (
         <div className={styles.root}>
             {children}
