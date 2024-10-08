@@ -7,7 +7,6 @@ import Sensor from "../../types/Sensor";
 import Sidebar from "../../components/Sidebar/Sidebar";
 import MapPortal from "../../components/MapPortal/MapPortal";
 import SensorMarker from "../../components/SensorMarker/SensorMarker.tsx";
-import useFlyToOnRender from "./useFlyToOnRender.ts";
 
 export interface ISensorSideViewLoaderData {
     sensor: Sensor;
