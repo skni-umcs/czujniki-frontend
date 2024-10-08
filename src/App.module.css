@@ -10,10 +10,6 @@
     contain: strict;
 }
 
-.mapWrapper {
-    flex-grow: 1;
-}
-
 .mapContainer {
     height: 100%;
     width: 100%;

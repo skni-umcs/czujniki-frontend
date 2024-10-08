@@ -3,15 +3,26 @@ import { IoClose } from "react-icons/io5";
 
 import styles from "./SensorList.module.css";
 import Sensor from "../../types/Sensor";
-import SensorListItem from "../SensorListItem/SensorListItem";
-import Sidebar from "../Sidebar/Sidebar";
+import SensorListItem from "../../components/SensorListItem/SensorListItem";
+import Sidebar from "../../components/Sidebar/Sidebar";
+import MapPortal from "../../components/MapPortal/MapPortal";
+import SensorMarker from "../../components/SensorMarker/SensorMarker.tsx";
+
+export interface ISensorListLoaderData {
+    sensorList: Sensor[];
+};
 
 const SensorList: React.FC = () => {
-    const sensors = useLoaderData() as Sensor[];
+    const { sensorList } = useLoaderData() as ISensorListLoaderData;
     const navigate = useNavigate();
 
     return (
         <Sidebar>
+            <MapPortal>
+                {sensorList.map(s => (
+                    <SensorMarker key={s.sensorId} sensor={s} />
+                ))}
+            </MapPortal>
             <div className={styles.root}>
                 <div className={styles.firstRow}>
                     <div className={styles.backButtonPlaceholder} />
@@ -31,7 +42,7 @@ const SensorList: React.FC = () => {
                         className={styles.searchBar}
                     />
                 </div>
-                {sensors.map(sensor => (
+                {sensorList.map(sensor => (
                     <SensorListItem
                         sensor={sensor}
                         key={sensor.sensorId}

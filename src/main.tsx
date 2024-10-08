@@ -1,47 +1,17 @@
-/* eslint-disable @typescript-eslint/require-await */
 import React from "react";
 import ReactDOM from "react-dom/client";
-import { createBrowserRouter, RouterProvider } from "react-router-dom";
+import { RouterProvider } from "react-router-dom";
 
 import "./index.css";
-import "leaflet/dist/leaflet.css";
-import json from "./sensors.json";
-import Sensor from "./types/Sensor.ts";
-import App from "./routes/App.tsx";
-import ErrorPage from "./routes/ErrorPage.tsx";
-import SensorSideView from "./components/SensorSideView/SensorSideView.tsx";
-import SensorList from "./components/SensorList/SensorList.tsx";
 
-const sensors: Sensor[] = json;
-
-const router = createBrowserRouter([
-    {
-        path: "/",
-        element: <App />,
-        errorElement: <ErrorPage />,
-        loader: async () => sensors,
-        children: [
-            {
-                path: "sensors/",
-                Component: SensorList,
-                loader: async () => sensors,
-            },
-            {
-                path: "sensors/:id",
-                Component: SensorSideView,
-                loader: async ({ params }) => {
-                    const sensor = sensors.find(s => s.sensorId === Number(params.id));
-                    if (!sensor) throw new Error("404 sensorId");
-                    return sensor;
-                },
-            },
-        ],
-    },
-]);
+import MapContextProvider from "./contexts/MapContextProvider.tsx";
+import router from "./router.ts";
 
 // eslint-disable-next-line @typescript-eslint/no-non-null-assertion
 ReactDOM.createRoot(document.getElementById("root")!).render(
     <React.StrictMode>
-        <RouterProvider router={router} />
+        <MapContextProvider>
+            <RouterProvider router={router} />
+        </MapContextProvider>
     </React.StrictMode>,
 );
