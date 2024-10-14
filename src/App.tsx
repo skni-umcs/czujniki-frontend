@@ -18,7 +18,7 @@ const App: React.FC = () => {
         return () => {
             setMapElement(null);
         };
-    }, []);
+    }, [setMapElement]);
 
     return (
         <>
@@ -34,6 +34,7 @@ const App: React.FC = () => {
                             <TileLayer
                                 attribution='&copy; <a href="https://www.openstreetmap.org/copyright">OpenStreetMap</a> contributors'
                                 url="https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png"
+                                className={styles.tileLayer}
                             />
                         )}
                     </div>

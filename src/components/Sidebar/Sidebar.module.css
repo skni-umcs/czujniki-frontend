@@ -10,16 +10,13 @@
     overflow: auto;
     scrollbar-width: thin;
     background-color: #242424;
-}
+    box-shadow: 0 0 16px 0px hsl(0deg 0% 0% / 50%);
 
-@media screen and (max-width: 900px) {
-    .root {
-        width: 300px;
-    }
-}
-
-@media screen and (max-width: 700px) {
-    .root {
+    @media (max-width: 700px) {
         width: 100%;
+    }
+
+    @media (max-width: 900px) {
+        width: 300px;
     }
 }

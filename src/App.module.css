@@ -1,6 +1,16 @@
+.appHeader {
+    @media (min-width: 700px) {
+        display: none !important;
+    }
+}
+
 .wrapper {
     display: flex;
     flex-grow: 1;
+
+    @media (max-width: 700px) {
+        flex-direction: column-reverse;
+    }
 }
 
 .leftRight {
@@ -13,16 +23,11 @@
 .mapContainer {
     height: 100%;
     width: 100%;
+    background-color: #242424;
 }
 
-@media screen and (max-width: 700px) {
-    .wrapper {
-        flex-direction: column-reverse;
-    }
-}
-
-@media screen and (min-width: 700px) {
-    .appHeader {
-        display: none !important;
+.tileLayer {
+    @media (prefers-color-scheme: dark) {
+        filter: invert(1) hue-rotate(180deg) saturate(50%) contrast(90%);
     }
 }
