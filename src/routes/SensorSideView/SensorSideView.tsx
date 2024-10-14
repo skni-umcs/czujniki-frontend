@@ -1,12 +1,12 @@
 import { useLoaderData, useNavigate } from "react-router-dom";
 import { IoArrowBack, IoClose } from "react-icons/io5";
-import { useMap } from "react-leaflet";
 
 import styles from "./SensorSideView.module.css";
 import Sensor from "../../types/Sensor";
 import Sidebar from "../../components/Sidebar/Sidebar";
 import MapPortal from "../../components/MapPortal/MapPortal";
 import SensorMarker from "../../components/SensorMarker/SensorMarker.tsx";
+import useFlyToOnRender from "./useFlyToOnRender.ts";
 
 export interface ISensorSideViewLoaderData {
     sensor: Sensor;
@@ -16,9 +16,7 @@ export interface ISensorSideViewLoaderData {
 const SensorSideView: React.FC = () => {
     const { sensorList, sensor } = useLoaderData() as ISensorSideViewLoaderData;
     const navigate = useNavigate();
-
-    const map = useMap();
-    map.flyTo([sensor.location.latitude, sensor.location.longitude], 18);
+    useFlyToOnRender(sensor.location.latitude, sensor.location.longitude);
 
     return (
         <Sidebar>
