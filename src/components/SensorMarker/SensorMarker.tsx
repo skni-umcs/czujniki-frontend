@@ -1,5 +1,5 @@
-import { Icon, LatLngExpression, LeafletMouseEventHandlerFn } from "leaflet";
-import { Marker, Popup } from "react-leaflet";
+import { Icon } from "leaflet";
+import { Marker, useMapEvent } from "react-leaflet";
 import { useNavigate } from "react-router-dom";
 import clsx from "clsx";
 
@@ -25,22 +25,23 @@ interface IPropsMarker extends React.PropsWithChildren {
 const SensorMarker: React.FC<IPropsMarker> = ({ sensor, isActive }) => {
     const navigate = useNavigate();
 
-    const position: LatLngExpression = [sensor.location.latitude, sensor.location.longitude];
+    // handleBlur
+    useMapEvent("click", () => {
+        if (!isActive) return;
+        navigate("/sensors");
+    });
 
-    const handleClick: LeafletMouseEventHandlerFn = () => {
+    const handleClick = () => {
         navigate(`/sensors/${sensor.sensorId.toString()}`);
     };
 
     return (
         <Marker
             icon={!isActive ? MyIcon : MyIconActive}
-            position={position}
+            position={[sensor.location.latitude, sensor.location.longitude]}
             eventHandlers={{ click: handleClick }}
-        >
-            <Popup>
-                {sensor.location.facultyName} {sensor.location.id}
-            </Popup>
-        </Marker>
+            title={`${sensor.location.facultyName} ${sensor.location.id.toString()}`}
+        />
     );
 };
 
