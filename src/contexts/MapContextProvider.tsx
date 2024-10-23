@@ -1,5 +1,5 @@
 import { createContext, useContext, useEffect, useState } from "react";
-import { Map as LeafletMap } from "leaflet";
+import { LatLngExpression, Map as LeafletMap } from "leaflet";
 import { createLeafletContext, LeafletContextInterface, LeafletProvider } from "@react-leaflet/core";
 
 interface IMapContext {
@@ -22,16 +22,18 @@ const MapContextProvider: React.FC<React.PropsWithChildren> = ({ children }) => 
     useEffect(() => {
         if (!mapElement) return;
 
-        const map = new LeafletMap(mapElement, {
-            zoomControl: false,
-            zoom: 17,
-            minZoom: 17,
-            maxBounds: [
-                [51.24, 22.53],
-                [51.248, 22.55],
-            ],
-            center: [51.244, 22.5415],
+        const center: LatLngExpression = [51.244, 22.5415];
+        const padding = 1;
 
+        const map = new LeafletMap(mapElement, {
+            center,
+            zoom: 17,
+            minZoom: 16,
+            zoomControl: false,
+            maxBounds: [
+                [center[0] - padding * 0.01, center[1] - padding * 0.015967],
+                [center[0] + padding * 0.01, center[1] + padding * 0.015967],
+            ],
         });
         const ctx = createLeafletContext(map);
 
