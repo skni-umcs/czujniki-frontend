@@ -38,11 +38,11 @@ install:
 #     reports:
 #       junit: test-results.xml # Optional: Save test results for GitLab to display
 
-# # Build the app
-# build:
-#   stage: build
-#   script:
-#     - pnpm build # Build the production version of the app
-#   artifacts:
-#     paths:
-#       - build # Assuming 'build' is the output directory
+# Build the app
+build:
+  stage: build
+  script:
+    - pnpm build # Build the production version of the app
+  artifacts:
+    paths:
+      - build # Assuming 'build' is the output directory
