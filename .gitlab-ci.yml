@@ -45,4 +45,4 @@ build:
     - pnpm build # Build the production version of the app
   artifacts:
     paths:
-      - build # Assuming 'build' is the output directory
+      - dist # Assuming 'build' is the output directory
