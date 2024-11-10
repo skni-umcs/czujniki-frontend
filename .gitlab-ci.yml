@@ -19,13 +19,15 @@ cache:
 # Base job template
 default:
   image: node # Use a Node.js image compatible with pnpm
-  before_script:
-    - corepack enable
-    - pnpm install # Installs dependencies with pnpm using the cache
+  # before_script:
+    # - corepack enable
+    # - pnpm install # Installs dependencies with pnpm using the cache
 
 # Install dependencies
 install:
   stage: install
+  before_script:
+    - corepack enable
   script:
     - pnpm install
   artifacts:
@@ -47,6 +49,8 @@ install:
 # Build the app
 build:
   stage: build
+  before_script:
+    - corepack enable
   script:
     - pnpm build # Build the production version of the app
   artifacts:
