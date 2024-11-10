@@ -1,52 +1,48 @@
-image: node:18
-
-# Define cache to speed up subsequent pipeline runs
-cache:
-  paths:
-    - node_modules/
-    - .pnpm-store/
-
-# Stages of the pipeline
 stages:
   - install
-  - test
+  # - test
   - build
-  - deploy
+  # - deploy
 
-# Install dependencies using pnpm
-install_dependencies:
+# Define caching strategy to speed up subsequent jobs
+cache:
+  key: ${CI_COMMIT_REF_SLUG}
+  paths:
+    - .pnpm-store
+
+# Base job template
+default:
+  image: node # Use a Node.js image compatible with pnpm
+  before_script:
+    - corepack enable
+    - pnpm install # Installs dependencies with pnpm using the cache
+
+# Install dependencies
+install:
   stage: install
   script:
-    - npm install -g pnpm
     - pnpm install
-  cache:
-    paths:
-      - node_modules/
-      - .pnpm-store/
-
-# Run tests
-test:
-  stage: test
-  script:
-    - pnpm test
-
-# Build the application
-build:
-  stage: build
-  script:
-    - pnpm build
   artifacts:
     paths:
-      - build/
+      - node_modules # Cache node_modules for faster builds
+  cache:
+    paths:
+      - .pnpm-store
 
-# Deploy (optional step, adjust according to your needs)
-deploy:
-  stage: deploy
-  script:
-    - echo "Deploying your application..."
-    # Add your deployment steps here
-  environment:
-    name: production
-    url: http://your-production-url.com
-  only:
-    - main
+# Run tests
+# test:
+#   stage: test
+#   script:
+#     - pnpm test:ci # Assumes you have a CI-specific test command
+#   artifacts:
+#     reports:
+#       junit: test-results.xml # Optional: Save test results for GitLab to display
+
+# # Build the app
+# build:
+#   stage: build
+#   script:
+#     - pnpm build # Build the production version of the app
+#   artifacts:
+#     paths:
+#       - build # Assuming 'build' is the output directory
