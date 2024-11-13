@@ -50,7 +50,7 @@ const SensorSideView: React.FC = () => {
                     <div>Temperatura: {sensor.currentTemperature}° C</div>
                     <div>Ciśnienie: {sensor.currentPressure} hPa</div>
                     <div>Wilgotność: {sensor.currentHumidity}%</div>
-                    <div>Rezystancja gazu: {sensor.currentGasResistance}</div>
+                    <div>Jakość powietrza: {sensor.currentGasResistance}</div>
                     <div>Data aktualizacji: {sensor.latestDataUpdate.toString()}</div>
                     <div className={styles.heading2}>Dane historyczne</div>
                     <div>Wykresy???</div>
