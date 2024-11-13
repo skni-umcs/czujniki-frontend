@@ -15,8 +15,9 @@
 }
 
 .root:hover {
-    background-color: green;
-    transition: .3s background-color;
+    background-color: var(--accent-color);
+    color: var(--accent-text-color);
+    transition: .2s background-color;
     cursor: pointer;
 }
 

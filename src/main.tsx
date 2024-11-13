@@ -5,13 +5,16 @@ import { RouterProvider } from "react-router-dom";
 import "./index.css";
 
 import MapContextProvider from "./contexts/MapContextProvider.tsx";
+import SettingsProvider from "./contexts/SettingsProvider.tsx";
 import router from "./router.ts";
 
 // eslint-disable-next-line @typescript-eslint/no-non-null-assertion
 ReactDOM.createRoot(document.getElementById("root")!).render(
     <React.StrictMode>
-        <MapContextProvider>
-            <RouterProvider router={router} />
-        </MapContextProvider>
+        <SettingsProvider>
+            <MapContextProvider>
+                <RouterProvider router={router} />
+            </MapContextProvider>
+        </SettingsProvider>
     </React.StrictMode>,
 );

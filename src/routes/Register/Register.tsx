@@ -1,6 +1,6 @@
 import { Link } from "react-router-dom";
 
-import styles from "./Register.module.css";
+import styles from "../Login/Login.module.css";
 import AppHeader from "../../components/AppHeader/AppHeader";
 
 const Register: React.FC = () => {
@@ -34,7 +34,7 @@ const Register: React.FC = () => {
                         className={styles.btn}
                     />
                     <div className={styles.suggestion}>
-                        Masz już konto? <Link className={styles.loginLink} to="/login">Zaloguj się!</Link>
+                        Masz już konto? <Link className={styles.link} to="/login">Zaloguj się!</Link>
                     </div>
                 </form>
             </div>

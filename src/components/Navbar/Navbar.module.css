@@ -1,13 +1,13 @@
-.sideMenu {
+.root {
     width: 100px;
-    border-right: 1px solid #ffffff0f;
+    border-right: 1px solid var(--border-color);
     display: flex;
     flex-direction: column;
     flex-wrap: nowrap;
     align-items: center;
 }
 
-.sideMenuItem {
+.item {
     border: 0;
     font: inherit;
     background-color: inherit;
@@ -21,26 +21,35 @@
     font-size: 0.75em;
 }
 
-.sideMenuItem:hover {
-    background-color: green;
+.item:hover {
+    background-color: var(--accent-color);
+    color: var(--accent-text-color);
+    transition: .2s background-color;
 }
 
-.sideMenuItem>div {
+.item>div {
     padding-top: 4px;
 }
 
 .logo {
     margin: 16px 0;
     margin-bottom: 10px;
+
+    :global :root.lightTheme :local(&) {
+        filter: invert(80%);
+    }
 }
 
+
 @media screen and (max-width: 700px) {
-    .sideMenu {
+    .root {
         display: flex;
         flex-direction: row;
         width: 100%;
         z-index: 1001;
-        background-color: #2d2d2d;
+        background-color: var(--alt-navbar-bg);
+        border-right: 0;
+        border-top: 1px solid var(--border-color);
     }
 
     .logo {

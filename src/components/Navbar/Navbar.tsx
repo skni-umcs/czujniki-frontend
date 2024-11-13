@@ -1,14 +1,23 @@
-import { IoHelpOutline, IoHeartOutline, IoList, IoSettingsOutline } from "react-icons/io5";
+import { IoHelpOutline, IoHeartOutline, IoList, IoSettingsOutline, IoAccessibilityOutline } from "react-icons/io5";
 import { useNavigate } from "react-router-dom";
+import { useContext } from "react";
 
 import styles from "./Navbar.module.css";
 import skniLogo from "../../assets/skni_logo.svg";
+import { SettingsContext } from "../../contexts/SettingsProvider";
 
 const Navbar: React.FC = () => {
     const navigate = useNavigate();
+    const { settings, setSettings } = useContext(SettingsContext);
+
+    const changeTheme = () => {
+        setSettings({
+            theme: (settings.theme === "dark") ? "light" : "dark",
+        });
+    };
 
     return (
-        <div className={styles.sideMenu}>
+        <div className={styles.root}>
             <img
                 className={styles.logo}
                 src={skniLogo}
@@ -17,7 +26,7 @@ const Navbar: React.FC = () => {
                 width={76}
             />
             <button
-                className={styles.sideMenuItem}
+                className={styles.item}
                 onClick={() => { navigate("/sensors"); }}
                 title="Lista czujników"
             >
@@ -26,22 +35,28 @@ const Navbar: React.FC = () => {
                     Czujniki
                 </div>
             </button>
-            <button className={styles.sideMenuItem} title="Ulubione czujniki">
+            <button className={styles.item} title="Ulubione czujniki">
                 <IoHeartOutline size={24} />
                 <div>
                     Ulubione
                 </div>
             </button>
-            <button className={styles.sideMenuItem} title="O projekcie">
+            <button className={styles.item} title="O projekcie">
                 <IoHelpOutline size={24} />
                 <div>
                     O projekcie
                 </div>
             </button>
-            <button className={styles.sideMenuItem} title="Ustawienia">
+            <button className={styles.item} title="Ustawienia">
                 <IoSettingsOutline size={24} />
                 <div>
                     Ustawienia
+                </div>
+            </button>
+            <button className={styles.item} title="Dostępność" onClick={changeTheme}>
+                <IoAccessibilityOutline size={24} />
+                <div>
+                    Dostępność
                 </div>
             </button>
         </div>

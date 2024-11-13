@@ -2,6 +2,9 @@
     display: flex;
     padding: 16px;
     align-items: center;
+    background-color: var(--appheader-bg);
+    border-bottom: 2px solid var(--border-color);
+    width: 100%;
 }
 
 .link {
@@ -13,6 +16,10 @@
 
 .logo {
     margin-inline-end: 16px;
+
+    :global :root.lightTheme :local(&) {
+        filter: invert(80%);
+    }
 }
 
 .heading {

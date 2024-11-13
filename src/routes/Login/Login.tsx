@@ -36,7 +36,7 @@ const Login: React.FC = () => {
                         className={styles.btn}
                     />
                     <div className={styles.suggestion}>
-                        Nie masz konta? <Link className={styles.registerLink} to="/register">Zarejestruj się!</Link>
+                        Nie masz konta? <Link className={styles.link} to="/register">Zarejestruj się!</Link>
                     </div>
                 </form>
             </div>
