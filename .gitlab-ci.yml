@@ -1,52 +1,91 @@
-image: node:18
-
-# Define cache to speed up subsequent pipeline runs
-cache:
-  paths:
-    - node_modules/
-    - .pnpm-store/
-
-# Stages of the pipeline
 stages:
   - install
-  - test
+  # - test
   - build
-  - deploy
+  - sonarqube-check
+  - sonarqube-vulnerability-report
+  # - deploy
 
-# Install dependencies using pnpm
-install_dependencies:
+variables:
+  SONAR_USER_HOME: "${CI_PROJECT_DIR}/.sonar"  # Defines the location of the analysis task cache
+  GIT_DEPTH: "0"  # Tells git to fetch all the branches of the project, required by the analysis task
+
+# Define caching strategy to speed up subsequent jobs
+cache:
+  key: ${CI_COMMIT_REF_SLUG}
+  paths:
+    - .pnpm-store
+
+# Base job template
+default:
+  image: node # Use a Node.js image compatible with pnpm
+  # before_script:
+    # - corepack enable
+    # - pnpm install # Installs dependencies with pnpm using the cache
+
+# Install dependencies
+install:
   stage: install
+  before_script:
+    - corepack enable
   script:
-    - npm install -g pnpm
     - pnpm install
-  cache:
-    paths:
-      - node_modules/
-      - .pnpm-store/
-
-# Run tests
-test:
-  stage: test
-  script:
-    - pnpm test
-
-# Build the application
-build:
-  stage: build
-  script:
-    - pnpm build
   artifacts:
     paths:
-      - build/
+      - node_modules # Cache node_modules for faster builds
+  cache:
+    paths:
+      - .pnpm-store
 
-# Deploy (optional step, adjust according to your needs)
-deploy:
-  stage: deploy
+# Run tests
+# test:
+#   stage: test
+#   script:
+#     - pnpm test:ci # Assumes you have a CI-specific test command
+#   artifacts:
+#     reports:
+#       junit: test-results.xml # Optional: Save test results for GitLab to display
+
+# Build the app
+build:
+  stage: build
+  before_script:
+    - corepack enable
   script:
-    - echo "Deploying your application..."
-    # Add your deployment steps here
-  environment:
-    name: production
-    url: http://your-production-url.com
-  only:
-    - main
+    - pnpm build # Build the production version of the app
+  artifacts:
+    paths:
+      - dist # Assuming 'build' is the output directory
+
+sonarqube-check:
+  stage: sonarqube-check
+  script: 
+    - sonar-scanner -Dsonar.host.url="${SONAR_HOST_URL}"
+  image: 
+    name: sonarsource/sonar-scanner-cli:11
+    entrypoint: [""]
+
+  allow_failure: true
+  rules:
+    - if: $CI_PIPELINE_SOURCE == 'merge_request_event'
+    - if: $CI_COMMIT_BRANCH == 'master'
+    - if: $CI_COMMIT_BRANCH == 'main'
+    - if: $CI_COMMIT_BRANCH == 'develop'
+
+sonarqube-vulnerability-report:
+  stage: sonarqube-vulnerability-report
+  script:
+    - 'curl -u "${SONAR_TOKEN}:" "${SONAR_HOST_URL}/api/issues/gitlab_sast_export?projectKey=czujniki_frontend_9ac2b1d3-a85f-4b2a-bd60-0a8a49fc5d24&branch=${CI_COMMIT_BRANCH}&pullRequest=${CI_MERGE_REQUEST_IID}" -o gl-sast-sonar-report.json'
+  image: 
+    name: sonarsource/sonar-scanner-cli:11
+    entrypoint: [""]
+  allow_failure: true
+  rules:
+    - if: $CI_PIPELINE_SOURCE == 'merge_request_event'
+    - if: $CI_COMMIT_BRANCH == 'master'
+    - if: $CI_COMMIT_BRANCH == 'main'
+    - if: $CI_COMMIT_BRANCH == 'develop'
+  artifacts:
+    expire_in: 1 day
+    reports:
+      sast: gl-sast-sonar-report.json
