@@ -1,19 +1,16 @@
 import { IoHelpOutline, IoHeartOutline, IoList, IoSettingsOutline, IoAccessibilityOutline } from "react-icons/io5";
 import { useNavigate } from "react-router-dom";
-import { useContext } from "react";
 
 import styles from "./Navbar.module.css";
 import skniLogo from "../../assets/skni_logo.svg";
-import { SettingsContext } from "../../contexts/SettingsProvider";
+import { useTheme } from "../../contexts/ThemeProvider";
 
 const Navbar: React.FC = () => {
     const navigate = useNavigate();
-    const { settings, setSettings } = useContext(SettingsContext);
+    const { setTheme } = useTheme();
 
     const changeTheme = () => {
-        setSettings({
-            theme: (settings.theme === "dark") ? "light" : "dark",
-        });
+        setTheme(theme => (theme === "dark") ? "light" : "dark");
     };
 
     return (

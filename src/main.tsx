@@ -5,7 +5,7 @@ import { RouterProvider } from "react-router-dom";
 import "./index.css";
 
 import MapContextProvider from "./contexts/MapContextProvider.tsx";
-import SettingsProvider from "./contexts/SettingsProvider.tsx";
+import SettingsProvider from "./contexts/ThemeProvider.tsx";
 import router from "./router.ts";
 
 // eslint-disable-next-line @typescript-eslint/no-non-null-assertion
