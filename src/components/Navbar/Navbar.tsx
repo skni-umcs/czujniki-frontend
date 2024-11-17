@@ -3,15 +3,9 @@ import { useNavigate } from "react-router-dom";
 
 import styles from "./Navbar.module.css";
 import skniLogo from "../../assets/skni_logo.svg";
-import { useTheme } from "../../contexts/ThemeProvider";
 
 const Navbar: React.FC = () => {
     const navigate = useNavigate();
-    const { setTheme } = useTheme();
-
-    const changeTheme = () => {
-        setTheme(theme => (theme === "dark") ? "light" : "dark");
-    };
 
     return (
         <div className={styles.root}>
@@ -50,7 +44,11 @@ const Navbar: React.FC = () => {
                     Ustawienia
                 </div>
             </button>
-            <button className={styles.item} title="Dostępność" onClick={changeTheme}>
+            <button
+                className={styles.item}
+                onClick={() => { navigate("/accessibility"); }}
+                title="Ustawienia dostępności"
+            >
                 <IoAccessibilityOutline size={24} />
                 <div>
                     Dostępność

@@ -22,14 +22,14 @@ const Login: React.FC = () => {
                         placeholder="Hasło"
                         className={styles.textInput}
                     />
-                    <div className={styles.checkboxContainer}>
+                    <label className={styles.checkboxContainer}>
                         <input
                             type="checkbox"
                             placeholder="Hasło"
                             className={styles.checkbox}
                         />
                         Nie wylogowywuj mnie
-                    </div>
+                    </label>
                     <input
                         type="submit"
                         value="Zaloguj się"

@@ -10,6 +10,7 @@ import Register from "./routes/Register/Register.tsx";
 import Sensor from "./types/Sensor.ts";
 import json from "./sensors.json";
 import App from "./App.tsx";
+import AccessibilitySideView from "./routes/AccessibilitySideView/AccessibilitySideView.tsx";
 
 const sensorList: Sensor[] = json;
 
@@ -21,6 +22,12 @@ const router = createBrowserRouter([
             {
                 path: "/",
                 Component: MainRoute,
+                ErrorBoundary: ErrorPage,
+                loader: async (): Promise<IMainRouteLoaderData> => ({ sensorList }),
+            },
+            {
+                path: "/accessibility",
+                Component: AccessibilitySideView,
                 ErrorBoundary: ErrorPage,
                 loader: async (): Promise<IMainRouteLoaderData> => ({ sensorList }),
             },

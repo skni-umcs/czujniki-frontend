@@ -40,4 +40,5 @@
     border-radius: 99px;
     border: 1px solid var(--border-color2);
     background-color: var(--searchbar-bg);
+    font-size: 0.9em;
 }

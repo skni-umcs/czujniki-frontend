@@ -1,6 +1,6 @@
 import { createContext, useState, useLayoutEffect, PropsWithChildren, useContext } from "react";
 
-type TTheme = "light" | "dark" | "highContrast";
+export type TTheme = "light" | "dark" | "highContrast";
 
 interface TThemeContext {
     theme: TTheme;
