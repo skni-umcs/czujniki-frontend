@@ -2,4 +2,8 @@
 
 .active {
     filter: hue-rotate(140deg);
+
+    :global :root.highContrastTheme :local(&) {
+        filter: hue-rotate(120deg);
+    }
 }

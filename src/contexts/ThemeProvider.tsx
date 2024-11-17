@@ -8,8 +8,12 @@ interface TThemeContext {
 }
 
 const getSystemPreferedTheme = (): TTheme => {
-    // if (window.matchMedia("(prefers-contrast: more)").matches) return "highContrast";
     if (window.matchMedia("(prefers-color-scheme: dark)").matches) return "dark";
+
+    if (window.matchMedia("(prefers-contrast: forced)").matches
+        || window.matchMedia("(forced-colors: active)").matches
+    ) return "highContrast";
+
     return "light";
 };
 

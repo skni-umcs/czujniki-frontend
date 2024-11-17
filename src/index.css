@@ -52,6 +52,46 @@
     --alt-navbar-bg: var(--bg-primary);
 }
 
+.highContrastTheme:root {
+    color-scheme: dark;
+
+    --text-color-primary: white;
+    --text-color-inverted: black;
+    --bg-primary: black;
+    --bg-secondary: black;
+    --bg-tertiary: orange;
+    --accent-color: transparent;
+    --accent-text-color: var(--text-color-primary);
+    --border-color: white;
+    --border-color2: white;
+    --primary-btn-color: yellow;
+    --primary-btn-hover-color: white;
+    --primary-btn-active-color: hsl(217, 89%, 87%);
+    --primary-btn-text-color: var(--text-color-inverted);
+    --input-border-color: white;
+
+    --appheader-bg: var(--bg-primary);
+    --sidebar-bg: var(--bg-primary);
+    --searchbar-bg: var(--bg-secondary);
+    --alt-navbar-bg: var(--bg-secondary);
+
+    a,
+    button,
+    label {
+        color: yellow;
+    }
+
+    a:hover,
+    button:hover,
+    label:hover {
+        outline: 2px solid white;
+    }
+
+    input[type="radio"] {
+        accent-color: yellow;
+    }
+}
+
 :root.darkTheme {
     .leaflet-layer {
         filter: invert(100%) hue-rotate(180deg) contrast(90%) !important;
@@ -76,6 +116,41 @@
         border-bottom: 0 !important;
         border: 1px solid var(--border-color) !important;
         background-color: var(--bg-primary) !important;
+    }
+}
+
+:root.highContrastTheme {
+    .leaflet-layer {
+        filter: invert(100%) hue-rotate(180deg) contrast(100%) !important;
+    }
+
+    .leaflet-control-attribution {
+        background-color: var(--bg-primary) !important;
+        color: var(--text-color-primary) !important;
+    }
+
+    .leaflet-control-attribution>a {
+        color: yellow !important;
+    }
+
+
+    .leaflet-control-zoom-in,
+    .leaflet-control-zoom-out {
+        color: yellow !important;
+    }
+
+    .leaflet-bar a {
+        border-bottom: 0 !important;
+        border: 1px solid yellow !important;
+        background-color: var(--bg-primary) !important;
+    }
+
+    .leaflet-marker-icon {
+        filter: hue-rotate(190deg);
+    }
+
+    .leaflet-marker-icon:hover {
+        outline: 2px solid white !important;
     }
 }
 
