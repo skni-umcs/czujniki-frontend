@@ -3,6 +3,7 @@ import { Outlet } from "react-router-dom";
 import { TileLayer } from "react-leaflet";
 
 import "leaflet/dist/leaflet.css";
+import "./leaflet.css";
 
 import styles from "./App.module.css";
 import Navbar from "./components/Navbar/Navbar";
