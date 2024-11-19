@@ -20,6 +20,8 @@
     --primary-btn-hover-color: hsl(217, 89%, 84%);
     --primary-btn-active-color: hsl(217, 89%, 87%);
     --primary-btn-text-color: var(--text-color-inverted);
+    --icon-btn-hover-color: var(--bg-secondary);
+    --icon-btn-active-color: hsl(0, 0%, 21%);
     --input-border-color: hsl(140, 1%, 56%);
 
     --appheader-bg: var(--bg-primary);
@@ -44,6 +46,8 @@
     --primary-btn-hover-color: hsl(217, 90%, 45%);
     --primary-btn-active-color: hsl(217, 90%, 40%);
     --primary-btn-text-color: white;
+    --icon-btn-hover-color: var(--bg-secondary);
+    --icon-btn-active-color: hsl(213, 43%, 92%);
     --input-border-color: hsl(140, 1%, 56%);
 
     --appheader-bg: var(--bg-primary);
@@ -68,6 +72,8 @@
     --primary-btn-hover-color: white;
     --primary-btn-active-color: hsl(217, 89%, 87%);
     --primary-btn-text-color: var(--text-color-inverted);
+    --icon-btn-hover-color: var(--bg-secondary);
+    --icon-btn-active-color: transparent;
     --input-border-color: white;
 
     --appheader-bg: var(--bg-primary);
