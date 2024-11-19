@@ -5,12 +5,12 @@ import ErrorPage from "./routes/ErrorPage.tsx";
 import MainRoute, { IMainRouteLoaderData } from "./routes/MainRoute/MainRoute.tsx";
 import SensorList, { ISensorListLoaderData } from "./routes/SensorList/SensorList.tsx";
 import SensorSideView, { ISensorSideViewLoaderData } from "./routes/SensorSideView/SensorSideView.tsx";
+import AccessibilitySideView, { IAccessibilitySideViewLoaderData } from "./routes/AccessibilitySideView/AccessibilitySideView.tsx";
 import Login from "./routes/Login/Login.tsx";
 import Register from "./routes/Register/Register.tsx";
 import Sensor from "./types/Sensor.ts";
 import json from "./sensors.json";
 import App from "./App.tsx";
-import AccessibilitySideView from "./routes/AccessibilitySideView/AccessibilitySideView.tsx";
 
 const sensorList: Sensor[] = json;
 
@@ -29,7 +29,7 @@ const router = createBrowserRouter([
                 path: "/accessibility",
                 Component: AccessibilitySideView,
                 ErrorBoundary: ErrorPage,
-                loader: async (): Promise<IMainRouteLoaderData> => ({ sensorList }),
+                loader: async (): Promise<IAccessibilitySideViewLoaderData> => ({ sensorList }),
             },
             {
                 path: "/sensors",

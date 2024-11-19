@@ -1,13 +1,12 @@
-import { useLoaderData, useNavigate } from "react-router-dom";
-import { IoArrowBack, IoClose } from "react-icons/io5";
+import { useLoaderData } from "react-router-dom";
 
 import styles from "./AccessibilitySideView.module.css";
-import Sensor from "../../types/Sensor";
-import Sidebar from "../../components/Sidebar/Sidebar";
-import MapPortal from "../../components/MapPortal/MapPortal";
+import SideView from "../../components/SideView/SideView.tsx";
+import MapPortal from "../../components/MapPortal/MapPortal.tsx";
 import SensorMarker from "../../components/SensorMarker/SensorMarker.tsx";
 import { TTheme, useTheme } from "../../contexts/ThemeProvider.tsx";
 import { TFontSize, useFontSize } from "../../contexts/FontSizeProvider.tsx";
+import Sensor from "../../types/Sensor.ts";
 
 export interface IAccessibilitySideViewLoaderData {
     sensorList: Sensor[];
@@ -15,7 +14,6 @@ export interface IAccessibilitySideViewLoaderData {
 
 const AccessibilitySideView: React.FC = () => {
     const { sensorList } = useLoaderData() as IAccessibilitySideViewLoaderData;
-    const navigate = useNavigate();
     const { theme, setTheme } = useTheme();
     const { fontSize, setFontSize } = useFontSize();
 
@@ -26,33 +24,14 @@ const AccessibilitySideView: React.FC = () => {
     };
 
     return (
-        <Sidebar>
+        <SideView title="Ustawienia dostępności">
             <MapPortal>
-                {sensorList.map(s => (
-                    <SensorMarker key={s.sensorId} sensor={s} />
-                ))}
+                {sensorList.map(s => <SensorMarker key={s.sensorId} sensor={s} />)}
             </MapPortal>
             <div className={styles.root}>
-                <div className={styles.firstRow}>
-                    <button
-                        className={styles.backButton}
-                        onClick={() => { navigate("/sensors"); }}
-                    >
-                        <IoArrowBack size={24} />
-                    </button>
-                    <div className={styles.heading}>
-                        Ustawienia dostępności
-                    </div>
-                    <button
-                        className={styles.closeBtn}
-                        onClick={() => { navigate("/"); }}
-                    >
-                        <IoClose size={24} />
-                    </button>
-                </div>
                 <div className={styles.content}>
                     <form onChange={handleChange}>
-                        <div className={styles.heading2} style={{ marginTop: 0 }}>Motyw</div>
+                        <div className={styles.heading} style={{ marginTop: 0 }}>Motyw</div>
                         <div>
                             <label>
                                 <input
@@ -82,7 +61,7 @@ const AccessibilitySideView: React.FC = () => {
                                 Wysoki kontrast
                             </label>
                         </div>
-                        <div className={styles.heading2}>Rozmiar tekstu</div>
+                        <div className={styles.heading}>Rozmiar tekstu</div>
                         <div>
                             <label>
                                 <input
@@ -115,7 +94,7 @@ const AccessibilitySideView: React.FC = () => {
                     </form>
                 </div>
             </div>
-        </Sidebar>
+        </SideView>
     );
 };
 

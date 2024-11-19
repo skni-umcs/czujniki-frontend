@@ -1,32 +1,5 @@
 .root {
     flex-grow: 1;
-    padding: 8px 0;
-}
-
-.firstRow {
-    display: flex;
-    align-items: center;
-    justify-content: space-between;
-    padding: 0 16px;
-}
-
-.heading {
-    font-size: 1.25em;
-    font-weight: bold;
-    padding: 16px 0;
-}
-
-.backButtonPlaceholder {
-    width: 32px;
-}
-
-.closeBtn {
-    padding: 4px;
-    line-height: 0;
-    border: 0;
-    border-radius: 100%;
-    cursor: pointer;
-    background: var(--searchbar-bg);
 }
 
 .searchBarContainer {
