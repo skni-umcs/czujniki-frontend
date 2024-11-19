@@ -19,12 +19,12 @@
     width: 100%;
     padding-block: 16px;
     font-size: 0.75em;
+    transition: .2s background-color, color;
 }
 
 .item:hover {
     background-color: var(--accent-color);
     color: var(--accent-text-color);
-    transition: .2s background-color;
 }
 
 .item>div {
