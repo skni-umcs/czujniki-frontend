@@ -1,20 +1,20 @@
-import { To, useNavigate } from "react-router-dom";
+import { useNavigate } from "react-router-dom";
 import { IoArrowBack, IoClose } from "react-icons/io5";
 
 import styles from "./SideView.module.css";
 
 interface IProps extends React.PropsWithChildren {
     title: string;
-    backLocation?: string;
+    showBackButton?: boolean;
 }
 
-const SideView: React.FC<IProps> = ({ children, title, backLocation }) => {
+const SideView: React.FC<IProps> = ({ children, title, showBackButton }) => {
     const navigate = useNavigate();
 
     const backButton = (
         <button
             className={styles.backButton}
-            onClick={() => { navigate(backLocation ?? (-1 as To)); }}
+            onClick={() => { navigate(-1); }}
         >
             <IoArrowBack size={24} />
         </button>
@@ -23,7 +23,7 @@ const SideView: React.FC<IProps> = ({ children, title, backLocation }) => {
     return (
         <div className={styles.root}>
             <div className={styles.firstRow}>
-                {backLocation ? backButton : <div className={styles.backButtonPlaceholder} />}
+                {showBackButton ? backButton : <div className={styles.backButtonPlaceholder} />}
                 <div className={styles.heading}>{title}</div>
                 <button
                     className={styles.closeBtn}

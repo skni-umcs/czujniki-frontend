@@ -1,6 +1,7 @@
 /* eslint-disable @typescript-eslint/require-await */
 import { createBrowserRouter } from "react-router-dom";
 
+import { getFavorites } from "./contexts/FavoritesProvider.tsx";
 import ErrorPage from "./routes/ErrorPage.tsx";
 import MainRoute, { IMainRouteLoaderData } from "./routes/MainRoute/MainRoute.tsx";
 import SensorList, { ISensorListLoaderData } from "./routes/SensorList/SensorList.tsx";
@@ -45,6 +46,16 @@ const router = createBrowserRouter([
                     const sensor = sensorList.find(s => s.sensorId === Number(params.id));
                     if (!sensor) throw new Error("404 sensorId");
                     return { sensor, sensorList };
+                },
+            },
+            {
+                path: "/favorites",
+                Component: SensorList,
+                ErrorBoundary: ErrorPage,
+                loader: async (): Promise<ISensorListLoaderData> => {
+                    const favIds = getFavorites();
+                    const favorites = sensorList.filter(el => favIds.includes(el.sensorId));
+                    return { sensorList: favorites, title: "Ulubione czujniki" };
                 },
             },
         ],

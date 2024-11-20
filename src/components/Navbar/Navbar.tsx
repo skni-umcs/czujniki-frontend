@@ -26,7 +26,11 @@ const Navbar: React.FC = () => {
                     Czujniki
                 </div>
             </button>
-            <button className={styles.item} title="Ulubione czujniki">
+            <button
+                className={styles.item}
+                onClick={() => { navigate("/favorites"); }}
+                title="Ulubione czujniki"
+            >
                 <IoHeartOutline size={24} />
                 <div>
                     Ulubione

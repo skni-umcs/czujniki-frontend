@@ -29,10 +29,7 @@ const SensorSideView: React.FC = () => {
     };
 
     return (
-        <SideView
-            title={`Czujnik ${sensor.sensorId.toString()}`}
-            backLocation="/sensors"
-        >
+        <SideView title={`Czujnik ${sensor.sensorId.toString()}`} showBackButton>
             <MapPortal>
                 {sensorList.map(s => (
                     <SensorMarker key={s.sensorId} sensor={s} isActive={s.sensorId === sensor.sensorId} />

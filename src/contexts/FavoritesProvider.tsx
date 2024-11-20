@@ -6,7 +6,7 @@ interface TFavoritesContext {
     removeFavorite: (id: number) => void;
 }
 
-const getFavorites = () => {
+export const getFavorites = () => {
     const json = localStorage.getItem("favorites");
     if (!json) return [];
 

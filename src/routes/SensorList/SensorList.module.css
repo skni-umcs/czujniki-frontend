@@ -15,3 +15,12 @@
     background-color: var(--searchbar-bg);
     font-size: 0.9em;
 }
+
+.emptyList {
+    font-size: 1.3em;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    padding-block: 64px;
+    font-style: italic;
+}

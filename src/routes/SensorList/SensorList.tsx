@@ -9,13 +9,14 @@ import SensorMarker from "../../components/SensorMarker/SensorMarker";
 
 export interface ISensorListLoaderData {
     sensorList: Sensor[];
+    title?: string;
 };
 
 const SensorList: React.FC = () => {
-    const { sensorList } = useLoaderData() as ISensorListLoaderData;
+    const { sensorList, title } = useLoaderData() as ISensorListLoaderData;
 
     return (
-        <SideView title="Lista czujników">
+        <SideView title={title ?? "Lista czujników"}>
             <MapPortal>
                 {sensorList.map(s => <SensorMarker key={s.sensorId} sensor={s} />)}
             </MapPortal>
@@ -32,6 +33,7 @@ const SensorList: React.FC = () => {
                         key={sensor.sensorId}
                     />
                 ))}
+                {sensorList.length === 0 && <div className={styles.emptyList}>Lista jest pusta</div>}
             </div>
         </SideView>
     );
