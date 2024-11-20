@@ -13,22 +13,8 @@
     padding: 32px;
 }
 
-.iconButton {
+.iconBtn {
     padding: 12px;
-    line-height: 0;
-    border: 0;
-    background-color: inherit;
-    cursor: pointer;
-    border-radius: 64px;
-    transition: .2s background-color;
-}
-
-.iconButton:hover {
-    background-color: var(--icon-btn-hover-color);
-}
-
-.iconButton:active {
-    background-color: var(--icon-btn-active-color);
 }
 
 .iconBtnBar {

@@ -1,3 +1,4 @@
+import { useMemo } from "react";
 import { useLoaderData } from "react-router-dom";
 import { IoBugOutline, IoHeart, IoHeartOutline, IoRefreshOutline } from "react-icons/io5";
 
@@ -6,9 +7,9 @@ import Sensor from "../../types/Sensor";
 import SideView from "../../components/SideView/SideView.tsx";
 import MapPortal from "../../components/MapPortal/MapPortal.tsx";
 import SensorMarker from "../../components/SensorMarker/SensorMarker.tsx";
+import IconButton from "../../components/IconButton/IconButton.tsx";
 import useFlyToOnRender from "./useFlyToOnRender.ts";
 import { useFavorites } from "../../contexts/FavoritesProvider.tsx";
-import { useMemo } from "react";
 
 export interface ISensorSideViewLoaderData {
     sensor: Sensor;
@@ -37,19 +38,19 @@ const SensorSideView: React.FC = () => {
             </MapPortal>
             <div className={styles.root}>
                 <div className={styles.iconBtnBar}>
-                    <button
-                        className={styles.iconButton}
+                    <IconButton
+                        className={styles.iconBtn}
                         onClick={toggleFavorite}
                         title="Dodaj do ulubionych"
                     >
                         {isFavorite ? <IoHeart size={24} /> : <IoHeartOutline size={24} />}
-                    </button>
-                    <button className={styles.iconButton} title="Odśwież dane">
+                    </IconButton>
+                    <IconButton className={styles.iconBtn} title="Odśwież dane">
                         <IoRefreshOutline size={24} />
-                    </button>
-                    <button className={styles.iconButton} title="Zgłoś błąd">
+                    </IconButton>
+                    <IconButton className={styles.iconBtn} title="Zgłoś błąd">
                         <IoBugOutline size={24} />
-                    </button>
+                    </IconButton>
                 </div>
                 <div className={styles.content}>
                     <div>

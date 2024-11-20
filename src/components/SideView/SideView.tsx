@@ -2,6 +2,7 @@ import { useNavigate } from "react-router-dom";
 import { IoArrowBack, IoClose } from "react-icons/io5";
 
 import styles from "./SideView.module.css";
+import IconButton from "../IconButton/IconButton";
 
 interface IProps extends React.PropsWithChildren {
     title: string;
@@ -12,12 +13,12 @@ const SideView: React.FC<IProps> = ({ children, title, showBackButton }) => {
     const navigate = useNavigate();
 
     const backButton = (
-        <button
-            className={styles.backButton}
+        <IconButton
+            title="Cofnij"
             onClick={() => { navigate(-1); }}
         >
             <IoArrowBack size={24} />
-        </button>
+        </IconButton>
     );
 
     return (
@@ -25,12 +26,12 @@ const SideView: React.FC<IProps> = ({ children, title, showBackButton }) => {
             <div className={styles.firstRow}>
                 {showBackButton ? backButton : <div className={styles.backButtonPlaceholder} />}
                 <div className={styles.heading}>{title}</div>
-                <button
-                    className={styles.closeBtn}
+                <IconButton
+                    title="Zamknij"
                     onClick={() => { navigate("/"); }}
                 >
                     <IoClose size={24} />
-                </button>
+                </IconButton>
             </div>
             {children}
         </div>
