@@ -8,6 +8,7 @@ import "./leaflet.css";
 import styles from "./App.module.css";
 import Navbar from "./components/Navbar/Navbar";
 import AppHeader from "./components/AppHeader/AppHeader";
+import MniswBar from "./components/MniswBar/MniswBar";
 import { useMapContext } from "./contexts/MapContextProvider";
 
 const App: React.FC = () => {
@@ -24,6 +25,7 @@ const App: React.FC = () => {
     return (
         <>
             <AppHeader className={styles.appHeader} />
+            <MniswBar />
             <div className={styles.wrapper}>
                 <Navbar />
                 <div className={styles.leftRight}>
