@@ -1,4 +1,4 @@
-import { IoHelpOutline, IoHeartOutline, IoList, IoSettingsOutline, IoAccessibilityOutline } from "react-icons/io5";
+import { IoHelpOutline, IoHeartOutline, IoList, IoAccessibilityOutline } from "react-icons/io5";
 import { useNavigate } from "react-router-dom";
 
 import styles from "./Navbar.module.css";
@@ -40,12 +40,6 @@ const Navbar: React.FC = () => {
                 <IoHelpOutline size={24} />
                 <div>
                     O projekcie
-                </div>
-            </button>
-            <button className={styles.item} title="Ustawienia">
-                <IoSettingsOutline size={24} />
-                <div>
-                    Ustawienia
                 </div>
             </button>
             <button
