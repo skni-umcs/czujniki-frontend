@@ -19,4 +19,5 @@
 
 .content label>input[type="radio"] {
     margin-right: 8px;
+    accent-color: var(--primary-btn-color);
 }
