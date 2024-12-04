@@ -37,6 +37,15 @@ const AccessibilitySideView: React.FC = () => {
                                 <input
                                     type="radio"
                                     name="theme"
+                                    value="system"
+                                    checked={theme === "system"}
+                                />
+                                Systemowy
+                            </label>
+                            <label>
+                                <input
+                                    type="radio"
+                                    name="theme"
                                     value="light"
                                     checked={theme === "light"}
                                 />

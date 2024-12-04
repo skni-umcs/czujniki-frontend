@@ -1,13 +1,14 @@
-import { createContext, useState, useLayoutEffect, PropsWithChildren, useContext } from "react";
+import { createContext, useState, useLayoutEffect, PropsWithChildren, useContext, useMemo } from "react";
 
-export type TTheme = "light" | "dark" | "highContrast";
+export type TTheme = "system" | "light" | "dark" | "highContrast";
 
 interface TThemeContext {
     theme: TTheme;
+    actualTheme: Omit<TTheme, "system">;
     setTheme: React.Dispatch<React.SetStateAction<TTheme>>;
 }
 
-const getSystemPreferedTheme = (): TTheme => {
+export const getSystemPreferedTheme = (): TTheme => {
     if (window.matchMedia("(prefers-color-scheme: dark)").matches) return "dark";
 
     if (window.matchMedia("(prefers-contrast: forced)").matches
@@ -17,26 +18,31 @@ const getSystemPreferedTheme = (): TTheme => {
     return "light";
 };
 
-const getTheme = () => {
+const getPersistedTheme = () => {
     const theme = localStorage.getItem("theme") as TTheme | null;
     return theme ?? getSystemPreferedTheme();
 };
 
 export const ThemeContext = createContext<TThemeContext>({
-    theme: getTheme(),
+    theme: "system",
+    actualTheme: getPersistedTheme(),
     setTheme: () => void 0,
 });
 
 const ThemeProvider: React.FC<PropsWithChildren> = ({ children }) => {
-    const [theme, setTheme] = useState(getTheme);
+    const [theme, setTheme] = useState(getPersistedTheme);
+
+    const actualTheme = useMemo(() => {
+        return theme === "system" ? getSystemPreferedTheme() : theme;
+    }, [theme]);
 
     useLayoutEffect(() => {
         localStorage.setItem("theme", theme);
-        document.documentElement.className = theme + "Theme";
-    }, [theme]);
+        document.documentElement.className = actualTheme + "Theme";
+    }, [theme, actualTheme]);
 
     return (
-        <ThemeContext.Provider value={{ theme, setTheme }}>
+        <ThemeContext.Provider value={{ theme, actualTheme, setTheme }}>
             {children}
         </ThemeContext.Provider>
     );

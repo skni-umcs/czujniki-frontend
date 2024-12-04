@@ -14,14 +14,14 @@ const getMniswState = () => {
 };
 
 const MniswBar: React.FC = () => {
-    const { theme } = useTheme();
+    const { actualTheme } = useTheme();
     const [mniswHidden, setMniswHidden] = useState(getMniswState);
 
     if (mniswHidden) return null;
 
     let logo = mniswLogoLight;
-    if (theme === "dark") logo = mniswLogoDark;
-    if (theme === "highContrast") logo = mniswLogoMono;
+    if (actualTheme === "dark") logo = mniswLogoDark;
+    if (actualTheme === "highContrast") logo = mniswLogoMono;
 
     const hideMnisw = () => {
         setMniswHidden(true);
