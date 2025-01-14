@@ -1,6 +1,7 @@
 import { useMemo } from "react";
 import { useLoaderData } from "react-router-dom";
 import { IoBugOutline, IoHeart, IoHeartOutline, IoRefreshOutline } from "react-icons/io5";
+import { WiBarometer, WiHumidity, WiDust, WiThermometer } from "react-icons/wi";
 
 import json from "../../sensorsData.json";
 
@@ -71,29 +72,48 @@ const SensorSideView: React.FC = () => {
                 </div>
                 <div className={styles.content}>
                     <div>
-                        <b>Wydział:</b> {sensor.location.facultyName}
-                    </div>
-                    <div>
-                        <b>Status:</b> {sensor.status}
-                    </div>
-                    <div>
-                        <b>Data aktualizacji:</b> {new Date(sensor.latestDataUpdate).toLocaleString()}
-                    </div>
-                    <div className={styles.heading}>Obecne warunki</div>
-                    <div>
-                        <b>Temperatura:</b> {sensor.currentTemperature}° C
-                    </div>
-                    <div>
-                        <b>Ciśnienie:</b> {sensor.currentPressure} hPa
-                    </div>
-                    <div>
-                        <b>Wilgotność:</b> {sensor.currentHumidity}%
-                    </div>
-                    <div>
-                        <b>Jakość powietrza:</b> {sensor.currentGasResistance}
+                        <div>
+                            <b>Wydział:</b> {sensor.location.facultyName}
+                        </div>
+                        <div>
+                            <b>Status:</b> {sensor.status}
+                        </div>
+                        <div>
+                            <b>Data aktualizacji:</b> {new Date(sensor.latestDataUpdate).toLocaleString()}
+                        </div>
                     </div>
 
-                    <div className={styles.heading2}>Temperatura</div>
+                    <div className={styles.heading}>Obecne warunki</div>
+                    <div className={styles.currentConditions}>
+                        <div className={styles.currentConditionWrapper}>
+                            Temperatura
+                            <div className={styles.currentCondition}>
+                                <WiThermometer size={44} /> {sensor.currentTemperature}° C
+                            </div>
+                        </div>
+                        <div className={styles.currentConditionWrapper}>
+                            Ciśnienie
+                            <div className={styles.currentCondition}>
+                                <WiBarometer size={44} /> {sensor.currentPressure} hPa
+                            </div>
+                        </div>
+                    </div>
+                    <div className={styles.currentConditions}>
+                        <div className={styles.currentConditionWrapper}>
+                            Wilgotność
+                            <div className={styles.currentCondition}>
+                                <WiHumidity size={44} /> {sensor.currentHumidity}%
+                            </div>
+                        </div>
+                        <div className={styles.currentConditionWrapper}>
+                            Jakość powietrza
+                            <div className={styles.currentCondition}>
+                                <WiDust size={44} /> {sensor.currentGasResistance} ppm
+                            </div>
+                        </div>
+                    </div>
+
+                    <div className={styles.heading}>Temperatura</div>
                     <SensorChart
                         width={chartWidth}
                         height={chartHeight}
@@ -108,7 +128,7 @@ const SensorSideView: React.FC = () => {
                         ]}
                     />
 
-                    <div className={styles.heading2}>Ciśnienie</div>
+                    <div className={styles.heading}>Ciśnienie</div>
                     <SensorChart
                         width={chartWidth}
                         height={chartHeight}
@@ -123,7 +143,7 @@ const SensorSideView: React.FC = () => {
                         ]}
                     />
 
-                    <div className={styles.heading2}>Wilgotność</div>
+                    <div className={styles.heading}>Wilgotność</div>
                     <SensorChart
                         width={chartWidth}
                         height={chartHeight}
@@ -135,7 +155,7 @@ const SensorSideView: React.FC = () => {
                         domain={[0, 100]}
                     />
 
-                    <div className={styles.heading2}>Jakość powietrza</div>
+                    <div className={styles.heading}>Jakość powietrza</div>
                     <SensorChart
                         width={chartWidth}
                         height={chartHeight}
