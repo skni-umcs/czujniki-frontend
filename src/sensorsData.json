@@ -1,0 +1,58 @@
+[
+    {
+        "dataId": 1,
+        "timestamp": "2025-01-14T08:30:00Z",
+        "temperature": 22.5,
+        "humidity": 45.2,
+        "pressure": 989.1,
+        "gasResistance": 1000
+    },
+    {
+        "dataId": 2,
+        "timestamp": "2025-01-14T08:35:00Z",
+        "temperature": 22.7,
+        "humidity": 44.8,
+        "pressure": 999.0,
+        "gasResistance": 990
+    },
+    {
+        "dataId": 3,
+        "timestamp": "2025-01-14T08:40:00Z",
+        "temperature": 22.9,
+        "humidity": 44.5,
+        "pressure": 1012.9,
+        "gasResistance": 980
+    },
+    {
+        "dataId": 4,
+        "timestamp": "2025-01-14T08:45:00Z",
+        "temperature": 23.1,
+        "humidity": 44.3,
+        "pressure": 1012.8,
+        "gasResistance": 970
+    },
+    {
+        "dataId": 5,
+        "timestamp": "2025-01-14T08:50:00Z",
+        "temperature": 24.3,
+        "humidity": 44.0,
+        "pressure": 1012.7,
+        "gasResistance": 960
+    },
+    {
+        "dataId": 6,
+        "timestamp": "2025-01-14T08:55:00Z",
+        "temperature": 25.5,
+        "humidity": 43.8,
+        "pressure": 1022.6,
+        "gasResistance": 950
+    },
+    {
+        "dataId": 6,
+        "timestamp": "2025-01-14T08:55:00Z",
+        "temperature": 21.5,
+        "humidity": 43.8,
+        "pressure": 1032.6,
+        "gasResistance": 950
+    }
+]

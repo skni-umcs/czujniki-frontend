@@ -1,6 +1,6 @@
 export default interface SensorData {
     dataId: number;
-    timestamp: Date;
+    timestamp: string;
     temperature: number;
     humidity: number;
     pressure: number;

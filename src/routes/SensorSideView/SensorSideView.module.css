@@ -4,13 +4,22 @@
 
 .heading {
     margin-top: 1.33em;
-    margin-bottom: 0.5em;
+    margin-bottom: 0.3em;
     font-weight: bold;
+    font-size: 1.2em;
+}
+
+.heading2 {
+    margin-top: 1.33em;
+    margin-bottom: 0.3em;
+    font-weight: bold;
+    text-align: center;
 }
 
 .content {
     line-height: 2;
     padding: 32px;
+    font-size: 0.90em;
 }
 
 .iconBtn {
@@ -21,4 +30,8 @@
     display: flex;
     justify-content: space-between;
     padding-inline: 48px;
+}
+
+.chartOffset {
+    left: -30px;
 }

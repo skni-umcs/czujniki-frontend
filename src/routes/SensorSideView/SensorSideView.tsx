@@ -2,12 +2,18 @@ import { useMemo } from "react";
 import { useLoaderData } from "react-router-dom";
 import { IoBugOutline, IoHeart, IoHeartOutline, IoRefreshOutline } from "react-icons/io5";
 
+import json from "../../sensorsData.json";
+
+const sensorDataList: SensorData[] = json;
+
 import styles from "./SensorSideView.module.css";
 import Sensor from "../../types/Sensor";
+import SensorData from "../../types/SensorData.ts";
 import SideView from "../../components/SideView/SideView.tsx";
 import MapPortal from "../../components/MapPortal/MapPortal.tsx";
 import SensorMarker from "../../components/SensorMarker/SensorMarker.tsx";
 import IconButton from "../../components/IconButton/IconButton.tsx";
+import SensorChart from "../../components/SensorChart/SensorChart.tsx";
 import useFlyToOnRender from "./useFlyToOnRender.ts";
 import { useFavorites } from "../../contexts/FavoritesProvider.tsx";
 
@@ -15,6 +21,17 @@ export interface ISensorSideViewLoaderData {
     sensor: Sensor;
     sensorList: Sensor[];
 };
+
+const data = sensorDataList.map(s => ({
+    datetime: new Date(s.timestamp).toLocaleString().slice(0, -3),
+    temperature: s.temperature,
+    humidity: s.humidity,
+    pressure: s.pressure,
+    gasResistance: s.gasResistance,
+}));
+
+const chartWidth = 320;
+const chartHeight = 150;
 
 const SensorSideView: React.FC = () => {
     const { sensor, sensorList } = useLoaderData() as ISensorSideViewLoaderData;
@@ -60,7 +77,7 @@ const SensorSideView: React.FC = () => {
                         <b>Status:</b> {sensor.status}
                     </div>
                     <div>
-                        <b>Data aktualizacji:</b> {sensor.latestDataUpdate.toString()}
+                        <b>Data aktualizacji:</b> {new Date(sensor.latestDataUpdate).toLocaleString()}
                     </div>
                     <div className={styles.heading}>Obecne warunki</div>
                     <div>
@@ -75,8 +92,63 @@ const SensorSideView: React.FC = () => {
                     <div>
                         <b>Jakość powietrza:</b> {sensor.currentGasResistance}
                     </div>
-                    <div className={styles.heading}>Dane historyczne</div>
-                    <div>brak</div>
+
+                    <div className={styles.heading2}>Temperatura</div>
+                    <SensorChart
+                        width={chartWidth}
+                        height={chartHeight}
+                        data={data}
+                        dataKey="temperature"
+                        className={styles.chartOffset}
+                        label="Temperatura"
+                        unit="° C"
+                        domain={[
+                            (dataMin: number) => dataMin - 2,
+                            (dataMax: number) => dataMax + 2,
+                        ]}
+                    />
+
+                    <div className={styles.heading2}>Ciśnienie</div>
+                    <SensorChart
+                        width={chartWidth}
+                        height={chartHeight}
+                        data={data}
+                        dataKey="pressure"
+                        className={styles.chartOffset}
+                        label="Ciśnienie"
+                        unit=" hPa"
+                        domain={[
+                            (dataMin: number) => (Math.ceil((dataMin - 10) / 10) * 10),
+                            (dataMax: number) => (Math.floor((dataMax + 10) / 10) * 10),
+                        ]}
+                    />
+
+                    <div className={styles.heading2}>Wilgotność</div>
+                    <SensorChart
+                        width={chartWidth}
+                        height={chartHeight}
+                        data={data}
+                        dataKey="humidity"
+                        className={styles.chartOffset}
+                        label="Wilgotność"
+                        unit="%"
+                        domain={[0, 100]}
+                    />
+
+                    <div className={styles.heading2}>Jakość powietrza</div>
+                    <SensorChart
+                        width={chartWidth}
+                        height={chartHeight}
+                        data={data}
+                        dataKey="gasResistance"
+                        className={styles.chartOffset}
+                        label="Jakość powietrza"
+                        unit=" ppm"
+                        domain={[
+                            (dataMin: number) => (Math.ceil((dataMin - 10) / 10) * 10),
+                            (dataMax: number) => (Math.floor((dataMax + 10) / 10) * 10),
+                        ]}
+                    />
                 </div>
             </div>
         </SideView>
