@@ -4,5 +4,5 @@ export default interface SensorData {
     temperature: number;
     humidity: number;
     pressure: number;
-    gasResistance: number;
+    gasResistance?: number;
 }

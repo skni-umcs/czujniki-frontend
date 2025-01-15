@@ -162,20 +162,23 @@ const SensorSideView: React.FC = () => {
                         unit="%"
                         domain={[0, 100]}
                     />
-
-                    <div className={styles.heading}>Jakość powietrza</div>
-                    <SensorChart
-                        height={chartHeight}
-                        data={data}
-                        dataKey="gasResistance"
-                        className={styles.chartOffset}
-                        label="Jakość powietrza"
-                        unit=" ppm"
-                        domain={[
-                            (dataMin: number) => (Math.ceil((dataMin - 10) / 10) * 10),
-                            (dataMax: number) => (Math.floor((dataMax + 10) / 10) * 10),
-                        ]}
-                    />
+                    {s.currentGasResistance && (
+                        <>
+                            <div className={styles.heading}>Jakość powietrza</div>
+                            <SensorChart
+                                height={chartHeight}
+                                data={data}
+                                dataKey="gasResistance"
+                                className={styles.chartOffset}
+                                label="Jakość powietrza"
+                                unit=" ppm"
+                                domain={[
+                                    (dataMin: number) => (Math.ceil((dataMin - 10) / 10) * 10),
+                                    (dataMax: number) => (Math.floor((dataMax + 10) / 10) * 10),
+                                ]}
+                            />
+                        </>
+                    )}
                 </div>
             </div>
         </SideView>
