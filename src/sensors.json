@@ -1,12 +1,11 @@
 [
     {
         "sensorId": 1,
-        "status": "error",
+        "status": "ERROR",
         "latestDataUpdate": "2024-09-25T12:04:25",
         "currentTemperature": -15.78,
         "currentHumidity": 13.45,
         "currentPressure": 1020.56,
-        "currentGasResistance": 893.99,
         "location": {
             "id": 560,
             "latitude": 51.246038,
@@ -16,7 +15,7 @@
     },
     {
         "sensorId": 2,
-        "status": "inactive",
+        "status": "OFFLINE",
         "latestDataUpdate": "2024-09-25T00:07:25",
         "currentTemperature": 38.97,
         "currentHumidity": 19.81,
@@ -31,7 +30,7 @@
     },
     {
         "sensorId": 3,
-        "status": "inactive",
+        "status": "OFFLINE",
         "latestDataUpdate": "2024-09-25T09:10:25",
         "currentTemperature": 4.03,
         "currentHumidity": 79.92,
@@ -46,7 +45,7 @@
     },
     {
         "sensorId": 4,
-        "status": "error",
+        "status": "ERROR",
         "latestDataUpdate": "2024-09-25T13:20:25",
         "currentTemperature": 44.31,
         "currentHumidity": 49.25,
@@ -61,7 +60,7 @@
     },
     {
         "sensorId": 5,
-        "status": "inactive",
+        "status": "OFFLINE",
         "latestDataUpdate": "2024-09-25T13:34:25",
         "currentTemperature": 10.96,
         "currentHumidity": 91.2,
@@ -71,6 +70,21 @@
             "id": 892,
             "latitude": 51.245641,
             "longitude": 22.540845,
+            "facultyName": "Medicine"
+        }
+    },
+    {
+        "sensorId": 6,
+        "status": "ONLINE",
+        "latestDataUpdate": "2024-09-25T13:24:25",
+        "currentTemperature": 10.96,
+        "currentHumidity": 91.2,
+        "currentPressure": 1010.93,
+        "currentGasResistance": 681.69,
+        "location": {
+            "id": 892,
+            "latitude": 51.275641,
+            "longitude": 22.520845,
             "facultyName": "Medicine"
         }
     }

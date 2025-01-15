@@ -1,7 +1,8 @@
 import { useMemo } from "react";
 import { useLoaderData } from "react-router-dom";
 import { IoBugOutline, IoHeart, IoHeartOutline, IoRefreshOutline } from "react-icons/io5";
-import { WiBarometer, WiHumidity, WiDust, WiThermometer } from "react-icons/wi";
+import { WiBarometer, WiHumidity, WiDust, WiThermometer, WiTime4 } from "react-icons/wi";
+import { TiDeleteOutline, TiTick, TiWarningOutline } from "react-icons/ti";
 
 import json from "../../sensorsData.json";
 
@@ -15,6 +16,7 @@ import MapPortal from "../../components/MapPortal/MapPortal.tsx";
 import SensorMarker from "../../components/SensorMarker/SensorMarker.tsx";
 import IconButton from "../../components/IconButton/IconButton.tsx";
 import SensorChart from "../../components/SensorChart/SensorChart.tsx";
+import CurrentCondition from "../../components/CurrentCondition/CurrentCondition.tsx";
 import useFlyToOnRender from "./useFlyToOnRender.ts";
 import { useFavorites } from "../../contexts/FavoritesProvider.tsx";
 
@@ -35,23 +37,23 @@ const chartWidth = 320;
 const chartHeight = 150;
 
 const SensorSideView: React.FC = () => {
-    const { sensor, sensorList } = useLoaderData() as ISensorSideViewLoaderData;
+    const { sensor: s, sensorList } = useLoaderData() as ISensorSideViewLoaderData;
     const { favorites, addFavorite, removeFavorite } = useFavorites();
 
-    useFlyToOnRender(sensor.location.latitude, sensor.location.longitude);
+    useFlyToOnRender(s.location.latitude, s.location.longitude);
 
-    const isFavorite = useMemo(() => favorites.includes(sensor.sensorId), [favorites, sensor.sensorId]);
+    const isFavorite = useMemo(() => favorites.includes(s.sensorId), [favorites, s.sensorId]);
 
     const toggleFavorite = () => {
-        if (!favorites.includes(sensor.sensorId)) addFavorite(sensor.sensorId);
-        else removeFavorite(sensor.sensorId);
+        if (!favorites.includes(s.sensorId)) addFavorite(s.sensorId);
+        else removeFavorite(s.sensorId);
     };
 
     return (
-        <SideView title={`Czujnik ${sensor.sensorId.toString()}`} showBackButton>
+        <SideView title={s.location.facultyName} showBackButton>
             <MapPortal>
-                {sensorList.map(s => (
-                    <SensorMarker key={s.sensorId} sensor={s} isActive={s.sensorId === sensor.sensorId} />
+                {sensorList.map(it => (
+                    <SensorMarker key={it.sensorId} sensor={it} isActive={it.sensorId === s.sensorId} />
                 ))}
             </MapPortal>
             <div className={styles.root}>
@@ -71,46 +73,56 @@ const SensorSideView: React.FC = () => {
                     </IconButton>
                 </div>
                 <div className={styles.content}>
-                    <div>
-                        <div>
-                            <b>Wydział:</b> {sensor.location.facultyName}
-                        </div>
-                        <div>
-                            <b>Status:</b> {sensor.status}
-                        </div>
-                        <div>
-                            <b>Data aktualizacji:</b> {new Date(sensor.latestDataUpdate).toLocaleString()}
-                        </div>
-                    </div>
-
                     <div className={styles.heading}>Obecne warunki</div>
                     <div className={styles.currentConditions}>
-                        <div className={styles.currentConditionWrapper}>
-                            Temperatura
-                            <div className={styles.currentCondition}>
-                                <WiThermometer size={44} /> {sensor.currentTemperature}° C
-                            </div>
-                        </div>
-                        <div className={styles.currentConditionWrapper}>
-                            Ciśnienie
-                            <div className={styles.currentCondition}>
-                                <WiBarometer size={44} /> {sensor.currentPressure} hPa
-                            </div>
-                        </div>
+                        <CurrentCondition
+                            label="Temperatura"
+                            value={`${s.currentTemperature.toString()}° C`}
+                            icon={WiThermometer}
+                            iconSize={44}
+                        />
+                        <CurrentCondition
+                            label="Ciśnienie"
+                            value={`${s.currentPressure.toString()} hPa`}
+                            icon={WiBarometer}
+                            iconSize={44}
+                        />
                     </div>
                     <div className={styles.currentConditions}>
-                        <div className={styles.currentConditionWrapper}>
-                            Wilgotność
-                            <div className={styles.currentCondition}>
-                                <WiHumidity size={44} /> {sensor.currentHumidity}%
-                            </div>
-                        </div>
-                        <div className={styles.currentConditionWrapper}>
-                            Jakość powietrza
-                            <div className={styles.currentCondition}>
-                                <WiDust size={44} /> {sensor.currentGasResistance} ppm
-                            </div>
-                        </div>
+                        <CurrentCondition
+                            label="Wilgotność"
+                            value={`${s.currentHumidity.toString()}%`}
+                            icon={WiHumidity}
+                            iconSize={44}
+                        />
+                        <CurrentCondition
+                            label="Jakość powietrza"
+                            value={s.currentGasResistance ? `${s.currentGasResistance.toString()} ppm` : "-"}
+                            icon={WiDust}
+                            iconSize={44}
+                        />
+                    </div>
+                    <div className={styles.currentConditions}>
+                        <CurrentCondition
+                            label="Data aktualizacji"
+                            value={new Date(s.latestDataUpdate).toLocaleString()}
+                            icon={WiTime4}
+                            iconSize={34}
+                            iconLeftMargin={4}
+                            multilineValue
+                        />
+                        <CurrentCondition
+                            label="Status"
+                            value={s.status}
+                            icon={s.status === "ONLINE"
+                                ? TiTick
+                                : (s.status === "OFFLINE"
+                                        ? TiDeleteOutline
+                                        : TiWarningOutline)}
+                            iconSize={34}
+                            iconLeftMargin={4}
+                            multilineValue
+                        />
                     </div>
 
                     <div className={styles.heading}>Temperatura</div>

@@ -1,0 +1,24 @@
+.root {
+    width: 50%;
+}
+
+.content {
+    width: 100%;
+    display: flex;
+    align-items: center;
+    margin-left: -4px;
+    padding-block: 2px;
+    line-height: 1.3em;
+    font-weight: bold;
+}
+
+.icon {
+    margin-right: 4px;
+    flex-shrink: 0;
+}
+
+.iconWrapper {
+    display: flex;
+    flex-shrink: 0;
+    width: 44px;
+}
