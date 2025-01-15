@@ -31,7 +31,7 @@ const SensorChart: React.FC<IProps> = ({ className, width, height, data, dataKey
                 unit={unit}
                 fontSize="0.8em"
                 scale="linear"
-                style={{ textWrap: "nowrap" }}
+                width={76}
                 domain={domain}
             />
             <Tooltip
