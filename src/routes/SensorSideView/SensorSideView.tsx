@@ -33,7 +33,6 @@ const data = sensorDataList.map(s => ({
     gasResistance: s.gasResistance,
 }));
 
-const chartWidth = 320;
 const chartHeight = 150;
 
 const SensorSideView: React.FC = () => {
@@ -127,7 +126,6 @@ const SensorSideView: React.FC = () => {
 
                     <div className={styles.heading}>Temperatura</div>
                     <SensorChart
-                        width={chartWidth}
                         height={chartHeight}
                         data={data}
                         dataKey="temperature"
@@ -142,7 +140,6 @@ const SensorSideView: React.FC = () => {
 
                     <div className={styles.heading}>Ciśnienie</div>
                     <SensorChart
-                        width={chartWidth}
                         height={chartHeight}
                         data={data}
                         dataKey="pressure"
@@ -157,7 +154,6 @@ const SensorSideView: React.FC = () => {
 
                     <div className={styles.heading}>Wilgotność</div>
                     <SensorChart
-                        width={chartWidth}
                         height={chartHeight}
                         data={data}
                         dataKey="humidity"
@@ -169,7 +165,6 @@ const SensorSideView: React.FC = () => {
 
                     <div className={styles.heading}>Jakość powietrza</div>
                     <SensorChart
-                        width={chartWidth}
                         height={chartHeight}
                         data={data}
                         dataKey="gasResistance"

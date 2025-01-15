@@ -48,11 +48,75 @@
         "gasResistance": 950
     },
     {
-        "dataId": 6,
-        "timestamp": "2025-01-14T08:55:00Z",
+        "dataId": 7,
+        "timestamp": "2025-01-14T09:00:00Z",
         "temperature": 21.5,
         "humidity": 43.8,
         "pressure": 1032.6,
         "gasResistance": 950
+    },
+    {
+        "dataId": 8,
+        "timestamp": "2025-01-14T09:05:00Z",
+        "temperature": 21.3,
+        "humidity": 43.5,
+        "pressure": 1035.1,
+        "gasResistance": 945
+    },
+    {
+        "dataId": 9,
+        "timestamp": "2025-01-14T09:10:00Z",
+        "temperature": 21.1,
+        "humidity": 43.3,
+        "pressure": 1036.5,
+        "gasResistance": 940
+    },
+    {
+        "dataId": 10,
+        "timestamp": "2025-01-14T09:15:00Z",
+        "temperature": 21.0,
+        "humidity": 43.0,
+        "pressure": 1038.0,
+        "gasResistance": 935
+    },
+    {
+        "dataId": 11,
+        "timestamp": "2025-01-14T09:20:00Z",
+        "temperature": 21.2,
+        "humidity": 42.8,
+        "pressure": 1039.0,
+        "gasResistance": 930
+    },
+    {
+        "dataId": 12,
+        "timestamp": "2025-01-14T09:25:00Z",
+        "temperature": 21.4,
+        "humidity": 42.6,
+        "pressure": 1040.0,
+        "gasResistance": 925
+    },
+    {
+        "dataId": 13,
+        "timestamp": "2025-01-14T09:30:00Z",
+        "temperature": 21.6,
+        "humidity": 42.4,
+        "pressure": 1041.0,
+        "gasResistance": 920
+    },
+    {
+        "dataId": 14,
+        "timestamp": "2025-01-14T09:35:00Z",
+        "temperature": 21.8,
+        "humidity": 42.2,
+        "pressure": 1042.0,
+        "gasResistance": 915
+    },
+    {
+        "dataId": 15,
+        "timestamp": "2025-01-14T09:40:00Z",
+        "temperature": 22.0,
+        "humidity": 42.0,
+        "pressure": 1043.0,
+        "gasResistance": 910
     }
 ]
