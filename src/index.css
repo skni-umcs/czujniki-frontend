@@ -8,6 +8,7 @@
     color-scheme: dark;
 
     --text-color-primary: hsla(0, 0%, 100%, 0.87);
+    --text-color-secondary: hsla(0, 0%, 100%, 0.67);
     --text-color-inverted: hsl(208, 37%, 20%);
     --bg-primary: hsl(0, 0%, 14%);
     --bg-secondary: hsl(0, 0%, 18%);
@@ -34,6 +35,7 @@
     color-scheme: light;
 
     --text-color-primary: hsl(208, 37%, 20%);
+    --text-color-secondary: hsl(207, 5%, 45%);
     --text-color-inverted: hsla(0, 0%, 100%, 0.87);
     --bg-primary: hsl(0, 0%, 100%);
     --bg-secondary: hsl(213, 43%, 96%);

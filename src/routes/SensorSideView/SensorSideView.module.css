@@ -12,7 +12,7 @@
 
 .content {
     line-height: 2;
-    padding: 32px;
+    padding: 24px;
     padding-top: 0;
     font-size: 0.90em;
 }
@@ -28,10 +28,16 @@
 }
 
 .chartOffset {
-    left: -40px;
+    left: -24px;
 }
 
 .currentConditions {
-    display: flex;
-    align-items: center;
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 16px;
+}
+
+.updateDate {
+    color: var(--text-color-secondary);
+    margin-left: 8px;
 }
