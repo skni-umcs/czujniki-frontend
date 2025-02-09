@@ -5,10 +5,14 @@ import clsx from "clsx";
 
 import Sensor from "../../types/Sensor";
 import styles from "./SensorMarker.module.css";
+import markerIconPng from "leaflet/dist/images/marker-icon.png";
+import markerShadowPng from "leaflet/dist/images/marker-shadow.png";
 
 const MyIconProps: Icon.DefaultIconOptions = {
     className: styles.root,
     iconSize: [25, 41],
+    iconUrl: markerIconPng,
+    shadowUrl: markerShadowPng,
 };
 
 const MyIcon = new Icon.Default(MyIconProps);
