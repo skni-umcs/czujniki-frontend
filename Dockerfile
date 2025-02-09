@@ -4,7 +4,8 @@ FROM node:20 AS base
 WORKDIR /app
 
 # Enable Corepack and install dependencies
-RUN corepack enable && corepack prepare pnpm@latest --activate
+RUN corepack enable pnpm
+RUN pnpm config set store-dir .pnpm-store
 
 # Copy package manager configs and install dependencies
 COPY package.json pnpm-lock.yaml ./
