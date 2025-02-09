@@ -1,11 +1,14 @@
 # Stage 1: Install dependencies (for both dev and prod)
-FROM node AS base
+FROM node:20 AS base
 
 WORKDIR /app
 
+# Enable Corepack and install dependencies
+RUN corepack enable && corepack prepare pnpm@latest --activate
+
 # Copy package manager configs and install dependencies
 COPY package.json pnpm-lock.yaml ./
-RUN npm install -g pnpm && pnpm install
+RUN pnpm install
 
 # Stage 2: Development (pnpm dev server)
 FROM base AS dev
@@ -26,7 +29,7 @@ COPY . .
 RUN pnpm build
 
 # Stage 4: Serve the React app with Nginx
-FROM nginx AS production
+FROM nginx:stable-alpine AS production
 
 WORKDIR /usr/share/nginx/html
 
@@ -36,10 +39,4 @@ RUN rm -rf ./*
 # Copy React build files from builder stage
 COPY --from=builder /app/dist .
 
-# Copy custom Nginx configuration
-COPY config/nginx.conf /etc/nginx/conf.d/default.conf
-
-EXPOSE 80
-
-# Start Nginx
-CMD ["nginx", "-g", "daemon off;"]
+#
