@@ -12,19 +12,16 @@ cache:
 
 install_dependencies:
   before_script:
-  - corepack enable
-  - corepack prepare pnpm@latest-8 --activate
+  - corepack enable pnpm
   - pnpm config set store-dir .pnpm-store
   stage: install
   image: node
   script:
-    - npm install -g pnpm
     - pnpm install
 
 build:
   before_script:
-  - corepack enable
-  - corepack prepare pnpm@latest-8 --activate
+  - corepack enable pnpm
   - pnpm config set store-dir .pnpm-store
   stage: build
   image: node
