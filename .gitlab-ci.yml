@@ -2,6 +2,7 @@ stages:
   - install
   - build
   - build_docker
+  - deploy
 
 
 cache:
@@ -45,3 +46,20 @@ docker_build:
     - docker push $CI_REGISTRY_IMAGE:latest
   only:
     - master
+
+
+deploy:
+  # image: alpine:latest
+  stage: deploy
+  trigger:
+    project: "czujniki/infra"
+    branch: "main"
+    strategy: depend
+    forward:
+      pipeline_variables: true
+  variables:
+    FRONTEND_IMAGE_TAG: "$CI_COMMIT_SHORT_SHA-$CI_COMMIT_BRANCH"
+  only:
+    - main
+    - master
+
