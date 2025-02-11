@@ -17,12 +17,12 @@ RUN pnpm build
 # Stage 4: Serve the React app with Nginx
 FROM nginx AS production
 
+COPY config/ngnix.conf /etc/nginx/nginx.conf
+
 WORKDIR /usr/share/nginx/html
 
 # Remove default Nginx static files
 RUN rm -rf ./*
-
-COPY config/ngnix.conf /etc/nginx/nginx.conf
 
 # Copy React build files from builder stage
 COPY --from=builder /app/dist .
