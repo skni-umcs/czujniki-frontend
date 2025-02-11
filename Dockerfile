@@ -1,17 +1,26 @@
-# Stage 1: Install dependencies (for both dev and prod)
+# Stage 1: Base Node image with pnpm
 FROM node AS base
 
 ENV PNPM_HOME="/pnpm"
 ENV PATH="$PNPM_HOME:$PATH"
+
 RUN corepack enable
 
-FROM base AS builder
-
+# Stage 2: Install dependencies separately for better caching
+FROM base AS deps
 WORKDIR /app
-COPY pnpm-lock.yaml package.json /app/
-RUN pnpm install
 
-COPY . /app
+# Copy only the package.json and lockfile first for better caching
+COPY pnpm-lock.yaml package.json ./
+RUN pnpm install --frozen-lockfile
+
+# Stage 3: Build the React app
+FROM base AS builder
+WORKDIR /app
+
+# Copy node_modules from deps stage to avoid reinstalling dependencies
+COPY --from=deps /app/node_modules ./node_modules
+COPY . ./
 RUN pnpm build
 
 # Stage 4: Serve the React app with Nginx
@@ -25,4 +34,5 @@ RUN rm -rf ./*
 # Copy React build files from builder stage
 COPY --from=builder /app/dist .
 
-#
+# Copy custom Nginx
+COPY config/nginx.conf /etc/nginx/conf.d/default.conf
