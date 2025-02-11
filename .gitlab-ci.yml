@@ -6,26 +6,28 @@ stages:
 
 install_dependencies:
   stage: install
-  image: node
+  image: node:lts-alpine
   when: manual
-  script:
-    - corepack enable
-    - corepack prepare pnpm@latest-10 --activate
+  before_script:
+    - corepack enable pnpm
     - pnpm config set store-dir .pnpm-store
+  script:
     - pnpm install --frozen-lockfile --prefer-offline
   cache:
     key:
       files:
         - pnpm-lock.yaml
     paths:
-      - node_modules/
-      - .pnpm-store/
+      - .pnpm-store
 
 build:
   stage: build
-  image: node
+  image: node:lts-alpine
   when: manual
   needs: ["install_dependencies"]
+  before_script:
+    - corepack enable pnpm
+    - pnpm config set store-dir .pnpm-store
   script:
     - pnpm build
   artifacts:
@@ -47,7 +49,8 @@ docker_build:
     - docker push "$CI_REGISTRY_IMAGE:latest"
   only:
     - master
-    - test-ci
+    - ci-test
+
 
 deploy:
   stage: deploy

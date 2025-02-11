@@ -1,5 +1,5 @@
 # Stage 1: Base Node image with pnpm
-FROM node AS base
+FROM node:lts-alpine AS base
 
 ENV PNPM_HOME="/pnpm"
 ENV PATH="$PNPM_HOME:$PATH"
@@ -12,7 +12,7 @@ WORKDIR /app
 
 # Copy only the package.json and lockfile first for better caching
 COPY pnpm-lock.yaml package.json ./
-RUN pnpm install --frozen-lockfile
+RUN pnpm install --frozen-lockfile --prefer-offline
 
 # Stage 3: Build the React app
 FROM base AS builder
@@ -24,7 +24,7 @@ COPY . ./
 RUN pnpm build
 
 # Stage 4: Serve the React app with Nginx
-FROM nginx AS production
+FROM nginx:alpine AS production
 
 WORKDIR /usr/share/nginx/html
 
@@ -35,4 +35,4 @@ RUN rm -rf ./*
 COPY --from=builder /app/dist .
 
 # Copy custom Nginx
-COPY config/nginx.conf /etc/nginx/conf.d/default.conf
+COPY ./config/nginx.conf /etc/nginx/nginx.conf
