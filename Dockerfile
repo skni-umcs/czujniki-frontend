@@ -14,6 +14,7 @@ WORKDIR /app
 COPY pnpm-lock.yaml package.json ./
 RUN corepack install
 
+ENV COREPACK_INTEGRITY_KEYS=0
 RUN pnpm install --frozen-lockfile --prefer-offline
 
 # Stage 3: Build the React app
