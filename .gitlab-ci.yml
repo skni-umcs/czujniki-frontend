@@ -10,7 +10,6 @@ install_dependencies:
   when: manual
   before_script:
     - corepack enable
-    - corepack install
     - pnpm config set store-dir .pnpm-store
   script:
     - pnpm install --frozen-lockfile --prefer-offline
@@ -28,7 +27,6 @@ build:
   needs: ["install_dependencies"]
   before_script:
     - corepack enable
-    - corepack install
     - pnpm config set store-dir .pnpm-store
   script:
     - pnpm build

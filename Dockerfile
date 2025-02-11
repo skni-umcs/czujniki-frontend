@@ -9,7 +9,7 @@ FROM base AS builder
 WORKDIR /app
 COPY pnpm-lock.yaml ./
 
-RUN pnpm fetch
+RUN pnpm install --frozen-lockfile --prefer-offline
 
 COPY . /app
 RUN pnpm build
