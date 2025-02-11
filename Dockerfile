@@ -21,8 +21,9 @@ WORKDIR /usr/share/nginx/html
 # Remove default Nginx static files
 RUN rm -rf ./*
 
-# Copy React build files from a builder stage
+# Copy React build files from builder stage
 COPY --from=builder /app/dist .
 
 # Use local Nginx config file
-COPY ./config/nginx.conf /etc/nginx/nginx.conf
+RUN rm /etc/nginx/conf.d/default.conf
+COPY ./config/nginx.conf /etc/nginx/conf.d
