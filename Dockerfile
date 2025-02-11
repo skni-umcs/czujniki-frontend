@@ -5,7 +5,6 @@ ENV PNPM_HOME="/pnpm"
 ENV PATH="$PNPM_HOME:$PATH"
 
 RUN corepack enable
-RUN corepack install
 
 # Stage 2: Install dependencies separately for better caching
 FROM base AS deps
@@ -13,6 +12,8 @@ WORKDIR /app
 
 # Copy only the package.json and lockfile first for better caching
 COPY pnpm-lock.yaml package.json ./
+RUN corepack install
+
 RUN pnpm install --frozen-lockfile --prefer-offline
 
 # Stage 3: Build the React app
@@ -26,7 +27,6 @@ RUN pnpm build
 
 # Stage 4: Serve the React app with Nginx
 FROM nginx:alpine AS production
-
 WORKDIR /usr/share/nginx/html
 
 # Remove default Nginx static files
