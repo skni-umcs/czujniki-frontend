@@ -25,4 +25,5 @@ RUN rm -rf ./*
 COPY --from=builder /app/dist .
 
 # Use local Nginx config file
-COPY ./config/nginx.conf /etc/nginx/conf.d/default.conf
+RUN rm /etc/nginx/conf.d/default.conf
+COPY ./config/nginx.conf /etc/nginx/conf.d
