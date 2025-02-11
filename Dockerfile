@@ -17,8 +17,6 @@ RUN pnpm build
 # Stage 4: Serve the React app with Nginx
 FROM nginx AS production
 
-COPY config/ngnix.conf /etc/nginx/nginx.conf
-
 WORKDIR /usr/share/nginx/html
 
 # Remove default Nginx static files
