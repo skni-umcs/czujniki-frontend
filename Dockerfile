@@ -6,8 +6,8 @@ RUN corepack enable
 
 FROM base AS builder
 
-COPY pnpm-lock.yaml /app
 WORKDIR /app
+COPY pnpm-lock.yaml ./
 
 RUN pnpm fetch
 
