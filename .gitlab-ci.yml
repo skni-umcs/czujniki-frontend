@@ -6,14 +6,14 @@ stages:
 
 install_dependencies:
   stage: install
-  image: node:lts-alpine
+  image: node:23-alpine
   when: manual
   before_script:
     - corepack enable
     - corepack install
-    - COREPACK_INTEGRITY_KEYS=0 pnpm config set store-dir .pnpm-store
+    - pnpm config set store-dir .pnpm-store
   script:
-    - COREPACK_INTEGRITY_KEYS=0 pnpm install --frozen-lockfile --prefer-offline
+    - pnpm install --frozen-lockfile --prefer-offline
   cache:
     key:
       files:
@@ -23,15 +23,15 @@ install_dependencies:
 
 build:
   stage: build
-  image: node:lts-alpine
+  image: node:23-alpine
   when: manual
   needs: ["install_dependencies"]
   before_script:
     - corepack enable
     - corepack install
-    - COREPACK_INTEGRITY_KEYS=0 pnpm config set store-dir .pnpm-store
+    - pnpm config set store-dir .pnpm-store
   script:
-    - COREPACK_INTEGRITY_KEYS=0 pnpm build
+    - pnpm build
   artifacts:
     paths:
       - dist/
@@ -39,9 +39,9 @@ build:
 
 docker_build:
   stage: build_docker
-  image: docker:24.0
+  image: docker:latest
   services:
-    - docker:24.0-dind
+    - docker:latest
   before_script:
     - docker login -u "$CI_REGISTRY_USER" -p "$CI_REGISTRY_PASSWORD" $CI_REGISTRY
   script:
