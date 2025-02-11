@@ -9,10 +9,11 @@ install_dependencies:
   image: node:lts-alpine
   when: manual
   before_script:
-    - corepack enable pnpm
-    - pnpm config set store-dir .pnpm-store
+    - corepack enable
+    - corepack install
+    - COREPACK_INTEGRITY_KEYS=0 pnpm config set store-dir .pnpm-store
   script:
-    - pnpm install --frozen-lockfile --prefer-offline
+    - COREPACK_INTEGRITY_KEYS=0 pnpm install --frozen-lockfile --prefer-offline
   cache:
     key:
       files:
@@ -26,10 +27,11 @@ build:
   when: manual
   needs: ["install_dependencies"]
   before_script:
-    - corepack enable pnpm
-    - pnpm config set store-dir .pnpm-store
+    - corepack enable
+    - corepack install
+    - COREPACK_INTEGRITY_KEYS=0 pnpm config set store-dir .pnpm-store
   script:
-    - pnpm build
+    - COREPACK_INTEGRITY_KEYS=0 pnpm build
   artifacts:
     paths:
       - dist/

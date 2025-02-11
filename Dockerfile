@@ -24,6 +24,8 @@ WORKDIR /app
 # Copy node_modules from deps stage to avoid reinstalling dependencies
 COPY --from=deps /app/node_modules ./node_modules
 COPY . ./
+
+ENV COREPACK_INTEGRITY_KEYS=0
 RUN pnpm build
 
 # Stage 4: Serve the React app with Nginx
