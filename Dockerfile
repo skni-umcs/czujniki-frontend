@@ -5,6 +5,7 @@ ENV PNPM_HOME="/pnpm"
 ENV PATH="$PNPM_HOME:$PATH"
 
 RUN corepack enable
+RUN corepack install
 
 # Stage 2: Install dependencies separately for better caching
 FROM base AS deps
