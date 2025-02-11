@@ -4,28 +4,30 @@ stages:
   - build_docker
   - deploy
 
-
-cache:
-  key: ${CI_COMMIT_REF_SLUG}
-  paths:
-    - node_modules/
-    - .pnpm-store/
-
 install_dependencies:
-  before_script:
-  - corepack enable pnpm
-  - pnpm config set store-dir .pnpm-store
   stage: install
-  image: node
+  image: node:23-alpine
+  when: manual
+  before_script:
+    - corepack enable
+    - pnpm config set store-dir .pnpm-store
   script:
-    - pnpm install
+    - pnpm install --frozen-lockfile --prefer-offline
+  cache:
+    key:
+      files:
+        - pnpm-lock.yaml
+    paths:
+      - .pnpm-store
 
 build:
-  before_script:
-  - corepack enable pnpm
-  - pnpm config set store-dir .pnpm-store
   stage: build
-  image: node
+  image: node:23-alpine
+  when: manual
+  needs: ["install_dependencies"]
+  before_script:
+    - corepack enable
+    - pnpm config set store-dir .pnpm-store
   script:
     - pnpm build
   artifacts:
@@ -35,21 +37,22 @@ build:
 
 docker_build:
   stage: build_docker
-  image: docker:24.0
+  image: docker:latest
   services:
-    - docker:24.0-dind
-  script:
+    - docker:latest
+  before_script:
     - docker login -u "$CI_REGISTRY_USER" -p "$CI_REGISTRY_PASSWORD" $CI_REGISTRY
-    - - docker build -t "$CI_REGISTRY_IMAGE:$CI_COMMIT_SHORT_SHA-$CI_COMMIT_BRANCH" .
-    - docker tag "$CI_REGISTRY_IMAGE:$CI_COMMIT_SHORT_SHA-$CI_COMMIT_BRANCH" $CI_REGISTRY_IMAGE:latest
+  script:
+    - docker build --cache-from "$CI_REGISTRY_IMAGE:latest" -t "$CI_REGISTRY_IMAGE:$CI_COMMIT_SHORT_SHA-$CI_COMMIT_BRANCH" .
+    - docker tag "$CI_REGISTRY_IMAGE:$CI_COMMIT_SHORT_SHA-$CI_COMMIT_BRANCH" "$CI_REGISTRY_IMAGE:latest"
     - docker push "$CI_REGISTRY_IMAGE:$CI_COMMIT_SHORT_SHA-$CI_COMMIT_BRANCH"
-    - docker push $CI_REGISTRY_IMAGE:latest
+    - docker push "$CI_REGISTRY_IMAGE:latest"
   only:
     - master
+    - ci-test
 
 
 deploy:
-  # image: alpine:latest
   stage: deploy
   trigger:
     project: "czujniki/infra"
@@ -62,4 +65,3 @@ deploy:
   only:
     - main
     - master
-
