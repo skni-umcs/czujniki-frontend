@@ -52,7 +52,6 @@ docker_build:
     - master
     - ci-test
 
-
 deploy:
   stage: deploy
   trigger:
