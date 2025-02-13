@@ -38,7 +38,7 @@ const AccessibilitySideView: React.FC = () => {
                                     type="radio"
                                     name="theme"
                                     value="system"
-                                    checked={theme === "system"}
+                                    defaultChecked={theme === "system"}
                                 />
                                 Systemowy
                             </label>
@@ -47,7 +47,7 @@ const AccessibilitySideView: React.FC = () => {
                                     type="radio"
                                     name="theme"
                                     value="light"
-                                    checked={theme === "light"}
+                                    defaultChecked={theme === "light"}
                                 />
                                 Jasny
                             </label>
@@ -56,7 +56,7 @@ const AccessibilitySideView: React.FC = () => {
                                     type="radio"
                                     name="theme"
                                     value="dark"
-                                    checked={theme === "dark"}
+                                    defaultChecked={theme === "dark"}
                                 />
                                 Ciemny
                             </label>
@@ -65,7 +65,7 @@ const AccessibilitySideView: React.FC = () => {
                                     type="radio"
                                     name="theme"
                                     value="highContrast"
-                                    checked={theme === "highContrast"}
+                                    defaultChecked={theme === "highContrast"}
                                 />
                                 Wysoki kontrast
                             </label>
@@ -77,7 +77,7 @@ const AccessibilitySideView: React.FC = () => {
                                     type="radio"
                                     name="font-size"
                                     value="normal"
-                                    checked={fontSize === "normal"}
+                                    defaultChecked={fontSize === "normal"}
                                 />
                                 Normalny
                             </label>
@@ -86,7 +86,7 @@ const AccessibilitySideView: React.FC = () => {
                                     type="radio"
                                     name="font-size"
                                     value="large"
-                                    checked={fontSize === "large"}
+                                    defaultChecked={fontSize === "large"}
                                 />
                                 Duży
                             </label>
@@ -95,7 +95,7 @@ const AccessibilitySideView: React.FC = () => {
                                     type="radio"
                                     name="font-size"
                                     value="larger"
-                                    checked={fontSize === "larger"}
+                                    defaultChecked={fontSize === "larger"}
                                 />
                                 Bardzo duży
                             </label>
