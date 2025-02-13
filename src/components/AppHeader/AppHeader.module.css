@@ -3,8 +3,9 @@
     padding: 16px;
     align-items: center;
     background-color: var(--appheader-bg);
-    border-bottom: 2px solid var(--border-color);
     width: 100%;
+    box-shadow: 0 0 8px hsl(0deg 0% 0% / 50%);
+    z-index: 1;
 }
 
 .link {

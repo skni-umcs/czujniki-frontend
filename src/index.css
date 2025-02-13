@@ -24,10 +24,11 @@
     --icon-btn-hover-color: var(--bg-secondary);
     --icon-btn-active-color: hsl(0, 0%, 21%);
     --input-border-color: hsl(140, 1%, 56%);
+    --shadow-color: var(--border-color);
 
     --appheader-bg: var(--bg-primary);
-    --sidebar-bg: var(--bg-primary);
-    --searchbar-bg: var(--bg-tertiary);
+    --sidebar-bg: hsl(0, 0%, 10%);
+    --searchbar-bg: hsl(0, 0%, 7%);
     --alt-navbar-bg: var(--bg-secondary);
 }
 
@@ -37,13 +38,13 @@
     --text-color-primary: hsl(208, 37%, 20%);
     --text-color-secondary: hsl(207, 5%, 45%);
     --text-color-inverted: hsla(0, 0%, 100%, 0.87);
-    --bg-primary: hsl(0, 0%, 100%);
-    --bg-secondary: hsl(213, 43%, 96%);
+    --bg-primary: hsl(213, 43%, 96%);
+    --bg-secondary: hsl(0, 0%, 100%);
     --bg-tertiary: hsla(0, 0%, 100%, 0.071);
     --accent-color: hsl(120, 19%, 46%);
     --accent-text-color: var(--text-color-inverted);
-    --border-color: hsl(0, 0%, 92%);
-    --border-color2: var(--border-color);
+    --border-color: hsl(0, 0%, 86%);
+    --border-color2: hsl(0, 0%, 92%);
     --primary-btn-color: hsl(217, 90%, 43%);
     --primary-btn-hover-color: hsl(217, 90%, 45%);
     --primary-btn-active-color: hsl(217, 90%, 40%);
@@ -51,10 +52,11 @@
     --icon-btn-hover-color: var(--bg-secondary);
     --icon-btn-active-color: hsl(213, 43%, 92%);
     --input-border-color: hsl(140, 1%, 56%);
+    --shadow-color: hsl(0, 0%, 28%);
 
     --appheader-bg: var(--bg-primary);
-    --sidebar-bg: var(--bg-primary);
-    --searchbar-bg: var(--bg-secondary);
+    --sidebar-bg: var(--bg-secondary);
+    --searchbar-bg: hsl(0, 0%, 95%);
     --alt-navbar-bg: var(--bg-primary);
 }
 
@@ -77,6 +79,7 @@
     --icon-btn-hover-color: var(--bg-secondary);
     --icon-btn-active-color: transparent;
     --input-border-color: white;
+    --shadow-color: hsl(0, 0%, 0%);
 
     --appheader-bg: var(--bg-primary);
     --sidebar-bg: var(--bg-primary);
