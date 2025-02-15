@@ -9,9 +9,13 @@ import styles from "./SensorMarker.module.css";
 const myIconProps: IconOptions = {
     className: styles.root,
     iconSize: [25, 41],
+    iconAnchor: [12, 41],
+    popupAnchor: [1, -34],
+    tooltipAnchor: [16, -28],
+    shadowSize: [41, 41],
     iconUrl: "/marker-icon.png",
     iconRetinaUrl: "/marker-icon-2x.png",
-    shadowUrl: "marker-shadow.png",
+    shadowUrl: "/marker-shadow.png",
 };
 
 const myIcon = icon(myIconProps);
