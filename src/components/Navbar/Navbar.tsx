@@ -18,7 +18,7 @@ const Navbar: React.FC = () => {
             />
             <button
                 className={styles.item}
-                onClick={() => { navigate("/sensors"); }}
+                onClick={() => { void navigate("/sensors"); }}
                 title="Lista czujników"
             >
                 <IoList size={24} />
@@ -28,7 +28,7 @@ const Navbar: React.FC = () => {
             </button>
             <button
                 className={styles.item}
-                onClick={() => { navigate("/favorites"); }}
+                onClick={() => { void navigate("/favorites"); }}
                 title="Ulubione czujniki"
             >
                 <IoHeartOutline size={24} />
@@ -44,7 +44,7 @@ const Navbar: React.FC = () => {
             </button>
             <button
                 className={styles.item}
-                onClick={() => { navigate("/accessibility"); }}
+                onClick={() => { void navigate("/accessibility"); }}
                 title="Ustawienia dostępności"
             >
                 <IoAccessibilityOutline size={24} />

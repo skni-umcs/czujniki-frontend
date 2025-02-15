@@ -9,7 +9,7 @@ export interface IMainRouteLoaderData {
 }
 
 const MainRoute: React.FC = () => {
-    const { sensorList } = useLoaderData() as IMainRouteLoaderData;
+    const { sensorList } = useLoaderData<IMainRouteLoaderData>();
 
     return (
         <MapPortal>

@@ -15,7 +15,7 @@ const SideView: React.FC<IProps> = ({ children, title, showBackButton }) => {
     const backButton = (
         <IconButton
             title="Cofnij"
-            onClick={() => { navigate(-1); }}
+            onClick={() => { void navigate(-1); }}
         >
             <IoArrowBack size={24} />
         </IconButton>
@@ -28,7 +28,7 @@ const SideView: React.FC<IProps> = ({ children, title, showBackButton }) => {
                 <div className={styles.heading}>{title}</div>
                 <IconButton
                     title="Zamknij"
-                    onClick={() => { navigate("/"); }}
+                    onClick={() => { void navigate("/"); }}
                 >
                     <IoClose size={24} />
                 </IconButton>

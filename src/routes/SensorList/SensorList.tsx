@@ -13,7 +13,7 @@ export interface ISensorListLoaderData {
 };
 
 const SensorList: React.FC = () => {
-    const { sensorList, title } = useLoaderData() as ISensorListLoaderData;
+    const { sensorList, title } = useLoaderData<ISensorListLoaderData>();
 
     return (
         <SideView title={title ?? "Lista czujników"}>

@@ -35,11 +35,11 @@ const SensorMarker: React.FC<IPropsMarker> = ({ sensor, isActive }) => {
     // handleBlur
     useMapEvent("click", () => {
         if (!isActive) return;
-        navigate("/sensors");
+        void navigate("/sensors");
     });
 
     const handleClick = () => {
-        navigate(`/sensors/${sensor.id.toString()}`);
+        void navigate(`/sensors/${sensor.id.toString()}`);
     };
 
     return (

@@ -13,7 +13,7 @@ export interface IAccessibilitySideViewLoaderData {
 };
 
 const AccessibilitySideView: React.FC = () => {
-    const { sensorList } = useLoaderData() as IAccessibilitySideViewLoaderData;
+    const { sensorList } = useLoaderData<IAccessibilitySideViewLoaderData>();
     const { theme, setTheme } = useTheme();
     const { fontSize, setFontSize } = useFontSize();
 
