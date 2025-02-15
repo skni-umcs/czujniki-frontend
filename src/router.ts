@@ -1,4 +1,3 @@
-/* eslint-disable @typescript-eslint/require-await */
 import { createBrowserRouter } from "react-router-dom";
 
 import { getFavorites } from "./contexts/FavoritesProvider.tsx";
@@ -10,10 +9,8 @@ import AccessibilitySideView, { IAccessibilitySideViewLoaderData } from "./route
 import Login from "./routes/Login/Login.tsx";
 import Register from "./routes/Register/Register.tsx";
 import Sensor from "./types/Sensor.ts";
-import json from "./sensors.json";
 import App from "./App.tsx";
-
-const sensorList: Sensor[] = json;
+import fetcher from "./fetcher.ts";
 
 const router = createBrowserRouter([
     {
@@ -24,27 +21,39 @@ const router = createBrowserRouter([
                 path: "/",
                 Component: MainRoute,
                 ErrorBoundary: ErrorPage,
-                loader: async (): Promise<IMainRouteLoaderData> => ({ sensorList }),
+                loader: async (): Promise<IMainRouteLoaderData> => {
+                    const sensorList = await fetcher<Sensor[]>("/api/sensor/all");
+                    return { sensorList };
+                },
             },
             {
                 path: "/accessibility",
                 Component: AccessibilitySideView,
                 ErrorBoundary: ErrorPage,
-                loader: async (): Promise<IAccessibilitySideViewLoaderData> => ({ sensorList }),
+                loader: async (): Promise<IAccessibilitySideViewLoaderData> => {
+                    const sensorList = await fetcher<Sensor[]>("/api/sensor/all");
+                    return { sensorList };
+                },
             },
             {
                 path: "/sensors",
                 Component: SensorList,
                 ErrorBoundary: ErrorPage,
-                loader: async (): Promise<ISensorListLoaderData> => ({ sensorList }),
+                loader: async (): Promise<ISensorListLoaderData> => {
+                    const sensorList = await fetcher<Sensor[]>("/api/sensor/all");
+                    return { sensorList };
+                },
             },
             {
                 path: "/sensors/:id",
                 Component: SensorSideView,
                 ErrorBoundary: ErrorPage,
                 loader: async ({ params }): Promise<ISensorSideViewLoaderData> => {
-                    const sensor = sensorList.find(s => s.id === Number(params.id));
-                    if (!sensor) throw new Error("404 sensor id");
+                    if (!params.id) throw new Error("404 sensor id");
+
+                    const sensor = await fetcher<Sensor>(`/api/sensor/${params.id}`);
+                    const sensorList = await fetcher<Sensor[]>("/api/sensor/all");
+
                     return { sensor, sensorList };
                 },
             },
@@ -54,7 +63,10 @@ const router = createBrowserRouter([
                 ErrorBoundary: ErrorPage,
                 loader: async (): Promise<ISensorListLoaderData> => {
                     const favIds = getFavorites();
+                    const sensorList = await fetcher<Sensor[]>("/api/sensor/all");
+
                     const favorites = sensorList.filter(el => favIds.includes(el.id));
+
                     return { sensorList: favorites, title: "Ulubione czujniki" };
                 },
             },
