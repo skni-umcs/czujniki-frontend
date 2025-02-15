@@ -1,0 +1,9 @@
+.root {
+    flex-grow: 1;
+}
+
+.message {
+    margin-top: 1em;
+    margin-bottom: 0.4em;
+    text-align: center;
+}
