@@ -35,7 +35,7 @@ const data = sensorDataList.map(s => ({
 const chartHeight = 150;
 
 const SensorSideView: React.FC = () => {
-    const { sensor: s, sensorList } = useLoaderData() as ISensorSideViewLoaderData;
+    const { sensor: s, sensorList } = useLoaderData<ISensorSideViewLoaderData>();
     const { favorites, addFavorite, removeFavorite } = useFavorites();
 
     useFlyToOnRender(s.location.latitude, s.location.longitude);
@@ -48,7 +48,7 @@ const SensorSideView: React.FC = () => {
     };
 
     return (
-        <SideView title={s.location.facultyName} showBackButton>
+        <SideView title={s.location.facultyAbbreviation} showBackButton>
             <MapPortal>
                 {sensorList.map(it => (
                     <SensorMarker key={it.id} sensor={it} isActive={it.id === s.id} />

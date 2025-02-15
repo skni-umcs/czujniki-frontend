@@ -3,4 +3,5 @@ export default interface Location {
     latitude: number;
     longitude: number;
     facultyName: string;
+    facultyAbbreviation: string;
 }

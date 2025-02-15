@@ -9,9 +9,10 @@ import AccessibilitySideView, { IAccessibilitySideViewLoaderData } from "./route
 import ErrorSideView from "./routes/ErrorSideView/ErrorSideView.tsx";
 import Login from "./routes/Login/Login.tsx";
 import Register from "./routes/Register/Register.tsx";
-import Sensor from "./types/Sensor.ts";
 import App from "./App.tsx";
-import fetcher from "./fetcher.ts";
+import DataProvider from "./DataProvider.ts";
+
+const repo = new DataProvider();
 
 const router = createBrowserRouter([
     {
@@ -23,7 +24,7 @@ const router = createBrowserRouter([
                 Component: MainRoute,
                 ErrorBoundary: ErrorSideView,
                 loader: async (): Promise<IMainRouteLoaderData> => {
-                    const sensorList = await fetcher<Sensor[]>("/api/sensor/all");
+                    const sensorList = await repo.getAllSensors();
                     return { sensorList };
                 },
             },
@@ -32,7 +33,7 @@ const router = createBrowserRouter([
                 Component: AccessibilitySideView,
                 ErrorBoundary: ErrorSideView,
                 loader: async (): Promise<IAccessibilitySideViewLoaderData> => {
-                    const sensorList = await fetcher<Sensor[]>("/api/sensor/all");
+                    const sensorList = await repo.getAllSensors();
                     return { sensorList };
                 },
             },
@@ -41,7 +42,7 @@ const router = createBrowserRouter([
                 Component: SensorList,
                 ErrorBoundary: ErrorSideView,
                 loader: async (): Promise<ISensorListLoaderData> => {
-                    const sensorList = await fetcher<Sensor[]>("/api/sensor/all");
+                    const sensorList = await repo.getAllSensors();
                     return { sensorList };
                 },
             },
@@ -53,10 +54,10 @@ const router = createBrowserRouter([
                     if (!params.id) return redirect("/") as never;
 
                     try {
-                        const sensor = await fetcher<Sensor>(`/api/sensor/${params.id}`);
-                        const sensorList = await fetcher<Sensor[]>("/api/sensor/all");
+                        const sensorList = await repo.getAllSensors();
+                        const sensor = await repo.getSensor(Number(params.id));
 
-                        return { sensor, sensorList };
+                        return { sensorList, sensor };
                     } catch (error) {
                         if ((error as Error).message.includes("Sensor not found")) {
                             console.error(error);
@@ -72,7 +73,7 @@ const router = createBrowserRouter([
                 ErrorBoundary: ErrorSideView,
                 loader: async (): Promise<ISensorListLoaderData> => {
                     const favIds = getFavorites();
-                    const sensorList = await fetcher<Sensor[]>("/api/sensor/all");
+                    const sensorList = await repo.getAllSensors();
 
                     const favorites = sensorList.filter(el => favIds.includes(el.id));
 
