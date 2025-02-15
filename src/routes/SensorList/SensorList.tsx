@@ -18,7 +18,7 @@ const SensorList: React.FC = () => {
     return (
         <SideView title={title ?? "Lista czujników"}>
             <MapPortal>
-                {sensorList.map(s => <SensorMarker key={s.sensorId} sensor={s} />)}
+                {sensorList.map(s => <SensorMarker key={s.id} sensor={s} />)}
             </MapPortal>
             <div className={styles.root}>
                 <div className={styles.searchBarContainer}>
@@ -30,7 +30,7 @@ const SensorList: React.FC = () => {
                 {sensorList.map(sensor => (
                     <SensorListItem
                         sensor={sensor}
-                        key={sensor.sensorId}
+                        key={sensor.id}
                     />
                 ))}
                 {sensorList.length === 0 && <div className={styles.emptyList}>Lista jest pusta</div>}

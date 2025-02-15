@@ -40,18 +40,18 @@ const SensorSideView: React.FC = () => {
 
     useFlyToOnRender(s.location.latitude, s.location.longitude);
 
-    const isFavorite = useMemo(() => favorites.includes(s.sensorId), [favorites, s.sensorId]);
+    const isFavorite = useMemo(() => favorites.includes(s.id), [favorites, s.id]);
 
     const toggleFavorite = () => {
-        if (!favorites.includes(s.sensorId)) addFavorite(s.sensorId);
-        else removeFavorite(s.sensorId);
+        if (!favorites.includes(s.id)) addFavorite(s.id);
+        else removeFavorite(s.id);
     };
 
     return (
         <SideView title={s.location.facultyName} showBackButton>
             <MapPortal>
                 {sensorList.map(it => (
-                    <SensorMarker key={it.sensorId} sensor={it} isActive={it.sensorId === s.sensorId} />
+                    <SensorMarker key={it.id} sensor={it} isActive={it.id === s.id} />
                 ))}
             </MapPortal>
             <div className={styles.root}>
@@ -75,25 +75,25 @@ const SensorSideView: React.FC = () => {
                     <div className={styles.currentConditions}>
                         <CurrentCondition
                             label="Temperatura"
-                            value={`${s.currentTemperature.toString()}° C`}
+                            value={s.temperature ? `${s.temperature.toString()}° C` : "-"}
                             icon={RiTempHotLine}
 
                         />
                         <CurrentCondition
                             label="Wilgotność"
-                            value={`${s.currentHumidity.toString()}%`}
+                            value={s.humidity ? `${s.humidity.toString()}%` : "-"}
                             icon={RiWaterPercentFill}
 
                         />
                         <CurrentCondition
                             label="Ciśnienie"
-                            value={`${Math.round(s.currentPressure).toString()} hPa`}
+                            value={s.pressure ? `${Math.round(s.pressure).toString()} hPa` : "-"}
                             icon={RiSpeedUpFill}
 
                         />
                         <CurrentCondition
                             label="Jakość pow."
-                            value={s.currentGasResistance ? s.currentGasResistance.toString() : "-"}
+                            value={s.gasResistance ? s.gasResistance.toString() : "-"}
                             icon={RiWindyFill}
                         />
                         {s.status !== "ONLINE" && (
@@ -144,7 +144,7 @@ const SensorSideView: React.FC = () => {
                         ]}
                     />
 
-                    {s.currentGasResistance && (
+                    {s.gasResistance && (
                         <>
                             <div className={styles.heading}>Jakość powietrza</div>
                             <SensorChart
@@ -161,11 +161,13 @@ const SensorSideView: React.FC = () => {
                             />
                         </>
                     )}
-                    <div className={styles.updateDate}>
-                        Zaktualizowano:
-                        <br />
-                        {new Date(s.latestDataUpdate).toLocaleString()}
-                    </div>
+                    {s.lastUpdate && (
+                        <div className={styles.updateDate}>
+                            Zaktualizowano:
+                            <br />
+                            {new Date(s.lastUpdate).toLocaleString()}
+                        </div>
+                    )}
                 </div>
             </div>
         </SideView>

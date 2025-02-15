@@ -26,7 +26,7 @@ const AccessibilitySideView: React.FC = () => {
     return (
         <SideView title="Ustawienia dostępności">
             <MapPortal>
-                {sensorList.map(s => <SensorMarker key={s.sensorId} sensor={s} />)}
+                {sensorList.map(s => <SensorMarker key={s.id} sensor={s} />)}
             </MapPortal>
             <div className={styles.root}>
                 <div className={styles.content}>

@@ -43,8 +43,8 @@ const router = createBrowserRouter([
                 Component: SensorSideView,
                 ErrorBoundary: ErrorPage,
                 loader: async ({ params }): Promise<ISensorSideViewLoaderData> => {
-                    const sensor = sensorList.find(s => s.sensorId === Number(params.id));
-                    if (!sensor) throw new Error("404 sensorId");
+                    const sensor = sensorList.find(s => s.id === Number(params.id));
+                    if (!sensor) throw new Error("404 sensor id");
                     return { sensor, sensorList };
                 },
             },
@@ -54,7 +54,7 @@ const router = createBrowserRouter([
                 ErrorBoundary: ErrorPage,
                 loader: async (): Promise<ISensorListLoaderData> => {
                     const favIds = getFavorites();
-                    const favorites = sensorList.filter(el => favIds.includes(el.sensorId));
+                    const favorites = sensorList.filter(el => favIds.includes(el.id));
                     return { sensorList: favorites, title: "Ulubione czujniki" };
                 },
             },

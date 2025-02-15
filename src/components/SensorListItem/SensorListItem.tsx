@@ -10,12 +10,12 @@ interface IProps {
 const SensorListItem: React.FC<IProps> = ({ sensor }) => {
     return (
         <Link
-            to={`/sensors/${sensor.sensorId.toString()}`}
+            to={`/sensors/${sensor.id.toString()}`}
             className={styles.root}
         >
-            <div className={styles.heading}>Czujnik {sensor.sensorId}</div>
+            <div className={styles.heading}>Czujnik {sensor.id}</div>
             <div>Wydział: {sensor.location.facultyName}</div>
-            <div>Temperatura: {sensor.currentTemperature}° C</div>
+            <div>Temperatura: {sensor.temperature}° C</div>
         </Link>
     );
 };

@@ -1,11 +1,11 @@
 [
     {
-        "sensorId": 1,
+        "id": 1,
         "status": "ERROR",
-        "latestDataUpdate": "2024-09-25T12:04:25",
-        "currentTemperature": -15.78,
-        "currentHumidity": 13.45,
-        "currentPressure": 1020.56,
+        "lastUpdate": "2024-09-25T12:04:25",
+        "temperature": -15.78,
+        "humidity": 13.45,
+        "pressure": 1020.56,
         "location": {
             "id": 560,
             "latitude": 51.246038,
@@ -14,13 +14,13 @@
         }
     },
     {
-        "sensorId": 2,
+        "id": 2,
         "status": "OFFLINE",
-        "latestDataUpdate": "2024-09-25T00:07:25",
-        "currentTemperature": 38.97,
-        "currentHumidity": 19.81,
-        "currentPressure": 976.03,
-        "currentGasResistance": 153.81,
+        "lastUpdate": "2024-09-25T00:07:25",
+        "temperature": 38.97,
+        "humidity": 19.81,
+        "pressure": 976.03,
+        "gasResistance": 153.81,
         "location": {
             "id": 161,
             "latitude": 51.245038,
@@ -29,13 +29,13 @@
         }
     },
     {
-        "sensorId": 3,
+        "id": 3,
         "status": "OFFLINE",
-        "latestDataUpdate": "2024-09-25T09:10:25",
-        "currentTemperature": 4.03,
-        "currentHumidity": 79.92,
-        "currentPressure": 1005.21,
-        "currentGasResistance": 420.73,
+        "lastUpdate": "2024-09-25T09:10:25",
+        "temperature": 4.03,
+        "humidity": 79.92,
+        "pressure": 1005.21,
+        "gasResistance": 420.73,
         "location": {
             "id": 921,
             "latitude": 51.243038,
@@ -44,13 +44,13 @@
         }
     },
     {
-        "sensorId": 4,
+        "id": 4,
         "status": "ERROR",
-        "latestDataUpdate": "2024-09-25T13:20:25",
-        "currentTemperature": 44.31,
-        "currentHumidity": 49.25,
-        "currentPressure": 966.07,
-        "currentGasResistance": 355.93,
+        "lastUpdate": "2024-09-25T13:20:25",
+        "temperature": 44.31,
+        "humidity": 49.25,
+        "pressure": 966.07,
+        "gasResistance": 355.93,
         "location": {
             "id": 626,
             "latitude": 51.247038,
@@ -59,13 +59,13 @@
         }
     },
     {
-        "sensorId": 5,
+        "id": 5,
         "status": "OFFLINE",
-        "latestDataUpdate": "2024-09-25T13:34:25",
-        "currentTemperature": 10.96,
-        "currentHumidity": 91.2,
-        "currentPressure": 1010.93,
-        "currentGasResistance": 681.69,
+        "lastUpdate": "2024-09-25T13:34:25",
+        "temperature": 10.96,
+        "humidity": 91.2,
+        "pressure": 1010.93,
+        "gasResistance": 681.69,
         "location": {
             "id": 892,
             "latitude": 51.245641,
@@ -74,13 +74,13 @@
         }
     },
     {
-        "sensorId": 6,
+        "id": 6,
         "status": "ONLINE",
-        "latestDataUpdate": "2024-09-25T13:24:25",
-        "currentTemperature": 10.96,
-        "currentHumidity": 91.2,
-        "currentPressure": 1010.93,
-        "currentGasResistance": 681.69,
+        "lastUpdate": "2024-09-25T13:24:25",
+        "temperature": 10.96,
+        "humidity": 91.2,
+        "pressure": 1010.93,
+        "gasResistance": 681.69,
         "location": {
             "id": 892,
             "latitude": 51.275641,

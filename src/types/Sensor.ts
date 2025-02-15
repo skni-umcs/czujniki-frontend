@@ -1,12 +1,12 @@
 import Location from "./Location";
 
 export default interface Sensor {
-    sensorId: number;
+    id: number;
     status: string;
-    latestDataUpdate: string;
-    currentTemperature: number;
-    currentHumidity: number;
-    currentPressure: number;
-    currentGasResistance?: number;
+    lastUpdate?: string;
+    temperature?: number;
+    humidity?: number;
+    pressure?: number;
+    gasResistance?: number;
     location: Location;
 }

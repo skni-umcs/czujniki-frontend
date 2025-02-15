@@ -14,7 +14,7 @@ const MainRoute: React.FC = () => {
     return (
         <MapPortal>
             {sensorList.map(s => (
-                <SensorMarker key={s.sensorId} sensor={s} />
+                <SensorMarker key={s.id} sensor={s} />
             ))}
         </MapPortal>
     );

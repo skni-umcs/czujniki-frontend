@@ -39,7 +39,7 @@ const SensorMarker: React.FC<IPropsMarker> = ({ sensor, isActive }) => {
     });
 
     const handleClick = () => {
-        navigate(`/sensors/${sensor.sensorId.toString()}`);
+        navigate(`/sensors/${sensor.id.toString()}`);
     };
 
     return (
