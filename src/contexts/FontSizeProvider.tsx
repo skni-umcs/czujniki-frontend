@@ -37,9 +37,9 @@ const FontSizeProvider: React.FC<PropsWithChildren> = ({ children }) => {
     }, [fontSize]);
 
     return (
-        <FontSizeContext.Provider value={{ fontSize, setFontSize }}>
+        <FontSizeContext value={{ fontSize, setFontSize }}>
             {children}
-        </FontSizeContext.Provider>
+        </FontSizeContext>
     );
 };
 

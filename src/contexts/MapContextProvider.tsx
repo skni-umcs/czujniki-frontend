@@ -1,6 +1,6 @@
 import { createContext, useContext, useEffect, useState } from "react";
 import { LatLngExpression, Map as LeafletMap } from "leaflet";
-import { createLeafletContext, LeafletContextInterface, LeafletProvider } from "@react-leaflet/core";
+import { createLeafletContext, LeafletContextInterface, LeafletContext } from "@react-leaflet/core";
 
 interface IMapContext {
     leafletContext: LeafletContextInterface | null;
@@ -51,11 +51,11 @@ const MapContextProvider: React.FC<React.PropsWithChildren> = ({ children }) => 
     // }, [location.pathname]);
 
     return (
-        <LeafletProvider value={leafletContext}>
-            <MapContext.Provider value={{ leafletContext, mapElement, setMapElement }}>
+        <LeafletContext value={leafletContext}>
+            <MapContext value={{ leafletContext, mapElement, setMapElement }}>
                 {children}
-            </MapContext.Provider>
-        </LeafletProvider>
+            </MapContext>
+        </LeafletContext>
     );
 };
 

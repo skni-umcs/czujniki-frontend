@@ -36,9 +36,9 @@ const FavoritesProvider: React.FC<PropsWithChildren> = ({ children }) => {
     }, [favorites]);
 
     return (
-        <FavoritesContext.Provider value={{ favorites, addFavorite, removeFavorite }}>
+        <FavoritesContext value={{ favorites, addFavorite, removeFavorite }}>
             {children}
-        </FavoritesContext.Provider>
+        </FavoritesContext>
     );
 };
 

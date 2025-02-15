@@ -42,9 +42,9 @@ const ThemeProvider: React.FC<PropsWithChildren> = ({ children }) => {
     }, [theme, actualTheme]);
 
     return (
-        <ThemeContext.Provider value={{ theme, actualTheme, setTheme }}>
+        <ThemeContext value={{ theme, actualTheme, setTheme }}>
             {children}
-        </ThemeContext.Provider>
+        </ThemeContext>
     );
 };
 
