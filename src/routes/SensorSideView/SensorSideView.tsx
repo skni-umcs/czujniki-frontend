@@ -1,4 +1,4 @@
-import { useMemo } from "react";
+import { Suspense, useMemo } from "react";
 import { useLoaderData } from "react-router-dom";
 import { IoBugOutline, IoHeart, IoHeartOutline, IoRefreshOutline } from "react-icons/io5";
 import { RiErrorWarningLine, RiRestTimeFill, RiSpeedUpFill, RiTempHotLine, RiWaterPercentFill, RiWindyFill } from "react-icons/ri";
@@ -10,21 +10,19 @@ import SideView from "../../components/SideView/SideView.tsx";
 import MapPortal from "../../components/MapPortal/MapPortal.tsx";
 import SensorMarker from "../../components/SensorMarker/SensorMarker.tsx";
 import IconButton from "../../components/IconButton/IconButton.tsx";
-import SensorChart from "../../components/SensorChart/SensorChart.tsx";
 import CurrentCondition from "../../components/CurrentCondition/CurrentCondition.tsx";
 import useFlyToOnRender from "./useFlyToOnRender.ts";
 import { useFavorites } from "../../contexts/FavoritesProvider.tsx";
+import Charts from "./Charts.tsx";
 
 export interface ISensorSideViewLoaderData {
     sensor: Sensor;
     sensorList: Sensor[];
-    historicalData: SensorData[];
+    historicalDataPromise: Promise<SensorData[]>;
 };
 
-const chartHeight = 150;
-
 const SensorSideView: React.FC = () => {
-    const { sensor: s, sensorList, historicalData } = useLoaderData<ISensorSideViewLoaderData>();
+    const { sensor: s, sensorList, historicalDataPromise } = useLoaderData<ISensorSideViewLoaderData>();
     const { favorites, addFavorite, removeFavorite } = useFavorites();
 
     useFlyToOnRender(s.location.latitude, s.location.longitude);
@@ -95,66 +93,9 @@ const SensorSideView: React.FC = () => {
                             />
                         )}
                     </div>
-
-                    <div className={styles.heading}>Temperatura</div>
-                    <SensorChart
-                        height={chartHeight}
-                        data={historicalData}
-                        dataKey="temperature"
-                        className={styles.chartOffset}
-                        unit="° C"
-                        domain={[
-                            (dataMin: number) => dataMin - 2,
-                            (dataMax: number) => dataMax + 2,
-                        ]}
-                    />
-
-                    <div className={styles.heading}>Wilgotność</div>
-                    <SensorChart
-                        height={chartHeight}
-                        data={historicalData}
-                        dataKey="humidity"
-                        className={styles.chartOffset}
-                        unit="%"
-                        domain={[0, 100]}
-                    />
-
-                    <div className={styles.heading}>Ciśnienie</div>
-                    <SensorChart
-                        height={chartHeight}
-                        data={historicalData}
-                        dataKey="pressure"
-                        className={styles.chartOffset}
-                        unit=" hPa"
-                        domain={[
-                            (dataMin: number) => (Math.ceil((dataMin - 10) / 10) * 10),
-                            (dataMax: number) => (Math.floor((dataMax + 10) / 10) * 10),
-                        ]}
-                    />
-
-                    {s.gasResistance && (
-                        <>
-                            <div className={styles.heading}>Jakość powietrza</div>
-                            <SensorChart
-                                height={chartHeight}
-                                data={historicalData}
-                                dataKey="gasResistance"
-                                className={styles.chartOffset}
-                                // unit=" ppm"
-                                domain={[
-                                    (dataMin: number) => (Math.ceil((dataMin - 10) / 10) * 10),
-                                    (dataMax: number) => (Math.floor((dataMax + 10) / 10) * 10),
-                                ]}
-                            />
-                        </>
-                    )}
-                    {s.lastUpdate && (
-                        <div className={styles.updateDate}>
-                            Zaktualizowano:
-                            <br />
-                            {new Date(s.lastUpdate).toLocaleString()}
-                        </div>
-                    )}
+                    <Suspense fallback={<div className={styles.loading}>Wczytywanie wykresów...</div>}>
+                        <Charts sensor={s} historicalDataPromise={historicalDataPromise} />
+                    </Suspense>
                 </div>
             </div>
         </SideView>

@@ -9,6 +9,7 @@
     flex-direction: column;
     overflow: auto;
     scrollbar-width: thin;
+    scrollbar-gutter: stable;
     background-color: var(--sidebar-bg);
     box-shadow: 0 0 16px 0 hsl(0deg 0% 0% / 50%);
     padding: 8px 0;

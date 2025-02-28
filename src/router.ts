@@ -61,13 +61,13 @@ const router = createBrowserRouter([
                         const startDate = new Date();
                         startDate.setHours(endDate.getHours() - 1);
 
-                        const historicalData = await repo.getHistoricalData(
+                        const historicalDataPromise = repo.getHistoricalData(
                             Number(params.id),
                             startDate,
                             endDate,
                         );
 
-                        return { sensorList, sensor, historicalData };
+                        return { sensorList, sensor, historicalDataPromise };
                     } catch (error) {
                         if ((error as Error).message.includes("Sensor not found")) {
                             console.error(error);

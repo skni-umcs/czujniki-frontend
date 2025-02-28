@@ -41,3 +41,9 @@
     color: var(--text-color-secondary);
     margin-left: 8px;
 }
+
+.loading {
+    margin-top: 2em;
+    margin-bottom: 0.4em;
+    text-align: center;
+}
