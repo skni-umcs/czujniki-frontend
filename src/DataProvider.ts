@@ -1,10 +1,11 @@
 import ApiError from "./types/ApiError";
 import Sensor from "./types/Sensor";
+import SensorData from "./types/SensorData";
 
 class DataProvider {
     #sensorList: Sensor[] | null = null;
 
-    async fetcher<T extends object>(endpoint: string) {
+    async fetcher<T extends object>(endpoint: RequestInfo | URL) {
         const res = await fetch(endpoint, {});
         const data = await res.json() as T | ApiError;
 
@@ -26,6 +27,16 @@ class DataProvider {
         if (cached) return cached;
 
         return this.fetcher<Sensor>(`/api/sensor/${id.toString()}`);
+    }
+
+    async getHistoricalData(id: Sensor["id"], startDate: Date, endDate: Date) {
+        const url = new URL(`/api/sensor/${id.toString()}/data`, window.location.origin);
+        url.searchParams.set("startDate", startDate.toISOString().split(".")[0]);
+        url.searchParams.set("endDate", endDate.toISOString().split(".")[0]);
+        url.searchParams.set("page", "0");
+        url.searchParams.set("size", "40");
+
+        return this.fetcher<SensorData[]>(url);
     }
 }
 

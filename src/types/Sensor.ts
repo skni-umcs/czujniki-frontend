@@ -7,6 +7,6 @@ export default interface Sensor {
     temperature?: number;
     humidity?: number;
     pressure?: number;
-    gasResistance?: number;
+    gasResistance?: number | null;
     location: Location;
 }
