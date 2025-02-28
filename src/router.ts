@@ -18,6 +18,7 @@ const router = createBrowserRouter([
     {
         Component: App,
         ErrorBoundary: ErrorPage,
+        HydrateFallback: () => null,
         children: [
             {
                 path: "/",
