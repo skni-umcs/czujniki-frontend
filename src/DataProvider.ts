@@ -23,8 +23,8 @@ class DataProvider {
     }
 
     async getSensor(id: Sensor["id"]) {
-        const cached = this.#sensorList?.find(s => s.id === id);
-        if (cached) return cached;
+        // const cached = this.#sensorList?.find(s => s.id === id);
+        // if (cached) return cached;
 
         return this.fetcher<Sensor>(`/api/sensor/${id.toString()}`);
     }

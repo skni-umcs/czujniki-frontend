@@ -1,5 +1,5 @@
-import { Suspense, useMemo } from "react";
-import { useLoaderData } from "react-router-dom";
+import { Suspense, use, useMemo } from "react";
+import { useLoaderData, useRevalidator } from "react-router-dom";
 import { IoBugOutline, IoHeart, IoHeartOutline, IoRefreshOutline } from "react-icons/io5";
 import { RiErrorWarningLine, RiRestTimeFill, RiSpeedUpFill, RiTempHotLine, RiWaterPercentFill, RiWindyFill } from "react-icons/ri";
 
@@ -22,8 +22,10 @@ export interface ISensorSideViewLoaderData {
 };
 
 const SensorSideView: React.FC = () => {
-    const { sensor: s, sensorList, historicalDataPromise } = useLoaderData<ISensorSideViewLoaderData>();
+    const { sensorPromise, sensorList, historicalDataPromise } = useLoaderData<ISensorSideViewLoaderData>();
     const { favorites, addFavorite, removeFavorite } = useFavorites();
+    const revalidator = useRevalidator();
+    const s = use(sensorPromise);
 
     useFlyToOnRender(s.location.latitude, s.location.longitude);
 
@@ -50,7 +52,11 @@ const SensorSideView: React.FC = () => {
                     >
                         {isFavorite ? <IoHeart size={24} /> : <IoHeartOutline size={24} />}
                     </IconButton>
-                    <IconButton className={styles.iconBtn} title="Odśwież dane">
+                    <IconButton
+                        className={styles.iconBtn}
+                        onClick={() => { void revalidator.revalidate(); }}
+                        title="Odśwież dane"
+                    >
                         <IoRefreshOutline size={24} />
                     </IconButton>
                     <IconButton className={styles.iconBtn} title="Zgłoś błąd">
