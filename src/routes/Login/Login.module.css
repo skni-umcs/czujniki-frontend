@@ -3,7 +3,6 @@
     display: flex;
     align-items: center;
     justify-content: center;
-    background-color: var(--bg-secondary);
 }
 
 .appHeader {
@@ -15,7 +14,7 @@
     width: 400px;
     padding: 32px;
     border-radius: 28px;
-    background-color: var(--bg-primary);
+    background-color: var(--login-panel-bg);
 
     :global :root.lightTheme :local(&) {
         box-shadow: 0 0 16px 0 hsl(0, 0%, 84%);
@@ -36,6 +35,11 @@
     border: 1px solid var(--input-border-color);
     background-color: transparent;
     font-size: 0.9em;
+}
+
+.textInput::placeholder {
+    color: inherit;
+    opacity: 0.7;
 }
 
 .checkboxContainer {

@@ -7,57 +7,78 @@
 :root {
     color-scheme: dark;
 
-    --text-color-primary: hsla(0, 0%, 100%, 0.87);
+    --color-surface-1: hsl(270, 4%, 11%);
+    --color-surface-2: hsl(300, 3%, 13%);
+    --color-surface-3: hsl(300, 2%, 16%);
+    --color-surface-4: hsl(300, 2%, 21%);
+    --color-surface-5: hsl(300, 2%, 21%);
+
+    --text-color-primary: hsla(0, 0%, 100%, 0.90);
     --text-color-secondary: hsla(0, 0%, 100%, 0.67);
     --text-color-inverted: hsl(208, 37%, 20%);
-    --bg-primary: hsl(0, 0%, 14%);
-    --bg-secondary: hsl(0, 0%, 18%);
-    --bg-tertiary: hsla(0, 0%, 0%, 0.071);
-    --accent-color: hsl(120, 19%, 40%);
-    --accent-text-color: var(--text-color-primary);
-    --border-color: hsl(0, 0%, 19%);
-    --border-color2: hsla(0, 0%, 100%, 0.25);
+    --bg-primary: var(--color-surface-2);
+    --bg-secondary: var(--color-surface-3);
+    --bg-tertiary: hsl(300, 8%, 7%);
+    --accent-color: #45455a;
+    /* --accent-text-color: hsl(213, 81%, 21%); */
+    --border-color: rgb(68 71 78);
+    --border-color2: hsl(0, 0%, 20%);
+    --border-layer-color: transparent;
     --primary-btn-color: hsl(217, 89%, 82%);
-    --primary-btn-hover-color: hsl(217, 89%, 84%);
-    --primary-btn-active-color: hsl(217, 89%, 87%);
+    --primary-btn-hover-color: hsl(217, 89%, 86%);
+    --primary-btn-active-color: hsl(217, 89%, 89%);
     --primary-btn-text-color: var(--text-color-inverted);
     --icon-btn-hover-color: var(--bg-secondary);
     --icon-btn-active-color: hsl(0, 0%, 21%);
     --input-border-color: hsl(140, 1%, 56%);
     --shadow-color: var(--border-color);
 
-    --appheader-bg: var(--bg-primary);
-    --sidebar-bg: hsl(0, 0%, 10%);
-    --searchbar-bg: hsl(0, 0%, 7%);
+    --login-panel-bg: var(--bg-secondary);
+    --appheader-bg: var(--bg-secondary);
+    --sidebar-bg: var(--bg-primary);
+    --searchbar-bg: hsl(223, 17%, 8%);
+    --searchbar-text-color: hsl(240, 14%, 90%);
+    --searchbar-border-color: transparent;
     --alt-navbar-bg: var(--bg-secondary);
 }
 
 .lightTheme:root {
     color-scheme: light;
 
+    --color-surface-1: #f8f1f6;
+    --color-surface-2: #f2ecee;
+    --color-surface-3: #ece7e9;
+    --color-surface-4: #e6e1e3;
+    --color-surface-5: #e6e1e3;
+
     --text-color-primary: hsl(208, 37%, 20%);
     --text-color-secondary: hsl(207, 5%, 45%);
     --text-color-inverted: hsla(0, 0%, 100%, 0.87);
-    --bg-primary: hsl(213, 43%, 96%);
-    --bg-secondary: hsl(0, 0%, 100%);
-    --bg-tertiary: hsla(0, 0%, 100%, 0.071);
-    --accent-color: hsl(120, 19%, 46%);
-    --accent-text-color: var(--text-color-inverted);
+    --bg-primary: white;
+    --bg-secondary: var(--color-surface-3);
+    --bg-tertiary: var(--color-surface-1);
+    --accent-color: #dcdaf5;
+    /* --accent-text-color: white; */
     --border-color: hsl(0, 0%, 86%);
     --border-color2: hsl(0, 0%, 92%);
-    --primary-btn-color: hsl(217, 90%, 43%);
-    --primary-btn-hover-color: hsl(217, 90%, 45%);
-    --primary-btn-active-color: hsl(217, 90%, 40%);
+    --border-layer-color: transparent;
+
+    --primary-btn-color: hsl(217, 62%, 47%);
+    --primary-btn-hover-color: hsl(217, 62%, 52%);
+    --primary-btn-active-color: hsl(217, 62%, 45%);
     --primary-btn-text-color: white;
     --icon-btn-hover-color: var(--bg-secondary);
     --icon-btn-active-color: hsl(213, 43%, 92%);
     --input-border-color: hsl(140, 1%, 56%);
     --shadow-color: hsl(0, 0%, 28%);
 
+    --login-panel-bg: var(--bg-primary);
     --appheader-bg: var(--bg-primary);
-    --sidebar-bg: var(--bg-secondary);
+    --sidebar-bg: var(--bg-primary);
     --searchbar-bg: hsl(0, 0%, 95%);
-    --alt-navbar-bg: var(--bg-primary);
+    --searchbar-text-color: hsl(270, 4%, 11%);
+    --searchbar-border-color: transparent;
+    --alt-navbar-bg: var(--bg-secondary);
 }
 
 .highContrastTheme:root {
@@ -67,11 +88,12 @@
     --text-color-inverted: black;
     --bg-primary: black;
     --bg-secondary: black;
-    --bg-tertiary: orange;
+    --bg-tertiary: grey;
     --accent-color: transparent;
     --accent-text-color: var(--text-color-primary);
     --border-color: white;
     --border-color2: white;
+    --border-layer-color: white;
     --primary-btn-color: yellow;
     --primary-btn-hover-color: white;
     --primary-btn-active-color: hsl(217, 89%, 87%);
@@ -81,9 +103,12 @@
     --input-border-color: white;
     --shadow-color: hsl(0, 0%, 0%);
 
+    --login-panel-bg: var(--bg-primary);
     --appheader-bg: var(--bg-primary);
     --sidebar-bg: var(--bg-primary);
     --searchbar-bg: var(--bg-secondary);
+    --searchbar-text-color: var(--text-color-primary);
+    --searchbar-border-color: var(--text-color-primary);
     --alt-navbar-bg: var(--bg-secondary);
 
     a,
@@ -96,6 +121,7 @@
     button:hover,
     label:hover {
         outline: 2px solid white;
+        z-index: 1;
     }
 
     input[type="radio"] {
@@ -103,12 +129,17 @@
     }
 }
 
+input[type="radio"],
+input[type="checkbox"] {
+    accent-color: var(--primary-btn-color);
+}
+
 body {
     margin: 0;
     font-family: "Noto Sans", sans-serif;
     line-height: 1.5;
     color: var(--text-color-primary);
-    background-color: var(--bg-primary);
+    background-color: var(--bg-tertiary);
 }
 
 #root {

@@ -20,7 +20,7 @@
 
     .leaflet-bar a {
         border-bottom: 0 !important;
-        border: 1px solid var(--border-color) !important;
+        border: 1px solid var(--border-color2) !important;
         background-color: var(--bg-primary) !important;
     }
 }

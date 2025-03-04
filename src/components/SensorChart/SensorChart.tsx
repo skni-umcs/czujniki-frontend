@@ -45,7 +45,7 @@ const SensorChart: React.FC<IProps> = ({ className, height, data, dataKey, unit,
                     allowEscapeViewBox={{ x: false, y: true }}
                     itemStyle={{ padding: 0 }}
                 />
-                <CartesianGrid stroke="var(--border-color2)" />
+                <CartesianGrid stroke="var(--border-color)" />
             </LineChart>
         </ResponsiveContainer>
     );

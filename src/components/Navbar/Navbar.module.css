@@ -1,10 +1,11 @@
 .root {
     width: 100px;
-    border-right: 1px solid var(--border-color);
+    border-right: 1px solid var(--border-layer-color);
     display: flex;
     flex-direction: column;
     flex-wrap: nowrap;
     align-items: center;
+    background-color: var(--alt-navbar-bg);
 }
 
 .item {
@@ -19,10 +20,10 @@
     width: 100%;
     padding-block: 16px;
     font-size: 0.75em;
-    transition: .2s background-color, color;
 }
 
 .item:hover {
+    transition: .1s background-color, color;
     background-color: var(--accent-color);
     color: var(--accent-text-color);
 }
