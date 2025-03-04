@@ -1,6 +1,7 @@
 import { use } from "react";
 
 import styles from "./SensorSideView.module.css";
+import Pageable from "../../types/Pageable";
 import Sensor from "../../types/Sensor";
 import SensorData from "../../types/SensorData";
 import SensorChart from "../../components/SensorChart/SensorChart";
@@ -9,11 +10,11 @@ const chartHeight = 150;
 
 interface IChartsProps {
     sensor: Sensor;
-    historicalDataPromise: Promise<SensorData[]>;
+    historicalDataPromise: Promise<Pageable<SensorData>>;
 };
 
 const Charts: React.FC<IChartsProps> = ({ sensor, historicalDataPromise }) => {
-    const historicalData = use(historicalDataPromise);
+    const { content: historicalData } = use(historicalDataPromise);
 
     return (
         <>
