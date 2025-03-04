@@ -1,4 +1,5 @@
 import ApiError from "./types/ApiError";
+import Pageable from "./types/Pageable";
 import Sensor from "./types/Sensor";
 import SensorData from "./types/SensorData";
 
@@ -36,7 +37,7 @@ class DataProvider {
         url.searchParams.set("page", "0");
         url.searchParams.set("size", "40");
 
-        return this.fetcher<SensorData[]>(url);
+        return this.fetcher<Pageable<SensorData>>(url);
     }
 }
 
