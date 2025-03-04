@@ -1,12 +1,13 @@
 import { Suspense, useEffect, useMemo, useState } from "react";
 import { useLoaderData, useRevalidator } from "react-router-dom";
 import { IoBugOutline, IoHeart, IoHeartOutline, IoRefreshOutline } from "react-icons/io5";
-import { RiErrorWarningLine, RiRestTimeFill, RiSpeedUpFill, RiTempHotLine, RiWaterPercentFill, RiWindyFill } from "react-icons/ri";
+import { RiCheckLine, RiErrorWarningLine, RiRestTimeFill, RiSpeedUpFill, RiTempHotLine, RiWaterPercentFill, RiWindyFill } from "react-icons/ri";
 
 import styles from "./SensorSideView.module.css";
 import Pageable from "../../types/Pageable.ts";
 import Sensor from "../../types/Sensor";
 import SensorData from "../../types/SensorData.ts";
+import { Status } from "../../types/Status.ts";
 import SideView from "../../components/SideView/SideView.tsx";
 import MapPortal from "../../components/MapPortal/MapPortal.tsx";
 import SensorMarker from "../../components/SensorMarker/SensorMarker.tsx";
@@ -105,13 +106,15 @@ const SensorSideView: React.FC = () => {
                                 icon={RiWindyFill}
                             />
                         )}
-                        {s.status !== "ONLINE" && (
-                            <CurrentCondition
-                                label="Status"
-                                value={s.status}
-                                icon={s.status === "OFFLINE" ? RiRestTimeFill : RiErrorWarningLine}
-                            />
-                        )}
+                        <CurrentCondition
+                            label="Status"
+                            value={Status[s.status]}
+                            icon={s.status === "ONLINE"
+                                ? RiCheckLine
+                                : (s.status === "OFFLINE"
+                                        ? RiRestTimeFill
+                                        : RiErrorWarningLine)}
+                        />
                     </div>
                     <Suspense fallback={<div className={styles.loading}>Wczytywanie wykresów...</div>}>
                         <Charts sensor={s} historicalDataPromise={historicalDataPromise} />

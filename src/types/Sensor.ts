@@ -1,8 +1,9 @@
 import Location from "./Location";
+import { TStatus } from "./Status";
 
 export default interface Sensor {
     id: number;
-    status: string;
+    status: TStatus;
     lastUpdate?: string;
     temperature?: number;
     humidity?: number;

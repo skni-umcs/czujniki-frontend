@@ -1,6 +1,7 @@
 import { Link } from "react-router-dom";
 
 import Sensor from "../../types/Sensor";
+import { Status } from "../../types/Status";
 import styles from "./SensorListItem.module.css";
 
 interface IProps {
@@ -13,10 +14,14 @@ const SensorListItem: React.FC<IProps> = ({ sensor }) => {
             to={`/sensors/${sensor.id.toString()}`}
             className={styles.root}
         >
-            <div className={styles.heading}>Czujnik {sensor.id}</div>
+            <div className={styles.heading}>{sensor.location.facultyAbbreviation} {sensor.id}</div>
             <div>{sensor.location.facultyName}</div>
-            {sensor.temperature && <div>Temperatura: {sensor.temperature}° C</div>}
-            {sensor.status !== "ONLINE" && <div>Status: {sensor.status}</div>}
+            {sensor.status === "ONLINE" && sensor.temperature && (
+                <div>Temperatura: {sensor.temperature}° C</div>
+            )}
+            {sensor.status !== "ONLINE" && (
+                <div>Status: <span style={{ color: "red" }}>{Status[sensor.status]}</span></div>
+            )}
         </Link>
     );
 };
