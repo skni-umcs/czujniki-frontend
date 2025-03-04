@@ -70,13 +70,6 @@ const Charts: React.FC<IChartsProps> = ({ sensor, historicalDataPromise }) => {
                     />
                 </>
             )}
-            {sensor.lastUpdate && (
-                <div className={styles.updateDate}>
-                    Zaktualizowano:
-                    <br />
-                    {new Date(sensor.lastUpdate).toLocaleString()}
-                </div>
-            )}
         </>
     );
 };

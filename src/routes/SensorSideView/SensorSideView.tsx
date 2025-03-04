@@ -1,4 +1,4 @@
-import { Suspense, use, useMemo } from "react";
+import { Suspense, useEffect, useMemo, useState } from "react";
 import { useLoaderData, useRevalidator } from "react-router-dom";
 import { IoBugOutline, IoHeart, IoHeartOutline, IoRefreshOutline } from "react-icons/io5";
 import { RiErrorWarningLine, RiRestTimeFill, RiSpeedUpFill, RiTempHotLine, RiWaterPercentFill, RiWindyFill } from "react-icons/ri";
@@ -18,17 +18,30 @@ import Charts from "./Charts.tsx";
 
 export interface ISensorSideViewLoaderData {
     sensorList: Sensor[];
-    sensorPromise: Promise<Sensor>;
+    sensor: Sensor;
     historicalDataPromise: Promise<Pageable<SensorData>>;
 };
 
 const SensorSideView: React.FC = () => {
-    const { sensorPromise, sensorList, historicalDataPromise } = useLoaderData<ISensorSideViewLoaderData>();
+    const { sensorList, sensor, historicalDataPromise } = useLoaderData<ISensorSideViewLoaderData>();
     const { favorites, addFavorite, removeFavorite } = useFavorites();
     const revalidator = useRevalidator();
-    const s = use(sensorPromise);
+    const [s, setSensor] = useState<Sensor>(sensor);
 
     useFlyToOnRender(s.location.latitude, s.location.longitude);
+
+    useEffect(() => {
+        const evtSource = new EventSource(`/api/sensor/${s.id.toString()}/live`);
+        evtSource.onmessage = (event: MessageEvent<string>) => {
+            const data = JSON.parse(event.data) as Sensor;
+            console.debug(data);
+            setSensor(data);
+        };
+
+        return () => {
+            evtSource.close();
+        };
+    }, [s.id]);
 
     const isFavorite = useMemo(() => favorites.includes(s.id), [favorites, s.id]);
 
@@ -102,6 +115,13 @@ const SensorSideView: React.FC = () => {
                     </div>
                     <Suspense fallback={<div className={styles.loading}>Wczytywanie wykresów...</div>}>
                         <Charts sensor={s} historicalDataPromise={historicalDataPromise} />
+                        {s.lastUpdate && (
+                            <div className={styles.updateDate}>
+                                Zaktualizowano:
+                                <br />
+                                {new Date(s.lastUpdate).toLocaleString()}
+                            </div>
+                        )}
                     </Suspense>
                 </div>
             </div>

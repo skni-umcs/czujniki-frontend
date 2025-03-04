@@ -56,7 +56,7 @@ const router = createBrowserRouter([
 
                     try {
                         const sensorList = await repo.getAllSensors();
-                        const sensorPromise = repo.getSensor(Number(params.id));
+                        const sensor = await repo.getSensor(Number(params.id));
 
                         const endDate = new Date();
                         const startDate = new Date();
@@ -68,7 +68,7 @@ const router = createBrowserRouter([
                             endDate,
                         );
 
-                        return { sensorList, sensorPromise, historicalDataPromise };
+                        return { sensorList, sensor, historicalDataPromise };
                     } catch (error) {
                         if ((error as Error).message.includes("Sensor not found")) {
                             console.error(error);
