@@ -36,6 +36,7 @@ class DataProvider {
         url.searchParams.set("endDate", endDate.toISOString().split(".")[0]);
         url.searchParams.set("page", "0");
         url.searchParams.set("size", "40");
+        url.searchParams.set("sort", "timestamp,desc");
 
         return this.fetcher<Pageable<SensorData>>(url);
     }

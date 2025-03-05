@@ -1,4 +1,4 @@
-import { use } from "react";
+import { use, useMemo } from "react";
 
 import styles from "./SensorSideView.module.css";
 import Pageable from "../../types/Pageable";
@@ -14,7 +14,10 @@ interface IChartsProps {
 };
 
 const Charts: React.FC<IChartsProps> = ({ sensor, historicalDataPromise }) => {
-    const { content: historicalData } = use(historicalDataPromise);
+    const { content } = use(historicalDataPromise);
+    const historicalData = useMemo(() => (
+        content.sort((a, b) => new Date(a.timestamp).valueOf() - new Date(b.timestamp).valueOf())
+    ), [content]);
 
     return (
         <>
