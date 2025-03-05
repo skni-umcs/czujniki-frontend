@@ -13,6 +13,13 @@ interface IProps {
     domain?: AxisDomain;
 }
 
+const getFormatedDate = (value: string) => {
+    const baseDate = new Date(value);
+    const timestamp = new Date(value);
+    timestamp.setHours(baseDate.getHours() + 1);
+    return timestamp.toLocaleString().slice(0, -3);
+};
+
 const SensorChart: React.FC<IProps> = ({ className, height, data, dataKey, unit, domain }) => {
     return (
         <ResponsiveContainer width="105%" height={height}>
@@ -26,12 +33,7 @@ const SensorChart: React.FC<IProps> = ({ className, height, data, dataKey, unit,
                 />
                 <XAxis
                     dataKey="timestamp"
-                    tickFormatter={(value: string) => {
-                        const baseDate = new Date(value);
-                        const timestamp = new Date(value);
-                        timestamp.setHours(baseDate.getHours() + 1);
-                        return timestamp.toLocaleString().slice(0, -3).split(", ")[1];
-                    }}
+                    tickFormatter={(value: string) => getFormatedDate(value).split(", ")[1]}
                     tickMargin={4}
                     fontSize="0.8em"
                     style={{ fill: "currentColor" }}
@@ -47,7 +49,7 @@ const SensorChart: React.FC<IProps> = ({ className, height, data, dataKey, unit,
                 <Tooltip
                     contentStyle={{ backgroundColor: "var(--bg-primary)", lineHeight: "1.5" }}
                     formatter={value => [`${value.toString()}${unit ?? ""}`]}
-                    labelFormatter={(value: string) => new Date(value).toLocaleString().slice(0, -3)}
+                    labelFormatter={getFormatedDate}
                     allowEscapeViewBox={{ x: false, y: true }}
                     itemStyle={{ padding: 0 }}
                 />
