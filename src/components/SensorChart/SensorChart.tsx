@@ -26,7 +26,12 @@ const SensorChart: React.FC<IProps> = ({ className, height, data, dataKey, unit,
                 />
                 <XAxis
                     dataKey="timestamp"
-                    tickFormatter={(value: string) => new Date(value).toLocaleString().slice(0, -3).split(", ")[1]}
+                    tickFormatter={(value: string) => {
+                        const baseDate = new Date(value);
+                        const timestamp = new Date(value);
+                        timestamp.setHours(baseDate.getHours() + 1);
+                        return timestamp.toLocaleString().slice(0, -3).split(", ")[1];
+                    }}
                     tickMargin={4}
                     fontSize="0.8em"
                     style={{ fill: "currentColor" }}
