@@ -21,7 +21,8 @@ const SensorChart: React.FC<IProps> = ({ className, height, data, dataKey, unit,
                     type="monotone"
                     dataKey={dataKey}
                     stroke="var(--primary-btn-color)"
-                    dot={false}
+                    dot={true}
+                    connectNulls={true}
                 />
                 <XAxis
                     dataKey="timestamp"
