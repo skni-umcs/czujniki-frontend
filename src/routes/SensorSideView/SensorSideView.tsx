@@ -83,26 +83,26 @@ const SensorSideView: React.FC = () => {
                     <div className={styles.currentConditions}>
                         <CurrentCondition
                             label="Temperatura"
-                            value={s.temperature ? `${s.temperature.toString()}° C` : "-"}
+                            value={s.temperature ? `${s.temperature.toString()}° C` : "Brak danych"}
                             icon={RiTempHotLine}
 
                         />
                         <CurrentCondition
                             label="Wilgotność"
-                            value={s.humidity ? `${s.humidity.toString()}%` : "-"}
+                            value={s.humidity ? `${s.humidity.toString()}%` : "Brak danych"}
                             icon={RiWaterPercentFill}
 
                         />
                         <CurrentCondition
                             label="Ciśnienie"
-                            value={s.pressure ? `${Math.round(s.pressure).toString()} hPa` : "-"}
+                            value={s.pressure ? `${s.pressure.toString()} hPa` : "Brak danych"}
                             icon={RiSpeedUpFill}
 
                         />
                         {s.gasResistance && (
                             <CurrentCondition
                                 label="Jakość pow."
-                                value={s.gasResistance ? s.gasResistance.toString() : "-"}
+                                value={s.gasResistance ? s.gasResistance.toString() : "Brak danych"}
                                 icon={RiWindyFill}
                             />
                         )}
