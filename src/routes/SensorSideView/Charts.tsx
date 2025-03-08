@@ -2,18 +2,16 @@ import { use, useMemo } from "react";
 
 import styles from "./SensorSideView.module.css";
 import Pageable from "../../types/Pageable";
-import Sensor from "../../types/Sensor";
 import SensorData from "../../types/SensorData";
 import SensorChart from "../../components/SensorChart/SensorChart";
 
 const chartHeight = 150;
 
 interface IChartsProps {
-    sensor: Sensor;
     historicalDataPromise: Promise<Pageable<SensorData>>;
 };
 
-const Charts: React.FC<IChartsProps> = ({ sensor, historicalDataPromise }) => {
+const Charts: React.FC<IChartsProps> = ({ historicalDataPromise }) => {
     const { content } = use(historicalDataPromise);
     const historicalData = useMemo(() => (
         content.sort((a, b) => new Date(a.timestamp).valueOf() - new Date(b.timestamp).valueOf())
@@ -21,20 +19,26 @@ const Charts: React.FC<IChartsProps> = ({ sensor, historicalDataPromise }) => {
 
     return (
         <>
-            <div className={styles.heading}>Temperatura</div>
-            <SensorChart
-                height={chartHeight}
-                data={historicalData}
-                dataKey="temperature"
-                className={styles.chartOffset}
-                unit="° C"
-                domain={[
-                    (dataMin: number) => dataMin - 2,
-                    (dataMax: number) => dataMax + 2,
-                ]}
-            />
+            {historicalData[0]?.temperature
+                ? (
+                        <>
+                            <div className={styles.heading}>Temperatura</div>
+                            <SensorChart
+                                height={chartHeight}
+                                data={historicalData}
+                                dataKey="temperature"
+                                className={styles.chartOffset}
+                                unit="° C"
+                                domain={[
+                                    (dataMin: number) => dataMin - 2,
+                                    (dataMax: number) => dataMax + 2,
+                                ]}
+                            />
+                        </>
+                    )
+                : null}
 
-            {sensor.humidity
+            {historicalData[0]?.humidity
                 ? (
                         <>
                             <div className={styles.heading}>Wilgotność</div>
@@ -50,7 +54,7 @@ const Charts: React.FC<IChartsProps> = ({ sensor, historicalDataPromise }) => {
                     )
                 : null}
 
-            {sensor.pressure
+            {historicalData[0]?.pressure
                 ? (
                         <>
                             <div className={styles.heading}>Ciśnienie</div>
@@ -69,7 +73,7 @@ const Charts: React.FC<IChartsProps> = ({ sensor, historicalDataPromise }) => {
                     )
                 : null}
 
-            {sensor.gasResistance
+            {historicalData[0]?.gasResistance
                 ? (
                         <>
                             <div className={styles.heading}>Jakość powietrza</div>

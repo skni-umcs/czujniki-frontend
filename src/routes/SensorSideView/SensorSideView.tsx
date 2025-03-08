@@ -117,13 +117,13 @@ const SensorSideView: React.FC = () => {
                         />
                     </div>
                     <Suspense fallback={<div className={styles.loading}>Wczytywanie wykresów...</div>}>
-                        <Charts sensor={s} historicalDataPromise={historicalDataPromise} />
+                        <Charts historicalDataPromise={historicalDataPromise} />
                         {s.lastUpdate && (
-                            <div className={styles.updateDate}>
+                            <p className={styles.updateDate}>
                                 Zaktualizowano:
                                 <br />
                                 {new Date(s.lastUpdate).toLocaleString()}
-                            </div>
+                            </p>
                         )}
                     </Suspense>
                 </div>
