@@ -36,7 +36,11 @@ const Navbar: React.FC = () => {
                     Ulubione
                 </div>
             </button>
-            <button className={styles.item} title="O projekcie">
+            <button
+                className={styles.item}
+                onClick={() => { void navigate("/about"); }}
+                title="O projekcie"
+            >
                 <IoHelpOutline size={24} />
                 <div>
                     O projekcie

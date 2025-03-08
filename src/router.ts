@@ -6,6 +6,7 @@ import MainRoute, { IMainRouteLoaderData } from "./routes/MainRoute/MainRoute.ts
 import SensorList, { ISensorListLoaderData } from "./routes/SensorList/SensorList.tsx";
 import SensorSideView, { ISensorSideViewLoaderData } from "./routes/SensorSideView/SensorSideView.tsx";
 import AccessibilitySideView, { IAccessibilitySideViewLoaderData } from "./routes/AccessibilitySideView/AccessibilitySideView.tsx";
+import AboutSideView from "./routes/AboutSideView/AboutSideView.tsx";
 import ErrorSideView from "./routes/ErrorSideView/ErrorSideView.tsx";
 import Login from "./routes/Login/Login.tsx";
 import Register from "./routes/Register/Register.tsx";
@@ -25,6 +26,15 @@ const router = createBrowserRouter([
                 Component: MainRoute,
                 ErrorBoundary: ErrorSideView,
                 loader: async (): Promise<IMainRouteLoaderData> => {
+                    const sensorList = await repo.getAllSensors();
+                    return { sensorList };
+                },
+            },
+            {
+                path: "/about",
+                Component: AboutSideView,
+                ErrorBoundary: ErrorSideView,
+                loader: async (): Promise<IAccessibilitySideViewLoaderData> => {
                     const sensorList = await repo.getAllSensors();
                     return { sensorList };
                 },
