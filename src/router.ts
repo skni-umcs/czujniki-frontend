@@ -18,8 +18,8 @@ const repo = new DataProvider();
 const router = createBrowserRouter([
     {
         Component: App,
+        HydrateFallback: App,
         ErrorBoundary: ErrorPage,
-        HydrateFallback: () => null,
         children: [
             {
                 path: "/",
