@@ -4,7 +4,6 @@ import { IoBugOutline, IoHeart, IoHeartOutline, IoRefreshOutline } from "react-i
 import { RiCheckLine, RiErrorWarningLine, RiRestTimeFill, RiSpeedUpFill, RiTempHotLine, RiWaterPercentFill, RiWindyFill } from "react-icons/ri";
 
 import styles from "./SensorSideView.module.css";
-import Pageable from "../../types/Pageable.ts";
 import Sensor from "../../types/Sensor";
 import SensorData from "../../types/SensorData.ts";
 import { Status } from "../../types/Status.ts";
@@ -20,7 +19,7 @@ import Charts from "./Charts.tsx";
 export interface ISensorSideViewLoaderData {
     sensorList: Sensor[];
     sensor: Sensor;
-    historicalDataPromise: Promise<Pageable<SensorData>>;
+    historicalDataPromise: Promise<SensorData[]>;
 };
 
 const SensorSideView: React.FC = () => {

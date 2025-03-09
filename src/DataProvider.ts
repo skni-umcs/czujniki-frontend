@@ -1,7 +1,7 @@
 import ApiError from "./types/ApiError";
 import Pageable from "./types/Pageable";
 import Sensor from "./types/Sensor";
-import SensorData from "./types/SensorData";
+import SensorData, { SensorDataUnparsed } from "./types/SensorData";
 
 class DataProvider {
     #sensorList: Sensor[] | null = null;
@@ -38,7 +38,12 @@ class DataProvider {
         url.searchParams.set("size", "40");
         url.searchParams.set("sort", "timestamp,desc");
 
-        return this.fetcher<Pageable<SensorData>>(url);
+        const data = await this.fetcher<Pageable<SensorDataUnparsed>>(url);
+        const historicalData: SensorData[] = data.content
+            .map(el => ({ ...el, timestamp: new Date(el.timestamp).valueOf() }))
+            .sort((a, b) => a.timestamp - b.timestamp);
+
+        return historicalData;
     }
 }
 
