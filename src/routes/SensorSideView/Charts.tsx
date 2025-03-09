@@ -5,7 +5,7 @@ import Pageable from "../../types/Pageable";
 import SensorData from "../../types/SensorData";
 import SensorChart from "../../components/SensorChart/SensorChart";
 
-const chartHeight = 150;
+const chartHeight = 170;
 
 interface IChartsProps {
     historicalDataPromise: Promise<Pageable<SensorData>>;
