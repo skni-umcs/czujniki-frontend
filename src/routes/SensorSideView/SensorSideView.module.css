@@ -12,8 +12,7 @@
 
 .content {
     line-height: 2;
-    padding: 24px;
-    padding-top: 0;
+    padding-bottom: 24px;
     font-size: 0.90em;
 }
 
@@ -27,19 +26,17 @@
     padding-inline: 48px;
 }
 
-.chartOffset {
-    left: -24px;
-}
-
 .currentConditions {
     display: grid;
-    grid-template-columns: 1fr 1fr;
-    gap: 16px;
+    grid-template-columns: 128px 128px;
+    justify-content: space-around;
+    gap: 16px 0;
+    padding: 0 16px;
 }
 
 .updateDate {
     color: var(--text-color-secondary);
-    margin-left: 8px;
+    margin: 4px 32px;
 }
 
 .loading {

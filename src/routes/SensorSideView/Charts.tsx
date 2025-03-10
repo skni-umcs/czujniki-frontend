@@ -24,7 +24,6 @@ const Charts: React.FC<IChartsProps> = ({ historicalDataPromise }) => {
                         height={chartHeight}
                         data={historicalData}
                         dataKey="temperature"
-                        className={styles.chartOffset}
                         unit="° C"
                     />
                 </>
@@ -37,7 +36,6 @@ const Charts: React.FC<IChartsProps> = ({ historicalDataPromise }) => {
                         height={chartHeight}
                         data={historicalData}
                         dataKey="humidity"
-                        className={styles.chartOffset}
                         unit="%"
                         domain={[0, 100]}
                     />
@@ -51,7 +49,6 @@ const Charts: React.FC<IChartsProps> = ({ historicalDataPromise }) => {
                         height={chartHeight}
                         data={historicalData}
                         dataKey="pressure"
-                        className={styles.chartOffset}
                         unit=" hPa"
                     />
                 </>

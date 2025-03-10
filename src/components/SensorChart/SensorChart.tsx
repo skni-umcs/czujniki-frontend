@@ -1,10 +1,12 @@
 import { CartesianGrid, Line, LineChart, ResponsiveContainer, Tooltip, XAxis, YAxis, ReferenceArea } from "recharts";
 import { AxisDomain } from "recharts/types/util/types";
+import { CategoricalChartFunc } from "recharts/types/chart/generateCategoricalChart";
+import { RiDeleteBack2Fill } from "react-icons/ri";
 import clsx from "clsx/lite";
-import { useChartZoom } from "./useChartZoom";
 
 import styles from "./SensorChart.module.css";
-import { CategoricalChartFunc } from "recharts/types/chart/generateCategoricalChart";
+import { useChartZoom } from "./useChartZoom";
+import IconButton from "../IconButton/IconButton";
 
 interface IProps<T extends object = object> {
     className?: string;
@@ -53,11 +55,13 @@ function SensorChart<T extends object = object>({ className, height, data, dataK
     return (
         <div className={styles.root}>
             {viewport.left !== "dataMin" && (
-                <button style={{ position: "absolute", right: 58, zIndex: 1 }} onClick={resetZoom}>Reset</button>
+                <IconButton className={styles.resetButton} title="Reset" onClick={resetZoom}>
+                    <RiDeleteBack2Fill size={20} />
+                </IconButton>
             )}
             <ResponsiveContainer width="100%" height={height}>
                 <LineChart
-                    margin={{ bottom: 0, top: 0, left: 10, right: 10 }}
+                    margin={{ bottom: 0, top: 0, left: 4, right: 32 }}
                     data={data}
                     className={clsx(styles.chart, className)}
                     onMouseDown={onMouseDownHandler}

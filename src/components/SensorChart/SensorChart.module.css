@@ -6,3 +6,10 @@
 .chart {
     color: var(--text-color-secondary);
 }
+
+.resetButton {
+    position: absolute;
+    right: 31px;
+    z-index: 1;
+    padding: 6px;
+}
