@@ -49,7 +49,10 @@ export const useChartZoom = () => {
         const [start, end] = [selection.leftIndex, selection.rightIndex].sort(asc);
         const [left, right] = [Number(selection.left), Number(selection.right)].sort(asc);
 
-        const { top, bottom } = calculateDomain(data.slice(start, end + 1), dataKey);
+        const { top, bottom } = calculateDomain(
+            data.slice(start, end < data.length ? end + 1 : end),
+            dataKey,
+        );
 
         setViewportState({ left, right, top, bottom });
         setSelectionState(initialSelectionState);
