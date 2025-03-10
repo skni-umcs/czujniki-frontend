@@ -1,4 +1,4 @@
-import { createBrowserRouter, redirect } from "react-router-dom";
+import { createBrowserRouter, LoaderFunctionArgs, redirect } from "react-router-dom";
 
 import { getFavorites } from "./contexts/FavoritesProvider.tsx";
 import ErrorPage from "./routes/ErrorPage.tsx";
@@ -14,6 +14,34 @@ import App from "./App.tsx";
 import DataProvider from "./DataProvider.ts";
 
 const repo = new DataProvider();
+
+const sensorLoader = async ({ params }: LoaderFunctionArgs): Promise<ISensorSideViewLoaderData> => {
+    if (!params.id) return redirect("/") as never;
+
+    try {
+        const sensorList = await repo.getAllSensors();
+        const sensor = await repo.getSensor(Number(params.id));
+
+        const endDate = new Date();
+        const startDate = new Date();
+        endDate.setSeconds(endDate.getSeconds() - 15); // to avoid date in the future error
+        startDate.setDate(endDate.getDate() - 1);
+
+        const historicalDataPromise = repo.getHistoricalData(
+            Number(params.id),
+            params.startDate ? new Date(params.startDate) : startDate,
+            params.endDate ? new Date(params.endDate) : endDate,
+        );
+
+        return { sensorList, sensor, historicalDataPromise };
+    } catch (error) {
+        if ((error as Error).message.includes("Sensor not found")) {
+            console.error(error);
+            return redirect("/") as never;
+        }
+        throw error;
+    }
+};
 
 const router = createBrowserRouter([
     {
@@ -61,33 +89,13 @@ const router = createBrowserRouter([
                 path: "/sensors/:id",
                 Component: SensorSideView,
                 ErrorBoundary: ErrorSideView,
-                loader: async ({ params }): Promise<ISensorSideViewLoaderData> => {
-                    if (!params.id) return redirect("/") as never;
-
-                    try {
-                        const sensorList = await repo.getAllSensors();
-                        const sensor = await repo.getSensor(Number(params.id));
-
-                        const endDate = new Date();
-                        const startDate = new Date();
-                        endDate.setSeconds(endDate.getSeconds() - 15); // to avoid date in the future error
-                        startDate.setDate(endDate.getDate() - 1);
-
-                        const historicalDataPromise = repo.getHistoricalData(
-                            Number(params.id),
-                            startDate,
-                            endDate,
-                        );
-
-                        return { sensorList, sensor, historicalDataPromise };
-                    } catch (error) {
-                        if ((error as Error).message.includes("Sensor not found")) {
-                            console.error(error);
-                            return redirect("/") as never;
-                        }
-                        throw error;
-                    }
-                },
+                loader: sensorLoader,
+            },
+            {
+                path: "/sensors/:id/:startDate/:endDate",
+                Component: SensorSideView,
+                ErrorBoundary: ErrorSideView,
+                loader: sensorLoader,
             },
             {
                 path: "/favorites",
