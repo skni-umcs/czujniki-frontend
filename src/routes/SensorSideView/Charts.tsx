@@ -17,7 +17,8 @@ const Charts: React.FC<IChartsProps> = ({ historicalDataPromise }) => {
 
     return (
         <>
-            {historicalData[0].temperature && (
+            {historicalData[0].temperature
+                ? (
                 <>
                     <div className={styles.heading}>Temperatura</div>
                     <SensorChart
@@ -27,9 +28,11 @@ const Charts: React.FC<IChartsProps> = ({ historicalDataPromise }) => {
                         unit="° C"
                     />
                 </>
-            )}
+                    )
+                : null}
 
-            {historicalData[0].humidity && (
+            {historicalData[0].humidity
+                ? (
                 <>
                     <div className={styles.heading}>Wilgotność</div>
                     <SensorChart
@@ -40,9 +43,11 @@ const Charts: React.FC<IChartsProps> = ({ historicalDataPromise }) => {
                         domain={[0, 100]}
                     />
                 </>
-            )}
+                    )
+                : null}
 
-            {historicalData[0].pressure && (
+            {historicalData[0].pressure
+                ? (
                 <>
                     <div className={styles.heading}>Ciśnienie</div>
                     <SensorChart
@@ -52,7 +57,8 @@ const Charts: React.FC<IChartsProps> = ({ historicalDataPromise }) => {
                         unit=" hPa"
                     />
                 </>
-            )}
+                    )
+                : null}
         </>
     );
 };
