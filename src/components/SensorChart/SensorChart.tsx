@@ -6,6 +6,7 @@ import clsx from "clsx/lite";
 
 import styles from "./SensorChart.module.css";
 import { useChartZoom } from "./useChartZoom";
+import CustomizedAxisTick from "./CustomizedAxisTick";
 import IconButton from "../IconButton/IconButton";
 
 interface IProps<T extends object = object> {
@@ -16,16 +17,6 @@ interface IProps<T extends object = object> {
     unit?: string;
     domain?: AxisDomain;
 }
-
-const getFormatedDate = (value: number) => {
-    const baseDate = new Date(value);
-    const timestamp = new Date(value);
-    timestamp.setHours(baseDate.getHours() + 1);
-    return timestamp.toLocaleString();
-};
-
-const getFormatedTime = (value: number) => getFormatedDate(value).split(", ")[1];
-const getFormatedTimeWithoutSec = (value: number) => getFormatedTime(value).slice(0, -3);
 
 function SensorChart<T extends object = object>({ className, height, data, dataKey, unit, domain }: IProps<T>) {
     const { viewport, selection, setSelectionState, handleZoom, resetZoom } = useChartZoom();
@@ -61,7 +52,7 @@ function SensorChart<T extends object = object>({ className, height, data, dataK
             )}
             <ResponsiveContainer width="100%" height={height}>
                 <LineChart
-                    margin={{ bottom: 0, top: 0, left: 4, right: 32 }}
+                    margin={{ bottom: 40, top: 0, left: 4, right: 32 }}
                     data={data}
                     className={clsx(styles.chart, className)}
                     onMouseDown={onMouseDownHandler}
@@ -69,21 +60,16 @@ function SensorChart<T extends object = object>({ className, height, data, dataK
                     onMouseUp={() => { handleZoom(data, dataKey); }}
                 >
                     <Line
-                        type="monotone"
+                        type="linear"
                         dataKey={dataKey as string | number}
                         stroke="var(--primary-btn-color)"
                         dot={false}
-                        connectNulls={true}
                     />
                     <XAxis
                         dataKey="timestamp"
-                        tickFormatter={getFormatedTimeWithoutSec}
-                        tickMargin={4}
-                        minTickGap={10}
-                        // scale="linear"
-                        fontSize="0.8em"
-                        style={{ fill: "currentColor" }}
-                        allowDataOverflow
+                        minTickGap={-60}
+                        tick={CustomizedAxisTick}
+                        allowDataOverflow={true}
                         type="number"
                         domain={[viewport.left, viewport.right]}
                     />
@@ -100,11 +86,11 @@ function SensorChart<T extends object = object>({ className, height, data, dataK
                     <Tooltip
                         contentStyle={{ backgroundColor: "var(--bg-primary)", lineHeight: "1.5" }}
                         formatter={value => [`${value.toString()}${unit ?? ""}`]}
-                        labelFormatter={getFormatedDate}
+                        labelFormatter={(value: number) => new Date(value).toLocaleString()}
                         allowEscapeViewBox={{ x: false, y: true }}
                         itemStyle={{ padding: 0 }}
                     />
-                    <CartesianGrid stroke="var(--border-color)" />
+                    <CartesianGrid strokeDasharray="1 3" stroke="var(--border-color)" />
                     {selection.left && selection.right && (
                         <ReferenceArea
                             x1={selection.left as string | number}

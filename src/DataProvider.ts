@@ -35,12 +35,17 @@ class DataProvider {
         url.searchParams.set("startDate", startDate.toISOString().split(".")[0]);
         url.searchParams.set("endDate", endDate.toISOString().split(".")[0]);
         url.searchParams.set("page", "0");
-        url.searchParams.set("size", "40");
+        url.searchParams.set("size", "300");
         url.searchParams.set("sort", "timestamp,desc");
 
         const data = await this.fetcher<Pageable<SensorDataUnparsed>>(url);
         const historicalData: SensorData[] = data.content
-            .map(el => ({ ...el, timestamp: new Date(el.timestamp).valueOf() }))
+            .map((el) => {
+                const baseDate = new Date(el.timestamp);
+                const timestamp = new Date(el.timestamp);
+                timestamp.setHours(baseDate.getHours() + 1);
+                return { ...el, timestamp: timestamp.valueOf() };
+            })
             .sort((a, b) => a.timestamp - b.timestamp);
 
         return historicalData;

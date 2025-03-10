@@ -70,7 +70,8 @@ const router = createBrowserRouter([
 
                         const endDate = new Date();
                         const startDate = new Date();
-                        startDate.setHours(endDate.getHours() - 1);
+                        endDate.setSeconds(endDate.getSeconds() - 15); // to avoid date in the future error
+                        startDate.setDate(endDate.getDate() - 1);
 
                         const historicalDataPromise = repo.getHistoricalData(
                             Number(params.id),
