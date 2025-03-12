@@ -120,7 +120,7 @@ const SensorSideView: React.FC = () => {
                     </div>
                     <Suspense fallback={<div className={styles.loading}>Wczytywanie wykresów...</div>}>
                         <Charts historicalDataPromise={historicalDataPromise} />
-                        {s.lastUpdate && (
+                        {s.lastUpdate !== undefined && (
                             <p className={styles.updateDate}>
                                 Zaktualizowano:
                                 <br />

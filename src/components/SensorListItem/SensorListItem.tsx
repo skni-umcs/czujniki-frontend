@@ -16,7 +16,7 @@ const SensorListItem: React.FC<IProps> = ({ sensor }) => {
         >
             <div className={styles.heading}>{sensor.location.facultyAbbreviation} {sensor.id}</div>
             <div>{sensor.location.facultyName}</div>
-            {sensor.status === "ONLINE" && sensor.temperature && (
+            {sensor.status === "ONLINE" && sensor.temperature !== undefined && (
                 <div>Temperatura: {sensor.temperature}° C</div>
             )}
             {sensor.status === "ERROR" && (
