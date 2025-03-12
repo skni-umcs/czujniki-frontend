@@ -37,6 +37,10 @@
 .updateDate {
     color: var(--text-color-secondary);
     margin: 16px 24px;
+
+    :global :root.highContrastTheme :local(&) {
+        color: var(--text-color-primary);
+    }
 }
 
 .loading,
@@ -69,6 +73,10 @@
     border-radius: 8px;
     border: 0;
     background-color: var(--searchbar-bg);
+
+    :global :root.highContrastTheme :local(&) {
+        border: 1px solid;
+    }
 }
 
 .dateFilterButton {
