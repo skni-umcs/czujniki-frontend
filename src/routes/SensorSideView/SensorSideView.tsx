@@ -1,7 +1,7 @@
 import { Suspense, useEffect, useMemo, useState } from "react";
 import { useLoaderData, useRevalidator } from "react-router-dom";
 import { IoBugOutline, IoHeart, IoHeartOutline, IoRefreshOutline } from "react-icons/io5";
-import { RiCheckLine, RiErrorWarningLine, RiRestTimeFill, RiSpeedUpFill, RiTempHotLine, RiWaterPercentFill, RiWindyFill } from "react-icons/ri";
+import { RiCheckLine, RiErrorWarningLine, RiRestTimeFill, RiSpeedUpFill, RiTempHotLine, RiWaterPercentFill } from "react-icons/ri";
 
 import styles from "./SensorSideView.module.css";
 import Sensor from "../../types/Sensor";
@@ -108,13 +108,6 @@ const SensorSideView: React.FC = () => {
                             icon={RiSpeedUpFill}
 
                         />
-                        {s.gasResistance && (
-                            <CurrentCondition
-                                label="Jakość pow."
-                                value={s.gasResistance ? s.gasResistance.toString() : "Brak danych"}
-                                icon={RiWindyFill}
-                            />
-                        )}
                         <CurrentCondition
                             label="Status"
                             value={Status[s.status]}

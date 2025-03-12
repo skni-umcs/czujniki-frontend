@@ -3,7 +3,6 @@ export interface SensorDataUnparsed {
     temperature: number;
     humidity: number;
     pressure: number;
-    gasResistance?: number | null;
 }
 
 export default interface SensorData {
@@ -11,5 +10,4 @@ export default interface SensorData {
     temperature: number;
     humidity: number;
     pressure: number;
-    gasResistance?: number | null;
 }
