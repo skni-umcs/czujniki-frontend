@@ -36,12 +36,12 @@
 
 .updateDate {
     color: var(--text-color-secondary);
-    margin: 16px 32px;
+    margin: 16px 24px;
 }
 
-.loading {
-    margin-top: 2em;
-    margin-bottom: 0.4em;
+.loading,
+.noChartsMessage {
+    margin: 2em 24px;
     text-align: center;
 }
 

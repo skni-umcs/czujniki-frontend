@@ -32,8 +32,6 @@ const Charts: React.FC<IChartsProps> = ({ historicalDataPromise }) => {
     const navigate = useNavigate();
     const params = useParams();
 
-    if (!historicalData[0]) return null;
-
     const handleDateFilter: React.FormEventHandler<HTMLFormElement> = (event) => {
         event.preventDefault();
 
@@ -68,7 +66,10 @@ const Charts: React.FC<IChartsProps> = ({ historicalDataPromise }) => {
                 </label>
                 <input className={styles.dateFilterButton} type="submit" value="Filtruj" />
             </form>
-            {historicalData[0].temperature
+            {!historicalData[0] && (
+                <div className={styles.noChartsMessage}>Brak danych w tym zakresie dat.</div>
+            )}
+            {historicalData[0]?.temperature
                 ? (
                         <>
                             <div className={styles.heading}>Temperatura</div>
@@ -82,7 +83,7 @@ const Charts: React.FC<IChartsProps> = ({ historicalDataPromise }) => {
                     )
                 : null}
 
-            {historicalData[0].humidity
+            {historicalData[0]?.humidity
                 ? (
                         <>
                             <div className={styles.heading}>Wilgotność</div>
@@ -97,7 +98,7 @@ const Charts: React.FC<IChartsProps> = ({ historicalDataPromise }) => {
                     )
                 : null}
 
-            {historicalData[0].pressure
+            {historicalData[0]?.pressure
                 ? (
                         <>
                             <div className={styles.heading}>Ciśnienie</div>
