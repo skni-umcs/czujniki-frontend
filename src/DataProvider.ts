@@ -30,10 +30,10 @@ class DataProvider {
         return this.fetcher<Sensor>(`/api/sensor/${id.toString()}`);
     }
 
-    async getHistoricalData(id: Sensor["id"], startDate: Date, endDate: Date) {
+    async getHistoricalData(id: Sensor["id"], startDate: Date, endDate?: Date) {
         const url = new URL(`/api/sensor/${id.toString()}/data`, window.location.origin);
-        url.searchParams.set("startDate", startDate.toISOString().split(".")[0]);
-        url.searchParams.set("endDate", endDate.toISOString().split(".")[0]);
+        url.searchParams.set("startDate", startDate.toISOString());
+        if (endDate) url.searchParams.set("endDate", endDate.toISOString());
         url.searchParams.set("page", "0");
         url.searchParams.set("size", "300");
         url.searchParams.set("sort", "timestamp,desc");
@@ -41,10 +41,7 @@ class DataProvider {
         const data = await this.fetcher<Pageable<SensorDataUnparsed>>(url);
         const historicalData: SensorData[] = data.content
             .map((el) => {
-                const baseDate = new Date(el.timestamp);
-                const timestamp = new Date(el.timestamp);
-                timestamp.setHours(baseDate.getHours() + 1);
-                return { ...el, timestamp: timestamp.valueOf() };
+                return { ...el, timestamp: new Date(el.timestamp).valueOf() };
             })
             .sort((a, b) => a.timestamp - b.timestamp);
 

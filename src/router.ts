@@ -22,15 +22,13 @@ const sensorLoader = async ({ params }: LoaderFunctionArgs): Promise<ISensorSide
         const sensorList = await repo.getAllSensors();
         const sensor = await repo.getSensor(Number(params.id));
 
-        const endDate = new Date();
         const startDate = new Date();
-        endDate.setSeconds(endDate.getSeconds() - 15); // to avoid date in the future error
-        startDate.setDate(endDate.getDate() - 1);
+        startDate.setDate(startDate.getDate() - 1);
 
         const historicalDataPromise = repo.getHistoricalData(
             Number(params.id),
             params.startDate ? new Date(params.startDate) : startDate,
-            params.endDate ? new Date(params.endDate) : endDate,
+            params.endDate ? new Date(params.endDate) : undefined,
         );
 
         return { sensorList, sensor, historicalDataPromise };

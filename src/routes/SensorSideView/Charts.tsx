@@ -8,13 +8,13 @@ import SensorChart from "../../components/SensorChart/SensorChart";
 const chartHeight = 225;
 
 const getDefaultDateRange = () => {
-    const endDate = new Date();
-    const startDate = new Date();
-    endDate.setSeconds(endDate.getSeconds() - 15); // to avoid date in the future error
-    startDate.setDate(endDate.getDate() - 1);
+    const now = new Date();
+    const offset = now.getTimezoneOffset() * 60000;
 
-    endDate.setHours(endDate.getHours() + 1);
-    startDate.setHours(startDate.getHours() + 1);
+    const endDate = new Date(now.getTime() - offset);
+    const startDate = new Date(now.getTime() - offset);
+
+    startDate.setDate(startDate.getDate() - 1);
     return { startDate, endDate };
 };
 
