@@ -27,17 +27,19 @@ const SensorSideView: React.FC = () => {
     const {
         sensorList,
         sensor: sensorFromRouter,
-        historicalDataPromise,
+        historicalDataPromise: historyPromiseFromRouter,
     } = useLoaderData<ISensorSideViewLoaderData>();
     const { favorites, addFavorite, removeFavorite } = useFavorites();
     const revalidator = useRevalidator();
     const [s, setSensor] = useState<Sensor>(sensorFromRouter);
+    const [historyPromise, setHistoryPromise] = useState(historyPromiseFromRouter);
 
     useFlyToOnRender(s.location.latitude, s.location.longitude);
 
     useEffect(() => {
         setSensor(sensorFromRouter);
-    }, [sensorFromRouter]);
+        setHistoryPromise(historyPromiseFromRouter);
+    }, [sensorFromRouter, historyPromiseFromRouter]);
 
     useEffect(() => {
         const evtSource = new EventSource(`/api/sensor/${s.id.toString()}/live`);
@@ -119,7 +121,7 @@ const SensorSideView: React.FC = () => {
                         />
                     </div>
                     <Suspense fallback={<div className={styles.loading}>Wczytywanie wykresów...</div>}>
-                        <Charts historicalDataPromise={historicalDataPromise} />
+                        <Charts historicalDataPromise={historyPromise} />
                         {s.lastUpdate !== undefined && (
                             <p className={styles.updateDate}>
                                 Zaktualizowano:
