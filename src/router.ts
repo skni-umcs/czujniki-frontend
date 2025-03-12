@@ -13,7 +13,7 @@ import Register from "./routes/Register/Register.tsx";
 import App from "./App.tsx";
 import DataProvider from "./DataProvider.ts";
 
-const repo = new DataProvider();
+export const repo = new DataProvider();
 
 const sensorLoader = async ({ params }: LoaderFunctionArgs): Promise<ISensorSideViewLoaderData> => {
     if (!params.id) return redirect("/") as never;

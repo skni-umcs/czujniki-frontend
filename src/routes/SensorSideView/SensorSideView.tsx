@@ -15,6 +15,7 @@ import CurrentCondition from "../../components/CurrentCondition/CurrentCondition
 import useFlyToOnRender from "./useFlyToOnRender.ts";
 import { useFavorites } from "../../contexts/FavoritesProvider.tsx";
 import Charts from "./Charts.tsx";
+import { repo } from "../../router.ts";
 
 export interface ISensorSideViewLoaderData {
     sensorList: Sensor[];
@@ -23,18 +24,27 @@ export interface ISensorSideViewLoaderData {
 };
 
 const SensorSideView: React.FC = () => {
-    const { sensorList, sensor, historicalDataPromise } = useLoaderData<ISensorSideViewLoaderData>();
+    const {
+        sensorList,
+        sensor: sensorFromRouter,
+        historicalDataPromise,
+    } = useLoaderData<ISensorSideViewLoaderData>();
     const { favorites, addFavorite, removeFavorite } = useFavorites();
     const revalidator = useRevalidator();
-    const [s, setSensor] = useState<Sensor>(sensor);
+    const [s, setSensor] = useState<Sensor>(sensorFromRouter);
 
     useFlyToOnRender(s.location.latitude, s.location.longitude);
+
+    useEffect(() => {
+        setSensor(sensorFromRouter);
+    }, [sensorFromRouter]);
 
     useEffect(() => {
         const evtSource = new EventSource(`/api/sensor/${s.id.toString()}/live`);
         evtSource.onmessage = (event: MessageEvent<string>) => {
             const data = JSON.parse(event.data) as Sensor;
-            console.debug(data);
+            console.debug("message: ", data);
+            repo.setSensorInCache(data);
             setSensor(data);
         };
 

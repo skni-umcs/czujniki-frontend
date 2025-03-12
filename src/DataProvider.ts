@@ -47,6 +47,15 @@ class DataProvider {
 
         return historicalData;
     }
+
+    setSensorInCache(data: Sensor) {
+        if (!this.#sensorList) return;
+
+        const index = this.#sensorList.findIndex(sensor => sensor.id === data.id);
+        if (index !== -1) {
+            this.#sensorList[index] = data;
+        }
+    }
 }
 
 export default DataProvider;
