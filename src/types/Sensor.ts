@@ -9,4 +9,5 @@ export default interface Sensor {
     humidity?: number;
     pressure?: number;
     location: Location;
+    floor?: number | null;
 }
