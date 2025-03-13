@@ -9,10 +9,6 @@
 }
 
 .item {
-    border: 0;
-    font: inherit;
-    background-color: inherit;
-    cursor: pointer;
     display: flex;
     align-items: center;
     justify-content: center;
@@ -20,6 +16,8 @@
     width: 100%;
     padding-block: 16px;
     font-size: 0.75em;
+    color: inherit;
+    text-decoration: inherit;
 }
 
 .item:hover {

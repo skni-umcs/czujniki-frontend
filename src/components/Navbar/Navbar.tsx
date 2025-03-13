@@ -1,12 +1,10 @@
 import { IoHelpOutline, IoHeartOutline, IoList, IoAccessibilityOutline } from "react-icons/io5";
-import { useNavigate } from "react-router-dom";
+import { Link } from "react-router-dom";
 
 import styles from "./Navbar.module.css";
 import skniLogo from "../../assets/skni_logo.svg";
 
 const Navbar: React.FC = () => {
-    const navigate = useNavigate();
-
     return (
         <div className={styles.root}>
             <img
@@ -16,46 +14,46 @@ const Navbar: React.FC = () => {
                 height={51}
                 width={76}
             />
-            <button
+            <Link
                 className={styles.item}
-                onClick={() => { void navigate("/sensors"); }}
+                to="/sensors"
                 title="Lista czujników"
             >
                 <IoList size={24} />
                 <div>
                     Czujniki
                 </div>
-            </button>
-            <button
+            </Link>
+            <Link
                 className={styles.item}
-                onClick={() => { void navigate("/favorites"); }}
+                to="/favorites"
                 title="Ulubione czujniki"
             >
                 <IoHeartOutline size={24} />
                 <div>
                     Ulubione
                 </div>
-            </button>
-            <button
+            </Link>
+            <Link
                 className={styles.item}
-                onClick={() => { void navigate("/about"); }}
+                to="/about"
                 title="O projekcie"
             >
                 <IoHelpOutline size={24} />
                 <div>
                     O projekcie
                 </div>
-            </button>
-            <button
+            </Link>
+            <Link
                 className={styles.item}
-                onClick={() => { void navigate("/accessibility"); }}
+                to="/accessibility"
                 title="Ustawienia dostępności"
             >
                 <IoAccessibilityOutline size={24} />
                 <div>
                     Dostępność
                 </div>
-            </button>
+            </Link>
         </div>
     );
 };
