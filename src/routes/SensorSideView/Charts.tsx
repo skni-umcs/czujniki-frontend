@@ -1,5 +1,5 @@
 import { use } from "react";
-import { useNavigate, useParams } from "react-router-dom";
+import { Form, useParams } from "react-router-dom";
 
 import styles from "./SensorSideView.module.css";
 import SensorData from "../../types/SensorData";
@@ -18,34 +18,25 @@ const getDefaultDateRange = () => {
     return { startDate, endDate };
 };
 
-type TDateFilterTarget = HTMLFormElement & {
-    startDate: HTMLInputElement;
-    endDate: HTMLInputElement;
-};
-
 interface IChartsProps {
     historicalDataPromise: Promise<SensorData[]>;
 };
 
 const Charts: React.FC<IChartsProps> = ({ historicalDataPromise }) => {
     const historicalData = use(historicalDataPromise);
-    const navigate = useNavigate();
-    const params = useParams();
-
-    const handleDateFilter: React.FormEventHandler<HTMLFormElement> = (event) => {
-        event.preventDefault();
-
-        const { startDate, endDate } = event.target as TDateFilterTarget;
-        // eslint-disable-next-line @typescript-eslint/no-non-null-assertion
-        void navigate(`/sensors/${params.id!}/${startDate.value}/${endDate.value}`);
-    };
+    const params = useParams() as { id: string };
 
     const { startDate, endDate } = getDefaultDateRange();
 
     return (
         <>
             <div className={styles.heading}>Dane historyczne</div>
-            <form className={styles.dateFilters} onSubmit={handleDateFilter}>
+            <Form
+                className={styles.dateFilters}
+                action={`/sensors/${params.id}`}
+                method="GET"
+                replace
+            >
                 <label>
                     <b>Data początkowa:</b>
                     <input
@@ -65,7 +56,7 @@ const Charts: React.FC<IChartsProps> = ({ historicalDataPromise }) => {
                     />
                 </label>
                 <input className={styles.dateFilterButton} type="submit" value="Filtruj" />
-            </form>
+            </Form>
             {!historicalData[0] && (
                 <div className={styles.noChartsMessage}>Brak danych w tym zakresie dat.</div>
             )}
