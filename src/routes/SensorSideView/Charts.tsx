@@ -5,7 +5,7 @@ import styles from "./SensorSideView.module.css";
 import SensorData from "../../types/SensorData";
 import SensorChart from "../../components/SensorChart/SensorChart";
 
-const chartHeight = 225;
+const chartHeight = 235;
 
 const getDefaultDateRange = () => {
     const now = new Date();

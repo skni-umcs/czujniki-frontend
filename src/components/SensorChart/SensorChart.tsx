@@ -52,7 +52,7 @@ function SensorChart<T extends object = object>({ className, height, data, dataK
             )}
             <ResponsiveContainer width="100%" height={height}>
                 <LineChart
-                    margin={{ bottom: 40, top: 0, left: 4, right: 32 }}
+                    margin={{ bottom: 50, top: 0, left: 4, right: 32 }}
                     data={data}
                     className={clsx(styles.chart, className)}
                     onMouseDown={onMouseDownHandler}
