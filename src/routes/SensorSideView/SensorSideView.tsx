@@ -1,5 +1,5 @@
 import { Suspense, useEffect, useMemo, useState } from "react";
-import { useLoaderData, useRevalidator } from "react-router-dom";
+import { useFetcher, useLoaderData, useRevalidator } from "react-router-dom";
 import { IoBugOutline, IoHeart, IoHeartOutline, IoRefreshOutline } from "react-icons/io5";
 import { RiCheckLine, RiErrorWarningLine, RiRestTimeFill, RiSpeedUpFill, RiTempHotLine, RiWaterPercentFill } from "react-icons/ri";
 
@@ -15,7 +15,6 @@ import CurrentCondition from "../../components/CurrentCondition/CurrentCondition
 import useFlyToOnRender from "./useFlyToOnRender.ts";
 import { useFavorites } from "../../contexts/FavoritesProvider.tsx";
 import Charts from "./Charts.tsx";
-import { repo } from "../../router.ts";
 
 export interface ISensorSideViewLoaderData {
     sensorList: Sensor[];
@@ -26,34 +25,33 @@ export interface ISensorSideViewLoaderData {
 const SensorSideView: React.FC = () => {
     const {
         sensorList,
-        sensor: sensorFromRouter,
+        sensor: s,
         historicalDataPromise: historyPromiseFromRouter,
     } = useLoaderData<ISensorSideViewLoaderData>();
     const { favorites, addFavorite, removeFavorite } = useFavorites();
     const revalidator = useRevalidator();
-    const [s, setSensor] = useState<Sensor>(sensorFromRouter);
+    const { submit } = useFetcher();
     const [historyPromise, setHistoryPromise] = useState(historyPromiseFromRouter);
 
     useFlyToOnRender(s.location.latitude, s.location.longitude);
 
     useEffect(() => {
-        setSensor(sensorFromRouter);
         setHistoryPromise(historyPromiseFromRouter);
-    }, [sensorFromRouter, historyPromiseFromRouter]);
+    }, [historyPromiseFromRouter]);
 
     useEffect(() => {
         const evtSource = new EventSource(`/api/sensor/${s.id.toString()}/live`);
         evtSource.onmessage = (event: MessageEvent<string>) => {
-            const data = JSON.parse(event.data) as Sensor;
-            console.debug("message: ", data);
-            repo.setSensorInCache(data);
-            setSensor(data);
+            void submit(event.data, {
+                method: "post",
+                encType: "application/json",
+            });
         };
 
         return () => {
             evtSource.close();
         };
-    }, [s.id]);
+    }, [s.id, submit]);
 
     const isFavorite = useMemo(() => favorites.includes(s.id), [favorites, s.id]);
 

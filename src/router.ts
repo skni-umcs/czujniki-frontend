@@ -12,8 +12,9 @@ import Login from "./routes/Login/Login.tsx";
 import Register from "./routes/Register/Register.tsx";
 import App from "./App.tsx";
 import DataProvider from "./DataProvider.ts";
+import Sensor from "./types/Sensor.ts";
 
-export const repo = new DataProvider();
+const repo = new DataProvider();
 
 const router = createBrowserRouter([
     {
@@ -61,6 +62,12 @@ const router = createBrowserRouter([
                 path: "/sensors/:id",
                 Component: SensorSideView,
                 ErrorBoundary: ErrorSideView,
+                action: async ({ request }) => {
+                    const updatedSensor = await request.json() as Sensor;
+                    repo.updateCachedSensor(updatedSensor);
+
+                    return updatedSensor;
+                },
                 loader: async ({ request, params }): Promise<ISensorSideViewLoaderData> => {
                     if (!params.id) return redirect("/") as never;
                     const url = new URL(request.url);
@@ -71,13 +78,10 @@ const router = createBrowserRouter([
                         const sensorList = await repo.getAllSensors();
                         const sensor = await repo.getSensor(Number(params.id));
 
-                        const fallbackStartDate = new Date();
-                        fallbackStartDate.setDate(fallbackStartDate.getDate() - 1);
-
                         const historicalDataPromise = repo.getHistoricalData(
                             Number(params.id),
-                            startDate ? new Date(startDate) : fallbackStartDate,
-                            endDate ? new Date(endDate) : undefined,
+                            startDate,
+                            endDate,
                         );
 
                         return { sensorList, sensor, historicalDataPromise };

@@ -5,6 +5,11 @@ import SensorData, { SensorDataUnparsed } from "./types/SensorData";
 
 class DataProvider {
     #sensorList: Sensor[] | null = null;
+    #historicalData = new Map<number, {
+        startDate: string | null;
+        endDate: string | null;
+        data: SensorData[];
+    }>();
 
     async fetcher<T extends object>(endpoint: RequestInfo | URL) {
         const res = await fetch(endpoint, {});
@@ -30,31 +35,51 @@ class DataProvider {
         return this.fetcher<Sensor>(`/api/sensor/${id.toString()}`);
     }
 
-    async getHistoricalData(id: Sensor["id"], startDate: Date, endDate?: Date) {
+    // TODO: Force refetch ???
+    async getHistoricalData(
+        id: Sensor["id"],
+        startDate: string | null,
+        endDate: string | null,
+    ) {
+        const cached = this.#historicalData.get(id);
+
+        if (startDate === cached?.startDate && endDate === cached.endDate) {
+            return cached.data;
+        }
+
+        const fallbackDate = new Date();
+        fallbackDate.setDate(fallbackDate.getDate() - 1);
+
+        const fixedStartDate = startDate ? new Date(startDate) : fallbackDate;
+
         const url = new URL(`/api/sensor/${id.toString()}/data`, window.location.origin);
-        url.searchParams.set("startDate", startDate.toISOString());
-        if (endDate) url.searchParams.set("endDate", endDate.toISOString());
+        url.searchParams.set("startDate", fixedStartDate.toISOString());
+        if (endDate) url.searchParams.set("endDate", new Date(endDate).toISOString());
         url.searchParams.set("page", "0");
         url.searchParams.set("size", "300");
         url.searchParams.set("sort", "timestamp,desc");
 
         const data = await this.fetcher<Pageable<SensorDataUnparsed>>(url);
-        const historicalData: SensorData[] = data.content
-            .map((el) => {
-                return { ...el, timestamp: new Date(el.timestamp).valueOf() };
-            })
+        const historicalData = data.content
+            .map(el => ({ ...el, timestamp: new Date(el.timestamp).getTime() } as SensorData))
             .sort((a, b) => a.timestamp - b.timestamp);
+
+        this.#historicalData.set(id, {
+            startDate,
+            endDate,
+            data: historicalData,
+        });
 
         return historicalData;
     }
 
-    setSensorInCache(data: Sensor) {
+    updateCachedSensor(data: Sensor) {
         if (!this.#sensorList) return;
 
         const index = this.#sensorList.findIndex(sensor => sensor.id === data.id);
-        if (index !== -1) {
-            this.#sensorList[index] = data;
-        }
+        if (index < 0) throw new Error("Sensor not found");
+
+        this.#sensorList = this.#sensorList.toSpliced(index, 1, data);
     }
 }
 
