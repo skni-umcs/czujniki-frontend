@@ -1,4 +1,4 @@
-import { Suspense, useEffect, useMemo, useState } from "react";
+import { Suspense, useEffect, useMemo } from "react";
 import { useFetcher, useLoaderData, useRevalidator } from "react-router-dom";
 import { IoBugOutline, IoHeart, IoHeartOutline, IoRefreshOutline } from "react-icons/io5";
 import { RiCheckLine, RiErrorWarningLine, RiRestTimeFill, RiSpeedUpFill, RiTempHotLine, RiWaterPercentFill } from "react-icons/ri";
@@ -26,18 +26,13 @@ const SensorSideView: React.FC = () => {
     const {
         sensorList,
         sensor: s,
-        historicalDataPromise: historyPromiseFromRouter,
+        historicalDataPromise,
     } = useLoaderData<ISensorSideViewLoaderData>();
     const { favorites, addFavorite, removeFavorite } = useFavorites();
     const revalidator = useRevalidator();
     const { submit } = useFetcher();
-    const [historyPromise, setHistoryPromise] = useState(historyPromiseFromRouter);
 
     useFlyToOnRender(s.location.latitude, s.location.longitude);
-
-    useEffect(() => {
-        setHistoryPromise(historyPromiseFromRouter);
-    }, [historyPromiseFromRouter]);
 
     useEffect(() => {
         const evtSource = new EventSource(`/api/sensor/${s.id.toString()}/live`);
@@ -118,8 +113,8 @@ const SensorSideView: React.FC = () => {
                                         : RiErrorWarningLine)}
                         />
                     </div>
-                    <Suspense fallback={<div className={styles.loading}>Wczytywanie wykresów...</div>}>
-                        <Charts historicalDataPromise={historyPromise} />
+                    <Suspense key={s.id} fallback={<div className={styles.loading}>Wczytywanie wykresów...</div>}>
+                        <Charts historicalDataPromise={historicalDataPromise} />
                         {s.lastUpdate !== undefined && (
                             <p className={styles.updateDate}>
                                 Zaktualizowano:
