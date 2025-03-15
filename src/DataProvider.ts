@@ -35,15 +35,15 @@ class DataProvider {
         return this.fetcher<Sensor>(`/api/sensor/${id.toString()}`);
     }
 
-    // TODO: Force refetch ???
     async getHistoricalData(
         id: Sensor["id"],
         startDate: string | null,
         endDate: string | null,
+        forceUpdate = false,
     ) {
         const cached = this.#historicalData.get(id);
 
-        if (startDate === cached?.startDate && endDate === cached.endDate) {
+        if (!forceUpdate && startDate === cached?.startDate && endDate === cached.endDate) {
             return cached.data;
         }
 

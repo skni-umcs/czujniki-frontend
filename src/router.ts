@@ -73,6 +73,7 @@ const router = createBrowserRouter([
                     const url = new URL(request.url);
                     const startDate = url.searchParams.get("startDate");
                     const endDate = url.searchParams.get("endDate");
+                    const forceUpdate = url.searchParams.get("forceUpdate") === "1";
 
                     try {
                         const sensorList = await repo.getAllSensors();
@@ -82,6 +83,7 @@ const router = createBrowserRouter([
                             Number(params.id),
                             startDate,
                             endDate,
+                            forceUpdate,
                         );
 
                         return { sensorList, sensor, historicalDataPromise };

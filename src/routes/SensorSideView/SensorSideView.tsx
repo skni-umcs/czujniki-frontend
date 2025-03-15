@@ -1,5 +1,5 @@
 import { Suspense, useEffect, useMemo } from "react";
-import { useFetcher, useLoaderData, useRevalidator } from "react-router-dom";
+import { useFetcher, useLoaderData } from "react-router-dom";
 import { IoBugOutline, IoHeart, IoHeartOutline, IoRefreshOutline } from "react-icons/io5";
 import { RiCheckLine, RiErrorWarningLine, RiRestTimeFill, RiSpeedUpFill, RiTempHotLine, RiWaterPercentFill } from "react-icons/ri";
 
@@ -29,7 +29,6 @@ const SensorSideView: React.FC = () => {
         historicalDataPromise,
     } = useLoaderData<ISensorSideViewLoaderData>();
     const { favorites, addFavorite, removeFavorite } = useFavorites();
-    const revalidator = useRevalidator();
     const { submit } = useFetcher();
 
     useFlyToOnRender(s.location.latitude, s.location.longitude);
@@ -55,6 +54,8 @@ const SensorSideView: React.FC = () => {
         else removeFavorite(s.id);
     };
 
+    const forceRefresh = () => void submit("forceUpdate=1", { method: "get" });
+
     return (
         <SideView title={`${s.location.facultyAbbreviation} ${s.id.toString()}`} showBackButton>
             <MapPortal>
@@ -73,7 +74,7 @@ const SensorSideView: React.FC = () => {
                     </IconButton>
                     <IconButton
                         className={styles.iconBtn}
-                        onClick={() => { void revalidator.revalidate(); }}
+                        onClick={forceRefresh}
                         title="Odśwież dane"
                     >
                         <IoRefreshOutline size={24} />
