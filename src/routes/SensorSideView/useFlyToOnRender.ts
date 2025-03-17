@@ -1,8 +1,11 @@
+import { useMap } from "maplibre-react-components";
 import { useEffect, useRef } from "react";
-import { useMap } from "react-leaflet";
 
-const useFlyToOnRender = (lat: number, lon: number) => {
-    const map = useMap();
+const useFlyToOnRender = (lat: number, lng: number) => {
+    const map = useMap("mapA");
+    if (!map) throw Error("no map");
+    const container = map.getContainer();
+
     const isInitAnimEnded = useRef(false);
     const isSameState = useRef(true);
 
@@ -10,25 +13,26 @@ const useFlyToOnRender = (lat: number, lon: number) => {
         const prevCenter = map.getCenter();
         const prevZoom = map.getZoom();
 
-        map.flyTo([lat, lon], 18);
+        map.flyTo({ center: { lat, lng }, zoom: 18 });
 
         return () => {
-            if (isSameState.current && prevZoom < map.getMaxZoom()) map.flyTo(prevCenter, prevZoom);
+            if (isSameState.current && prevZoom < map.getMaxZoom())
+                map.flyTo({ center: prevCenter, zoom: prevZoom });
         };
-    }, [map, lat, lon]);
+    }, [map, lat, lng]);
 
     useEffect(() => {
         const fn = () => {
             isInitAnimEnded.current = true;
-            map.removeEventListener("moveend", fn);
+            container.removeEventListener("moveend", fn);
         };
 
-        map.addEventListener("moveend", fn);
+        container.addEventListener("moveend", fn);
 
         return () => {
-            map.removeEventListener("moveend", fn);
+            container.removeEventListener("moveend", fn);
         };
-    }, [map]);
+    }, [container]);
 
     useEffect(() => {
         const fn = () => {
@@ -36,14 +40,14 @@ const useFlyToOnRender = (lat: number, lon: number) => {
             isSameState.current = false;
         };
 
-        map.addEventListener("move", fn);
-        map.addEventListener("zoom", fn);
+        container.addEventListener("move", fn);
+        container.addEventListener("zoom", fn);
 
         return () => {
-            map.removeEventListener("move", fn);
-            map.removeEventListener("zoom", fn);
+            container.removeEventListener("move", fn);
+            container.removeEventListener("zoom", fn);
         };
-    }, [map]);
+    }, [container]);
 };
 
 export default useFlyToOnRender;

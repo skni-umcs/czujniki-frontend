@@ -1,26 +1,14 @@
-import { Suspense, useEffect, useRef } from "react";
+import { Suspense, useRef } from "react";
 import { Outlet } from "react-router-dom";
-import { TileLayer } from "react-leaflet";
-
-import "leaflet/dist/leaflet.css";
-import "./leaflet.css";
+import { RMap, RNavigationControl } from "maplibre-react-components";
 
 import styles from "./App.module.css";
 import Navbar from "./components/Navbar/Navbar";
 import AppHeader from "./components/AppHeader/AppHeader";
 import MniswBar from "./components/MniswBar/MniswBar";
-import { useMapContext } from "./contexts/MapContextProvider";
 
 const App: React.FC = () => {
-    const { leafletContext, setMapElement } = useMapContext();
     const elRef = useRef<HTMLDivElement>(null);
-
-    useEffect(() => {
-        setMapElement(elRef.current);
-        return () => {
-            setMapElement(null);
-        };
-    }, [setMapElement]);
 
     return (
         <>
@@ -30,16 +18,18 @@ const App: React.FC = () => {
                 <Navbar />
                 <div className={styles.leftRight}>
                     <Suspense>
-                        {leafletContext && <Outlet />}
+                        <Outlet />
                     </Suspense>
-                    <div className={styles.mapContainer} ref={elRef}>
-                        {leafletContext && (
-                            <TileLayer
-                                attribution='&copy; <a href="https://www.openstreetmap.org/copyright">OpenStreetMap</a> contributors'
-                                url="https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png"
-                            />
-                        )}
-                    </div>
+                    <RMap
+                        id="mapA"
+                        initialCenter={[22.5415, 51.244]}
+                        initialZoom={17}
+                        minZoom={16}
+                        mapStyle="https://tiles.openfreemap.org/styles/liberty"
+                    >
+                        <RNavigationControl position="top-right" showCompass={false} />
+                        <div ref={elRef} />
+                    </RMap>
                 </div>
             </div>
         </>

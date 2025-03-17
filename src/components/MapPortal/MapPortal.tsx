@@ -1,29 +1,18 @@
-import { Control } from "leaflet";
-import { createControlComponent } from "@react-leaflet/core";
-
 import styles from "./MapPortal.module.css";
 import { createPortal } from "react-dom";
-import { useMapContext } from "../../contexts/MapContextProvider.tsx";
-
-export const ZoomControl = createControlComponent(
-    () => new Control.Zoom({
-        position: "topright",
-        zoomInTitle: "Powiększ",
-        zoomOutTitle: "Pomniejsz",
-    }),
-);
+import { useMap } from "maplibre-react-components";
 
 const MapPortal: React.FC<React.PropsWithChildren> = ({ children }) => {
-    const { mapElement } = useMapContext();
-
-    if (!mapElement) return null;
+    const map = useMap("mapA");
+    if (!map) return null;
 
     return createPortal(
         <div className={styles.root}>
-            <ZoomControl />
+            {/* <ZoomControl /> */}
+            {/* TESTTTTTTTT */}
             {children}
         </div>,
-        mapElement,
+        map.getContainer(),
     );
 };
 
