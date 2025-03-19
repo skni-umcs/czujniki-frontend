@@ -26,6 +26,9 @@ COPY --from=builder /app/dist .
 
 COPY ./config/nginx.conf.template /tmp/nginx.conf.template
 
+ARG BACKEND_URL
+ENV BACKEND_URL=${BACKEND_URL}
+
 RUN envsubst '${BACKEND_URL}' < /tmp/nginx.conf.template > /etc/nginx/conf.d/nginx.conf
 
 # Use local Nginx config file
