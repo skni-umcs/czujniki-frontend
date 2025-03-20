@@ -12,7 +12,7 @@ server {
     }
 
     location /api {
-        proxy_pass https://back.dev.skni.umcs.pl;
+        proxy_pass ${BACKEND_URL};
         proxy_buffering off; # needed for SSE to work
     }
 
