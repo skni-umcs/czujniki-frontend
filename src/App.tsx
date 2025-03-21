@@ -1,25 +1,17 @@
-import { Suspense, useEffect, useRef } from "react";
+import { Suspense } from "react";
 import { Outlet } from "react-router-dom";
-
-import "leaflet/dist/leaflet.css";
-import "./leaflet.css";
+import { RMap, CurrentMapIdContext, RNavigationControl } from "maplibre-react-components";
 
 import styles from "./App.module.css";
 import Navbar from "./components/Navbar/Navbar";
 import AppHeader from "./components/AppHeader/AppHeader";
 import MniswBar from "./components/MniswBar/MniswBar";
-import { useMapContext } from "./contexts/MapContextProvider";
+import { useTheme } from "./contexts/ThemeProvider";
+
+const mapID = "mapA";
 
 const App: React.FC = () => {
-    const { leafletContext, setMapElement } = useMapContext();
-    const elRef = useRef<HTMLDivElement>(null);
-
-    useEffect(() => {
-        setMapElement(elRef.current);
-        return () => {
-            setMapElement(null);
-        };
-    }, [setMapElement]);
+    const { theme } = useTheme();
 
     return (
         <>
@@ -28,10 +20,21 @@ const App: React.FC = () => {
             <div className={styles.wrapper}>
                 <Navbar />
                 <div className={styles.leftRight}>
-                    <Suspense>
-                        {leafletContext && <Outlet />}
-                    </Suspense>
-                    <div className={styles.mapContainer} ref={elRef} />
+                    <CurrentMapIdContext value={mapID}>
+                        <Suspense>
+                            <Outlet />
+                        </Suspense>
+                    </CurrentMapIdContext>
+                    <RMap
+                        id={mapID}
+                        className={theme === "light" ? "" : "dark"}
+                        initialCenter={[22.5415, 51.244]}
+                        initialZoom={17}
+                        minZoom={16}
+                        mapStyle="/osm_library.json"
+                    >
+                        <RNavigationControl position="top-right" showCompass={false} />
+                    </RMap>
                 </div>
             </div>
         </>

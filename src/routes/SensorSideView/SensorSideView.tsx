@@ -12,7 +12,6 @@ import MapPortal from "../../components/MapPortal/MapPortal.tsx";
 import SensorMarker from "../../components/SensorMarker/SensorMarker.tsx";
 import IconButton from "../../components/IconButton/IconButton.tsx";
 import CurrentCondition from "../../components/CurrentCondition/CurrentCondition.tsx";
-import useFlyToOnRender from "./useFlyToOnRender.ts";
 import { useFavorites } from "../../contexts/FavoritesProvider.tsx";
 import Charts from "./Charts.tsx";
 
@@ -30,8 +29,6 @@ const SensorSideView: React.FC = () => {
     } = useLoaderData<ISensorSideViewLoaderData>();
     const { favorites, addFavorite, removeFavorite } = useFavorites();
     const { submit } = useFetcher();
-
-    useFlyToOnRender(s.location.latitude, s.location.longitude);
 
     useEffect(() => {
         const evtSource = new EventSource(`/api/sensor/${s.id.toString()}/live`);
