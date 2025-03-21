@@ -18,9 +18,9 @@ const App: React.FC = () => {
                 <Navbar />
                 <div className={styles.leftRight}>
                     <CurrentMapIdContext value={mapID}>
-                    <Suspense>
-                        <Outlet />
-                    </Suspense>
+                        <Suspense>
+                            <Outlet />
+                        </Suspense>
                     </CurrentMapIdContext>
                     <RMap
                         id={mapID}
