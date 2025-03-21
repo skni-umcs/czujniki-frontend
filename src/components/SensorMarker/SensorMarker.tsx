@@ -1,23 +1,19 @@
 import { useNavigate } from "react-router-dom";
+import { RMarker } from "maplibre-react-components";
 import clsx from "clsx/lite";
 
 import Sensor from "../../types/Sensor";
 import styles from "./SensorMarker.module.css";
-import { RMarker } from "maplibre-react-components";
-
+import useActiveMarkerBlur from "./useActiveMarkerBlur";
 interface IPropsMarker extends React.PropsWithChildren {
     sensor: Sensor;
     isActive?: boolean;
 }
 
-const SensorMarker: React.FC<IPropsMarker> = ({ sensor, isActive }) => {
+const SensorMarker: React.FC<IPropsMarker> = ({ sensor, isActive = false }) => {
     const navigate = useNavigate();
 
-    // handleBlur
-    // useMapEvent("click", () => {
-    //     if (!isActive) return;
-    //     void navigate("/sensors");
-    // });
+    useActiveMarkerBlur(isActive);
 
     const handleClick = () => {
         void navigate(`/sensors/${sensor.id.toString()}`);
