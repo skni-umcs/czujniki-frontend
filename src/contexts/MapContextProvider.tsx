@@ -1,6 +1,7 @@
 import { RMapContextProvider } from "maplibre-react-components";
 
-import "maplibre-gl/dist/maplibre-gl.css";
+import "maplibre-theme/icons.default.css";
+import "maplibre-theme/classic.css";
 
 const MapContextProvider: React.FC<React.PropsWithChildren> = ({ children }) => {
     return (

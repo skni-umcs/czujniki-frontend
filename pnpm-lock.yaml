@@ -17,6 +17,9 @@ importers:
       maplibre-react-components:
         specifier: ^0.2.0
         version: 0.2.0(maplibre-gl@5.2.0)(react-dom@19.0.0(react@19.0.0))(react@19.0.0)
+      maplibre-theme:
+        specifier: ^0.2.1
+        version: 0.2.1
       react:
         specifier: ^19.0.0
         version: 19.0.0
@@ -1500,6 +1503,9 @@ packages:
       maplibre-gl: ^5.0.0
       react: ^17.0.0 || ^18.0.0 || ^19.0.0
       react-dom: ^17.0.0 || ^18.0.0 || ^19.0.0
+
+  maplibre-theme@0.2.1:
+    resolution: {integrity: sha512-SvAdwvGppFv622XRJIxMEvx8d/a/J7/HgFq7dSMt+S2+Iae9MUBntw9iiFgBni0rP0W3Nz9PIiQqOFyFvGcg/g==}
 
   math-intrinsics@1.1.0:
     resolution: {integrity: sha512-/IXtbwEk5HTPyEwyKX6hGkYXxM9nbj64B+ilVJnC/R6B0pH5G4V3b0pVbL7DBj4tkhBAppbQUlf6F6Xl9LHu1g==}
@@ -3579,6 +3585,8 @@ snapshots:
       maplibre-gl: 5.2.0
       react: 19.0.0
       react-dom: 19.0.0(react@19.0.0)
+
+  maplibre-theme@0.2.1: {}
 
   math-intrinsics@1.1.0: {}
 

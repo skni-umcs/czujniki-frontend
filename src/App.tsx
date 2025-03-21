@@ -6,10 +6,13 @@ import styles from "./App.module.css";
 import Navbar from "./components/Navbar/Navbar";
 import AppHeader from "./components/AppHeader/AppHeader";
 import MniswBar from "./components/MniswBar/MniswBar";
+import { useTheme } from "./contexts/ThemeProvider";
 
 const mapID = "mapA";
 
 const App: React.FC = () => {
+    const { theme } = useTheme();
+
     return (
         <>
             <AppHeader className={styles.appHeader} />
@@ -24,6 +27,7 @@ const App: React.FC = () => {
                     </CurrentMapIdContext>
                     <RMap
                         id={mapID}
+                        className={theme === "light" ? "" : "dark"}
                         initialCenter={[22.5415, 51.244]}
                         initialZoom={17}
                         minZoom={16}
