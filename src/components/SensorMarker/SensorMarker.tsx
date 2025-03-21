@@ -3,7 +3,7 @@ import clsx from "clsx/lite";
 
 import Sensor from "../../types/Sensor";
 import styles from "./SensorMarker.module.css";
-import { MyMarker } from "../MyMarker";
+import { RMarker } from "maplibre-react-components";
 
 interface IPropsMarker extends React.PropsWithChildren {
     sensor: Sensor;
@@ -24,7 +24,7 @@ const SensorMarker: React.FC<IPropsMarker> = ({ sensor, isActive }) => {
     };
 
     return (
-        <MyMarker
+        <RMarker
             // icon={!isActive ? myIcon : myIconActive}
             className={clsx(isActive && styles.active)}
             latitude={sensor.location.latitude}
