@@ -1,11 +1,13 @@
 import { Suspense } from "react";
 import { Outlet } from "react-router-dom";
-import { RMap, RNavigationControl } from "maplibre-react-components";
+import { RMap, CurrentMapIdContext, RNavigationControl } from "maplibre-react-components";
 
 import styles from "./App.module.css";
 import Navbar from "./components/Navbar/Navbar";
 import AppHeader from "./components/AppHeader/AppHeader";
 import MniswBar from "./components/MniswBar/MniswBar";
+
+const mapID = "mapA";
 
 const App: React.FC = () => {
     return (
@@ -15,11 +17,13 @@ const App: React.FC = () => {
             <div className={styles.wrapper}>
                 <Navbar />
                 <div className={styles.leftRight}>
+                    <CurrentMapIdContext value={mapID}>
                     <Suspense>
                         <Outlet />
                     </Suspense>
+                    </CurrentMapIdContext>
                     <RMap
-                        id="mapA"
+                        id={mapID}
                         initialCenter={[22.5415, 51.244]}
                         initialZoom={17}
                         minZoom={16}
