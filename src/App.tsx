@@ -1,4 +1,4 @@
-import { Suspense, useRef } from "react";
+import { Suspense } from "react";
 import { Outlet } from "react-router-dom";
 import { RMap, RNavigationControl } from "maplibre-react-components";
 
@@ -8,8 +8,6 @@ import AppHeader from "./components/AppHeader/AppHeader";
 import MniswBar from "./components/MniswBar/MniswBar";
 
 const App: React.FC = () => {
-    const elRef = useRef<HTMLDivElement>(null);
-
     return (
         <>
             <AppHeader className={styles.appHeader} />
@@ -28,7 +26,6 @@ const App: React.FC = () => {
                         mapStyle="https://tiles.openfreemap.org/styles/liberty"
                     >
                         <RNavigationControl position="top-right" showCompass={false} />
-                        <div ref={elRef} />
                     </RMap>
                 </div>
             </div>
