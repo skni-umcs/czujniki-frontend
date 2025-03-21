@@ -3,16 +3,13 @@ import { createPortal } from "react-dom";
 import { useMap } from "maplibre-react-components";
 
 const MapPortal: React.FC<React.PropsWithChildren> = ({ children }) => {
-    const map = useMap("mapA");
-    if (!map) return null;
+    const mapContainerEl = useMap().getContainer();
 
     return createPortal(
         <div className={styles.root}>
-            {/* <ZoomControl /> */}
-            {/* TESTTTTTTTT */}
             {children}
         </div>,
-        map.getContainer(),
+        mapContainerEl,
     );
 };
 
