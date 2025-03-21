@@ -1,8 +1,10 @@
 :root.darkTheme {
-
-    .leaflet-layer,
-    .leaflet-gl-layer {
+    .leaflet-layer {
         filter: invert(100%) hue-rotate(180deg) contrast(90%) !important;
+    }
+
+    .leaflet-gl-layer {
+        filter: invert(100%) hue-rotate(180deg) contrast(100%) !important;
     }
 
     .leaflet-control-attribution {
