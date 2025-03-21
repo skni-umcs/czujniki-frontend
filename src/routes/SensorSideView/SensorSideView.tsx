@@ -12,7 +12,6 @@ import MapPortal from "../../components/MapPortal/MapPortal.tsx";
 import SensorMarker from "../../components/SensorMarker/SensorMarker.tsx";
 import IconButton from "../../components/IconButton/IconButton.tsx";
 import CurrentCondition from "../../components/CurrentCondition/CurrentCondition.tsx";
-import useFlyToOnRender from "./useFlyToOnRender.ts";
 import { useFavorites } from "../../contexts/FavoritesProvider.tsx";
 import Charts from "./Charts.tsx";
 import { repo } from "../../router.ts";
@@ -33,8 +32,6 @@ const SensorSideView: React.FC = () => {
     const revalidator = useRevalidator();
     const [s, setSensor] = useState<Sensor>(sensorFromRouter);
     const [historyPromise, setHistoryPromise] = useState(historyPromiseFromRouter);
-
-    useFlyToOnRender(s.location.latitude, s.location.longitude);
 
     useEffect(() => {
         setSensor(sensorFromRouter);
