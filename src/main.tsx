@@ -1,10 +1,10 @@
 import React from "react";
 import ReactDOM from "react-dom/client";
 import { RouterProvider } from "react-router-dom";
+import { RMapContextProvider } from "maplibre-react-components";
 
 import "./index.css";
 
-import MapContextProvider from "./contexts/MapContextProvider.tsx";
 import ThemeProvider from "./contexts/ThemeProvider.tsx";
 import FontSizeProvider from "./contexts/FontSizeProvider.tsx";
 import FavoritesProvider from "./contexts/FavoritesProvider.tsx";
@@ -16,9 +16,9 @@ ReactDOM.createRoot(document.getElementById("root")!).render(
         <FontSizeProvider>
             <ThemeProvider>
                 <FavoritesProvider>
-                    <MapContextProvider>
+                    <RMapContextProvider>
                         <RouterProvider router={router} />
-                    </MapContextProvider>
+                    </RMapContextProvider>
                 </FavoritesProvider>
             </ThemeProvider>
         </FontSizeProvider>
