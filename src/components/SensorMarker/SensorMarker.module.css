@@ -1,9 +1,16 @@
-.root {}
+.root {
+    --color: light-dark(#7167a0, #4ea1dd);
+    color: var(--color);
+
+    :global :root.highContrastTheme :local &:hover {
+        outline: 2px solid white;
+    }
+}
 
 .active {
-    filter: hue-rotate(140deg);
+    color: color-mix(in oklab, var(--color), #f00 80%);
 
     :global :root.highContrastTheme :local(&) {
-        filter: hue-rotate(320deg) !important;
+        outline: 2px solid yellow;
     }
 }
