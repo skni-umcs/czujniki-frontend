@@ -12,13 +12,25 @@ class DataProvider {
     }>();
 
     async fetcher<T extends object>(endpoint: RequestInfo | URL) {
-        const res = await fetch(endpoint, {});
-        const data = await res.json() as T | ApiError;
+        try {
+            const res = await fetch(endpoint, {});
 
-        if ("errorMessage" in data) {
-            throw new Error(data.errorMessage);
+            let data: T | ApiError;
+            try {
+                data = await res.json() as T | ApiError;
+            } catch (err) {
+                throw new Error("Invalid response", { cause: err });
+            }
+
+            if ("errorMessage" in data) {
+                throw new Error(data.errorMessage);
+            }
+
+            return data;
+        } catch (err) {
+            const msg = `Fetch error: ${err instanceof Error ? err.message : String(err)}`;
+            throw new Error(msg, { cause: err });
         }
-        return data;
     }
 
     async getAllSensors() {
