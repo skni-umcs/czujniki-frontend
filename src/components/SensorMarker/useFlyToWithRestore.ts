@@ -9,10 +9,17 @@ const useFlyToWithRestore = (isActive: boolean, lat: number, lng: number) => {
     useEffect(() => {
         if (!isActive) return;
 
+        const isMobile = window.matchMedia("(max-width: 700px)").matches;
+        if (isMobile) return;
+
         const prevCenter = map.getCenter();
         const prevZoom = map.getZoom();
 
-        map.flyTo({ center: { lat, lng }, zoom: 18 });
+        map.flyTo({
+            padding: { left: 400 },
+            center: { lat, lng },
+            zoom: 18,
+        });
         void map.once("moveend", () => {
             isCameraStateValid.current = true;
 
