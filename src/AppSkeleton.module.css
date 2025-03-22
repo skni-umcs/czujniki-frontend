@@ -1,0 +1,20 @@
+.root {
+    display: flex;
+    height: 100%;
+    width: 100%;
+    align-items: center;
+    justify-content: center;
+    color: var(--text-color-secondary);
+    font-weight: bold;
+    font-size: 1.75em;
+    user-select: none;
+    opacity: 0;
+    animation: fadeIn forwards;
+    animation-delay: 750ms;
+}
+
+@keyframes fadeIn {
+    to {
+        opacity: 1;
+    }
+}

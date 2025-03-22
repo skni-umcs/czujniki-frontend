@@ -6,7 +6,7 @@ import { mapID } from "../SensorMap/SensorMap";
 
 const MapPortal: React.FC<React.PropsWithChildren> = ({ children }) => {
     const mapContainerEl = useMap(mapID)?.getContainer();
-    if (!mapContainerEl) throw new Error("No map container");
+    if (!mapContainerEl) return null;
 
     return createPortal(
         <CurrentMapIdContext value={mapID}>

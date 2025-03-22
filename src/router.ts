@@ -11,6 +11,7 @@ import ErrorSideView from "./routes/ErrorSideView/ErrorSideView.tsx";
 import Login from "./routes/Login/Login.tsx";
 import Register from "./routes/Register/Register.tsx";
 import App from "./App.tsx";
+import AppSkeleton from "./AppSkeleton.tsx";
 import DataProvider from "./DataProvider.ts";
 import Sensor from "./types/Sensor.ts";
 
@@ -19,7 +20,7 @@ const repo = new DataProvider();
 const router = createBrowserRouter([
     {
         Component: App,
-        HydrateFallback: App,
+        HydrateFallback: AppSkeleton,
         ErrorBoundary: ErrorPage,
         children: [
             {
