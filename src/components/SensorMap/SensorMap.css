@@ -1,0 +1,11 @@
+@import url("maplibre-theme/icons.default.css");
+@import url("maplibre-theme/classic.css");
+@import url("maplibre-react-components/style.css");
+
+.maplibregl-map {
+    --ml-font-icons: maplibregl-icons-default;
+}
+
+.maplibregl-map.dark .maplibregl-canvas {
+    filter: invert(100%) hue-rotate(180deg) contrast(100%);
+}

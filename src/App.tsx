@@ -1,18 +1,16 @@
 import { Suspense } from "react";
 import { Outlet } from "react-router-dom";
-import { RMap, CurrentMapIdContext, RNavigationControl } from "maplibre-react-components";
+import { CurrentMapIdContext } from "maplibre-react-components";
 
 import styles from "./App.module.css";
 import Navbar from "./components/Navbar/Navbar";
 import AppHeader from "./components/AppHeader/AppHeader";
 import MniswBar from "./components/MniswBar/MniswBar";
-import { useTheme } from "./contexts/ThemeProvider";
+import SensorMap from "./components/SensorMap/SensorMap";
 
 const mapID = "mapA";
 
 const App: React.FC = () => {
-    const { theme } = useTheme();
-
     return (
         <>
             <AppHeader className={styles.appHeader} />
@@ -25,16 +23,7 @@ const App: React.FC = () => {
                             <Outlet />
                         </Suspense>
                     </CurrentMapIdContext>
-                    <RMap
-                        id={mapID}
-                        className={theme === "light" ? "" : "dark"}
-                        initialCenter={[22.5415, 51.244]}
-                        initialZoom={17}
-                        minZoom={16}
-                        mapStyle="/osm_library.json"
-                    >
-                        <RNavigationControl position="top-right" showCompass={false} />
-                    </RMap>
+                    <SensorMap />
                 </div>
             </div>
         </>
