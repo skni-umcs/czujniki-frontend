@@ -1,17 +1,19 @@
 import { createBrowserRouter, redirect } from "react-router-dom";
 
 import { getFavorites } from "./contexts/FavoritesProvider.tsx";
-import ErrorPage from "./routes/ErrorPage.tsx";
-import MainRoute, { IMainRouteLoaderData } from "./routes/MainRoute/MainRoute.tsx";
-import SensorList, { ISensorListLoaderData } from "./routes/SensorList/SensorList.tsx";
-import SensorSideView, { ISensorSideViewLoaderData } from "./routes/SensorSideView/SensorSideView.tsx";
-import AccessibilitySideView, { IAccessibilitySideViewLoaderData } from "./routes/AccessibilitySideView/AccessibilitySideView.tsx";
-import AboutSideView from "./routes/AboutSideView/AboutSideView.tsx";
-import ErrorSideView from "./routes/ErrorSideView/ErrorSideView.tsx";
-import Login from "./routes/Login/Login.tsx";
-import Register from "./routes/Register/Register.tsx";
-import App from "./App.tsx";
-import AppSkeleton from "./AppSkeleton.tsx";
+import ErrorRouteFallback from "./routes/ErrorRouteFallback.tsx";
+import MapAppRoute from "./routes/MapAppRoute/MapAppRoute.tsx";
+import MapAppRouteSkeleton from "./routes/MapAppRouteSkeleton/MapAppRouteSkeleton.tsx";
+import LoginRoute from "./routes/LoginRoute/LoginRoute.tsx";
+import RegisterRoute from "./routes/RegisterRoute/RegisterRoute.tsx";
+
+import HiddenSideView, { IHiddenSideViewLoaderData } from "./sideViewRoutes/HiddenSideView/HiddenSideView.tsx";
+import SensorListSideView, { ISensorListSideViewLoaderData } from "./sideViewRoutes/SensorListSideView/SensorListSideView.tsx";
+import SensorSideView, { ISensorSideViewLoaderData } from "./sideViewRoutes/SensorSideView/SensorSideView.tsx";
+import AccessibilitySideView, { IAccessibilitySideViewLoaderData } from "./sideViewRoutes/AccessibilitySideView/AccessibilitySideView.tsx";
+import AboutSideView from "./sideViewRoutes/AboutSideView/AboutSideView.tsx";
+import ErrorSideView from "./sideViewRoutes/ErrorSideView/ErrorSideView.tsx";
+
 import DataProvider from "./DataProvider.ts";
 import Sensor from "./types/Sensor.ts";
 
@@ -19,15 +21,15 @@ const repo = new DataProvider();
 
 const router = createBrowserRouter([
     {
-        Component: App,
-        HydrateFallback: AppSkeleton,
-        ErrorBoundary: ErrorPage,
+        Component: MapAppRoute,
+        HydrateFallback: MapAppRouteSkeleton,
+        ErrorBoundary: ErrorRouteFallback,
         children: [
             {
                 path: "/",
-                Component: MainRoute,
+                Component: HiddenSideView,
                 ErrorBoundary: ErrorSideView,
-                loader: async (): Promise<IMainRouteLoaderData> => {
+                loader: async (): Promise<IHiddenSideViewLoaderData> => {
                     const sensorList = await repo.getAllSensors();
                     return { sensorList };
                 },
@@ -52,9 +54,9 @@ const router = createBrowserRouter([
             },
             {
                 path: "/sensors",
-                Component: SensorList,
+                Component: SensorListSideView,
                 ErrorBoundary: ErrorSideView,
-                loader: async (): Promise<ISensorListLoaderData> => {
+                loader: async (): Promise<ISensorListSideViewLoaderData> => {
                     const sensorList = await repo.getAllSensors();
                     return { sensorList };
                 },
@@ -99,9 +101,9 @@ const router = createBrowserRouter([
             },
             {
                 path: "/favorites",
-                Component: SensorList,
+                Component: SensorListSideView,
                 ErrorBoundary: ErrorSideView,
-                loader: async (): Promise<ISensorListLoaderData> => {
+                loader: async (): Promise<ISensorListSideViewLoaderData> => {
                     const favIds = getFavorites();
                     const sensorList = await repo.getAllSensors();
 
@@ -114,13 +116,13 @@ const router = createBrowserRouter([
     },
     {
         path: "/login",
-        Component: Login,
-        ErrorBoundary: ErrorPage,
+        Component: LoginRoute,
+        ErrorBoundary: ErrorRouteFallback,
     },
     {
         path: "/register",
-        Component: Register,
-        ErrorBoundary: ErrorPage,
+        Component: RegisterRoute,
+        ErrorBoundary: ErrorRouteFallback,
     },
 ]);
 

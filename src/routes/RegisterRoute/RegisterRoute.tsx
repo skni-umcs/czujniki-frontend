@@ -1,15 +1,15 @@
 import { Link } from "react-router-dom";
 
-import styles from "./Login.module.css";
+import styles from "../LoginRoute/LoginRoute.module.css"; // TODO?
 import AppHeader from "../../components/AppHeader/AppHeader";
 
-const Login: React.FC = () => {
+const RegisterRoute: React.FC = () => {
     return (
         <>
             <AppHeader className={styles.appHeader} />
             <div className={styles.root}>
                 <form className={styles.container}>
-                    <div className={styles.heading}>Logowanie</div>
+                    <div className={styles.heading}>Rejestracja</div>
                     <input
                         required
                         type="text"
@@ -22,21 +22,19 @@ const Login: React.FC = () => {
                         placeholder="Hasło"
                         className={styles.textInput}
                     />
-                    <label className={styles.checkboxContainer}>
-                        <input
-                            type="checkbox"
-                            placeholder="Hasło"
-                            className={styles.checkbox}
-                        />
-                        Nie wylogowywuj mnie
-                    </label>
+                    <input
+                        required
+                        type="password"
+                        placeholder="Powtórz hasło"
+                        className={styles.textInput}
+                    />
                     <input
                         type="submit"
-                        value="Zaloguj się"
+                        value="Załóż konto"
                         className={styles.btn}
                     />
                     <div className={styles.suggestion}>
-                        Nie masz konta? <Link className={styles.link} to="/register">Zarejestruj się!</Link>
+                        Masz już konto? <Link className={styles.link} to="/login">Zaloguj się!</Link>
                     </div>
                 </form>
             </div>
@@ -44,4 +42,4 @@ const Login: React.FC = () => {
     );
 };
 
-export default Login;
+export default RegisterRoute;

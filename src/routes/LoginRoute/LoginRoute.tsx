@@ -1,15 +1,15 @@
 import { Link } from "react-router-dom";
 
-import styles from "../Login/Login.module.css";
+import styles from "./LoginRoute.module.css";
 import AppHeader from "../../components/AppHeader/AppHeader";
 
-const Register: React.FC = () => {
+const LoginRoute: React.FC = () => {
     return (
         <>
             <AppHeader className={styles.appHeader} />
             <div className={styles.root}>
                 <form className={styles.container}>
-                    <div className={styles.heading}>Rejestracja</div>
+                    <div className={styles.heading}>Logowanie</div>
                     <input
                         required
                         type="text"
@@ -22,19 +22,21 @@ const Register: React.FC = () => {
                         placeholder="Hasło"
                         className={styles.textInput}
                     />
-                    <input
-                        required
-                        type="password"
-                        placeholder="Powtórz hasło"
-                        className={styles.textInput}
-                    />
+                    <label className={styles.checkboxContainer}>
+                        <input
+                            type="checkbox"
+                            placeholder="Hasło"
+                            className={styles.checkbox}
+                        />
+                        Nie wylogowywuj mnie
+                    </label>
                     <input
                         type="submit"
-                        value="Załóż konto"
+                        value="Zaloguj się"
                         className={styles.btn}
                     />
                     <div className={styles.suggestion}>
-                        Masz już konto? <Link className={styles.link} to="/login">Zaloguj się!</Link>
+                        Nie masz konta? <Link className={styles.link} to="/register">Zarejestruj się!</Link>
                     </div>
                 </form>
             </div>
@@ -42,4 +44,4 @@ const Register: React.FC = () => {
     );
 };
 
-export default Register;
+export default LoginRoute;

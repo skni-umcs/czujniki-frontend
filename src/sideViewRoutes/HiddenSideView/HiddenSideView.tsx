@@ -4,12 +4,12 @@ import Sensor from "../../types/Sensor.ts";
 import MapPortal from "../../components/MapPortal/MapPortal.tsx";
 import SensorMarker from "../../components/SensorMarker/SensorMarker.tsx";
 
-export interface IMainRouteLoaderData {
+export interface IHiddenSideViewLoaderData {
     sensorList: Sensor[];
 }
 
-const MainRoute: React.FC = () => {
-    const { sensorList } = useLoaderData<IMainRouteLoaderData>();
+const HiddenSideView: React.FC = () => {
+    const { sensorList } = useLoaderData<IHiddenSideViewLoaderData>();
 
     return (
         <MapPortal>
@@ -20,4 +20,4 @@ const MainRoute: React.FC = () => {
     );
 };
 
-export default MainRoute;
+export default HiddenSideView;

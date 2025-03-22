@@ -1,7 +1,7 @@
-import styles from "./App.module.css";
-import Navbar from "./components/Navbar/Navbar";
-import AppHeader from "./components/AppHeader/AppHeader";
-import MniswBar from "./components/MniswBar/MniswBar";
+import styles from "./MapAppTemplate.module.css";
+import Navbar from "../Navbar/Navbar";
+import AppHeader from "../AppHeader/AppHeader";
+import MniswBar from "../MniswBar/MniswBar";
 
 const MainAppTemplate: React.FC<React.PropsWithChildren> = ({ children }) => {
     return (

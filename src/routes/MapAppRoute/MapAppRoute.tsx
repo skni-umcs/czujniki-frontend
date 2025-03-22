@@ -1,10 +1,10 @@
 import { Suspense } from "react";
 import { Outlet } from "react-router-dom";
 
-import SensorMap from "./components/SensorMap/SensorMap";
-import MainAppTemplate from "./MainAppTemplate";
+import SensorMap from "../../components/SensorMap/SensorMap";
+import MainAppTemplate from "../../components/MapAppTemplate/MapAppTemplate";
 
-const App: React.FC = () => {
+const MapAppRoute: React.FC = () => {
     return (
         <MainAppTemplate>
             <Suspense>
@@ -15,4 +15,4 @@ const App: React.FC = () => {
     );
 };
 
-export default App;
+export default MapAppRoute;

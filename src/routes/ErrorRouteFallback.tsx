@@ -1,6 +1,6 @@
 import { useRouteError } from "react-router-dom";
 
-export default function ErrorPage() {
+export default function ErrorRouteFallback() {
     const error = useRouteError() as Error;
     console.error(error);
 

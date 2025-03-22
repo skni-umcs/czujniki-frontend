@@ -4,7 +4,7 @@ import { IoBugOutline, IoHeart, IoHeartOutline, IoRefreshOutline } from "react-i
 import { RiCheckLine, RiErrorWarningLine, RiRestTimeFill, RiSpeedUpFill, RiTempHotLine, RiWaterPercentFill } from "react-icons/ri";
 
 import styles from "./SensorSideView.module.css";
-import Sensor from "../../types/Sensor";
+import Sensor from "../../types/Sensor.ts";
 import SensorData from "../../types/SensorData.ts";
 import { Status } from "../../types/Status.ts";
 import SideView from "../../components/SideView/SideView.tsx";

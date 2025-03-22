@@ -1,19 +1,19 @@
 import { useLoaderData } from "react-router-dom";
 
-import styles from "./SensorList.module.css";
+import styles from "./SensorListSideView.module.css";
 import Sensor from "../../types/Sensor";
 import SensorListItem from "../../components/SensorListItem/SensorListItem";
 import SideView from "../../components/SideView/SideView";
 import MapPortal from "../../components/MapPortal/MapPortal";
 import SensorMarker from "../../components/SensorMarker/SensorMarker";
 
-export interface ISensorListLoaderData {
+export interface ISensorListSideViewLoaderData {
     sensorList: Sensor[];
     title?: string;
 };
 
-const SensorList: React.FC = () => {
-    const { sensorList, title } = useLoaderData<ISensorListLoaderData>();
+const SensorListSideView: React.FC = () => {
+    const { sensorList, title } = useLoaderData<ISensorListSideViewLoaderData>();
 
     return (
         <SideView title={title ?? "Lista czujników"}>
@@ -39,4 +39,4 @@ const SensorList: React.FC = () => {
     );
 };
 
-export default SensorList;
+export default SensorListSideView;

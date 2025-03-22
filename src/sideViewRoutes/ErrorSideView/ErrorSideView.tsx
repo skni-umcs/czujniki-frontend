@@ -10,7 +10,7 @@ const ErrorSideView: React.FC = () => {
     return (
         <SideView title="Błąd">
             <div className={styles.root}>
-                <div className={styles.content}>
+                <div>
                     <div className={styles.message}>{error.message}</div>
                 </div>
             </div>
