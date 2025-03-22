@@ -1,14 +1,19 @@
-import styles from "./MapPortal.module.css";
 import { createPortal } from "react-dom";
-import { useMap } from "maplibre-react-components";
+import { CurrentMapIdContext, useMap } from "maplibre-react-components";
+
+import styles from "./MapPortal.module.css";
+import { mapID } from "../SensorMap/SensorMap";
 
 const MapPortal: React.FC<React.PropsWithChildren> = ({ children }) => {
-    const mapContainerEl = useMap().getContainer();
+    const mapContainerEl = useMap(mapID)?.getContainer();
+    if (!mapContainerEl) throw new Error("No map container");
 
     return createPortal(
-        <div className={styles.root}>
-            {children}
-        </div>,
+        <CurrentMapIdContext value={mapID}>
+            <div className={styles.root}>
+                {children}
+            </div>
+        </CurrentMapIdContext>,
         mapContainerEl,
     );
 };
