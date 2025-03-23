@@ -1,7 +1,10 @@
+import { StyleSpecification } from "maplibre-gl";
 import { RMap, RNavigationControl } from "maplibre-react-components";
 
-import "./SensorMap.css";
 import { useTheme } from "../../contexts/ThemeProvider";
+
+import osmLib from "./osm_liberty.json";
+import "./SensorMap.css";
 
 export const mapID = "mapA";
 
@@ -15,7 +18,7 @@ const SensorMap: React.FC = () => {
             initialCenter={[22.542066, 51.245487]}
             initialZoom={16}
             minZoom={14}
-            mapStyle="/osm_library.json"
+            mapStyle={osmLib as StyleSpecification}
         >
             <RNavigationControl position="top-right" showCompass={false} />
         </RMap>
