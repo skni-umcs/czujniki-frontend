@@ -8,6 +8,9 @@ import "./SensorMap.css";
 
 export const mapID = "mapA";
 
+const center = [22.542066, 51.245487] as [number, number];
+const padding = 1.5;
+
 const SensorMap: React.FC = () => {
     const { theme } = useTheme();
 
@@ -15,9 +18,13 @@ const SensorMap: React.FC = () => {
         <RMap
             id={mapID}
             className={theme === "light" ? "" : "dark"}
-            initialCenter={[22.542066, 51.245487]}
+            initialCenter={center}
             initialZoom={16}
-            minZoom={14}
+            minZoom={15}
+            maxBounds={[
+                [center[0] - padding * 0.015967, center[1] - padding * 0.01],
+                [center[0] + padding * 0.015967, center[1] + padding * 0.01],
+            ]}
             mapStyle={osmLib as StyleSpecification}
         >
             <RNavigationControl position="top-right" showCompass={false} />
