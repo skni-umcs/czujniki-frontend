@@ -26,6 +26,7 @@ const SensorMap: React.FC = () => {
                 [center[0] + padding * 0.015967, center[1] + padding * 0.01],
             ]}
             mapStyle={osmLib as StyleSpecification}
+            maxPitch={40}
         >
             <RNavigationControl position="top-right" showCompass={false} />
         </RMap>
