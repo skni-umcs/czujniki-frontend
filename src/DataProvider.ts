@@ -14,7 +14,7 @@ class DataProvider {
     async fetcher<T extends object>(endpoint: RequestInfo | URL) {
         try {
             const res = await fetch(endpoint, {
-                signal: AbortSignal.timeout(5000),
+                signal: AbortSignal.timeout(30000),
             });
 
             let data: T | ApiError;
