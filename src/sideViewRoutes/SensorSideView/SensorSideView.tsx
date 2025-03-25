@@ -1,7 +1,9 @@
-import { Suspense, useEffect, useMemo } from "react";
+import { Suspense, useEffect, useMemo, useState } from "react";
 import { useFetcher, useLoaderData } from "react-router-dom";
-import { IoBugOutline, IoHeart, IoHeartOutline, IoRefreshOutline } from "react-icons/io5";
+import { IoHeart, IoHeartOutline } from "react-icons/io5";
 import { RiCheckLine, RiErrorWarningLine, RiRestTimeFill, RiSpeedUpFill, RiTempHotLine, RiWaterPercentFill } from "react-icons/ri";
+import { VscRefresh } from "react-icons/vsc";
+import clsx from "clsx/lite";
 
 import styles from "./SensorSideView.module.css";
 import Sensor from "../../types/Sensor.ts";
@@ -29,6 +31,7 @@ const SensorSideView: React.FC = () => {
     } = useLoaderData<ISensorSideViewLoaderData>();
     const { favorites, addFavorite, removeFavorite } = useFavorites();
     const { submit } = useFetcher();
+    const [isRefreshing, setIsRefreshing] = useState(false);
 
     useEffect(() => {
         const evtSource = new EventSource(`/api/sensor/${s.id.toString()}/live`);
@@ -51,7 +54,15 @@ const SensorSideView: React.FC = () => {
         else removeFavorite(s.id);
     };
 
-    const forceRefresh = () => void submit("forceUpdate=1", { method: "get" });
+    const forceRefresh = () => {
+        if (isRefreshing) return;
+        void (async () => {
+            setIsRefreshing(true);
+            await submit("forceUpdate=1", { method: "get" });
+            await new Promise(resolve => setTimeout(resolve, 1700));
+            setIsRefreshing(false);
+        })();
+    };
 
     return (
         <SideView title={`${s.location.facultyAbbreviation} ${s.id.toString()}`} showBackButton>
@@ -70,14 +81,11 @@ const SensorSideView: React.FC = () => {
                         {isFavorite ? <IoHeart size={24} /> : <IoHeartOutline size={24} />}
                     </IconButton>
                     <IconButton
-                        className={styles.iconBtn}
+                        className={clsx(styles.iconBtn, isRefreshing && styles.rotate)}
                         onClick={forceRefresh}
                         title="Odśwież dane"
                     >
-                        <IoRefreshOutline size={24} />
-                    </IconButton>
-                    <IconButton className={styles.iconBtn} title="Zgłoś błąd">
-                        <IoBugOutline size={24} />
+                        <VscRefresh size={24} />
                     </IconButton>
                 </div>
                 <div className={styles.content}>
