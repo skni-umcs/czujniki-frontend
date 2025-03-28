@@ -53,15 +53,6 @@ const router = createBrowserRouter([
                 },
             },
             {
-                path: "/sensors",
-                Component: SensorListSideView,
-                ErrorBoundary: ErrorSideView,
-                loader: async (): Promise<ISensorListSideViewLoaderData> => {
-                    const sensorList = await repo.getAllSensors();
-                    return { sensorList };
-                },
-            },
-            {
                 path: "/sensors/:id",
                 Component: SensorSideView,
                 ErrorBoundary: ErrorSideView,
@@ -100,16 +91,36 @@ const router = createBrowserRouter([
                 },
             },
             {
+                path: "/sensors",
+                Component: SensorListSideView,
+                ErrorBoundary: ErrorSideView,
+                loader: async ({ request }): Promise<ISensorListSideViewLoaderData> => {
+                    const url = new URL(request.url);
+                    const query = url.searchParams.get("q") ?? "";
+
+                    const sensorList = query
+                        ? (await repo.findSensors(query)).content
+                        : await repo.getAllSensors();
+
+                    return { sensorList, query };
+                },
+            },
+            {
                 path: "/favorites",
                 Component: SensorListSideView,
                 ErrorBoundary: ErrorSideView,
-                loader: async (): Promise<ISensorListSideViewLoaderData> => {
-                    const favIds = getFavorites();
-                    const sensorList = await repo.getAllSensors();
+                loader: async ({ request }): Promise<ISensorListSideViewLoaderData> => {
+                    const url = new URL(request.url);
+                    const query = url.searchParams.get("q") ?? "";
 
+                    const sensorList = query
+                        ? (await repo.findSensors(query)).content
+                        : await repo.getAllSensors();
+
+                    const favIds = getFavorites();
                     const favorites = sensorList.filter(el => favIds.includes(el.id));
 
-                    return { sensorList: favorites, title: "Ulubione czujniki" };
+                    return { sensorList: favorites, query, title: "Ulubione czujniki" };
                 },
             },
         ],

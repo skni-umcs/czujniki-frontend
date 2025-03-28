@@ -49,6 +49,13 @@ class DataProvider {
         return this.fetcher<Sensor>(`/api/sensor/${id.toString()}`);
     }
 
+    async findSensors(query: string) {
+        const url = new URL(`/api/sensor/all/search`, window.location.origin);
+        url.searchParams.set("searchTerm", query);
+
+        return this.fetcher<Pageable<Sensor>>(url);
+    }
+
     async getHistoricalData(
         id: Sensor["id"],
         startDate: string | null,

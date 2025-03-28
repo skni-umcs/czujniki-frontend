@@ -1,4 +1,4 @@
-import { useLoaderData } from "react-router-dom";
+import { Form, useLoaderData } from "react-router-dom";
 
 import styles from "./SensorListSideView.module.css";
 import Sensor from "../../types/Sensor";
@@ -9,11 +9,12 @@ import SensorMarker from "../../components/SensorMarker/SensorMarker";
 
 export interface ISensorListSideViewLoaderData {
     sensorList: Sensor[];
+    query?: string;
     title?: string;
 };
 
 const SensorListSideView: React.FC = () => {
-    const { sensorList, title } = useLoaderData<ISensorListSideViewLoaderData>();
+    const { sensorList, query, title } = useLoaderData<ISensorListSideViewLoaderData>();
 
     return (
         <SideView title={title ?? "Lista czujników"}>
@@ -21,12 +22,15 @@ const SensorListSideView: React.FC = () => {
                 {sensorList.map(s => <SensorMarker key={s.id} sensor={s} />)}
             </MapPortal>
             <div className={styles.root}>
-                <div className={styles.searchBarContainer}>
+                <Form className={styles.searchBarContainer}>
                     <input
+                        name="q"
+                        type="search"
                         placeholder="Szukaj..."
+                        defaultValue={query}
                         className={styles.searchBar}
                     />
-                </div>
+                </Form>
                 {sensorList.map(sensor => (
                     <SensorListItem
                         sensor={sensor}
