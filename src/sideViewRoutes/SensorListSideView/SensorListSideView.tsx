@@ -10,11 +10,14 @@ import SensorMarker from "../../components/SensorMarker/SensorMarker";
 export interface ISensorListSideViewLoaderData {
     sensorList: Sensor[];
     query?: string;
+};
+
+export interface IProps {
     title?: string;
 };
 
-const SensorListSideView: React.FC = () => {
-    const { sensorList, query, title } = useLoaderData<ISensorListSideViewLoaderData>();
+const SensorListSideView: React.FC<IProps> = ({ title }) => {
+    const { sensorList, query } = useLoaderData<ISensorListSideViewLoaderData>();
 
     return (
         <SideView title={title ?? "Lista czujników"}>

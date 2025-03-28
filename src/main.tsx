@@ -8,7 +8,7 @@ import "./index.css";
 import ThemeProvider from "./contexts/ThemeProvider.tsx";
 import FontSizeProvider from "./contexts/FontSizeProvider.tsx";
 import FavoritesProvider from "./contexts/FavoritesProvider.tsx";
-import router from "./router.ts";
+import router from "./router.tsx";
 
 // eslint-disable-next-line @typescript-eslint/no-non-null-assertion
 ReactDOM.createRoot(document.getElementById("root")!).render(

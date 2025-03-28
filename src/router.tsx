@@ -107,7 +107,7 @@ const router = createBrowserRouter([
             },
             {
                 path: "/favorites",
-                Component: SensorListSideView,
+                element: <SensorListSideView title="Ulubione czujniki" />,
                 ErrorBoundary: ErrorSideView,
                 loader: async ({ request }): Promise<ISensorListSideViewLoaderData> => {
                     const url = new URL(request.url);
@@ -120,7 +120,7 @@ const router = createBrowserRouter([
                     const favIds = getFavorites();
                     const favorites = sensorList.filter(el => favIds.includes(el.id));
 
-                    return { sensorList: favorites, query, title: "Ulubione czujniki" };
+                    return { sensorList: favorites, query };
                 },
             },
         ],
