@@ -12,38 +12,31 @@
   },
   "dependencies": {
     "clsx": "^2.1.1",
-    "maplibre-gl": "^5.2.0",
+    "maplibre-gl": "^5.3.0",
     "maplibre-react-components": "^0.2.0",
     "maplibre-theme": "^0.2.1",
-    "react": "^19.0.0",
-    "react-dom": "^19.0.0",
-    "react-icons": "^5.4.0",
-    "react-router-dom": "^7.1.5",
+    "react": "^19.1.0",
+    "react-dom": "^19.1.0",
+    "react-icons": "^5.5.0",
+    "react-router-dom": "^7.4.1",
     "recharts": "^2.15.1"
   },
   "devDependencies": {
-    "@eslint/compat": "^1.2.6",
-    "@eslint/js": "^9.20.0",
-    "@stylistic/eslint-plugin": "^3.1.0",
-    "@types/eslint__js": "^8.42.3",
-    "@types/react": "^19.0.8",
-    "@types/react-dom": "^19.0.3",
-    "@vitejs/plugin-react-swc": "^3.8.0",
-    "eslint": "^9.20.1",
+    "@eslint/js": "^9.23.0",
+    "@stylistic/eslint-plugin": "^4.2.0",
+    "@types/react": "^19.0.12",
+    "@types/react-dom": "^19.0.4",
+    "@vitejs/plugin-react-swc": "^3.8.1",
+    "eslint": "^9.23.0",
     "eslint-plugin-jsx-a11y": "^6.10.2",
     "eslint-plugin-react": "^7.37.4",
-    "eslint-plugin-react-hooks": "^5.1.0",
+    "eslint-plugin-react-hooks": "^5.2.0",
     "eslint-plugin-react-refresh": "^0.4.19",
     "husky": "^9.1.7",
-    "typescript": "^5.7.3",
-    "typescript-eslint": "^8.24.0",
+    "typescript": "^5.8.2",
+    "typescript-eslint": "^8.28.0",
     "typescript-plugin-css-modules": "^5.1.0",
-    "vite": "^6.1.0"
+    "vite": "^6.2.3"
   },
-  "overrides": {
-    "eslint-plugin-react-hooks": {
-      "eslint": "$eslint"
-    }
-  },
-  "packageManager": "pnpm@10.3.0+sha256.24dd5c65d86c7d0710aba16699fbc46d74fc9acf2b419f4945207f2de9e57e23"
+  "packageManager": "pnpm@10.7.0+sha256.35cab26953bf90847e798839db58c9a2a82d526b7af179fd2a103c18242cadc6"
 }

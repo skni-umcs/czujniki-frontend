@@ -5,7 +5,6 @@ import reactHooksPlugin from "eslint-plugin-react-hooks";
 import reactPlugin from "eslint-plugin-react";
 import jsxA11y from "eslint-plugin-jsx-a11y";
 import StylisticPlugin from "@stylistic/eslint-plugin";
-import { fixupPluginRules } from "@eslint/compat";
 
 const customizedStylistic = StylisticPlugin.configs.customize({
     indent: 4,
@@ -27,8 +26,7 @@ export default tseslint.config(
     {
         plugins: {
             "react": reactPlugin,
-            // @ts-expect-error wait for type fixes
-            "react-hooks": fixupPluginRules(reactHooksPlugin),
+            "react-hooks": reactHooksPlugin,
             "@stylistic": StylisticPlugin,
         },
         rules: {
