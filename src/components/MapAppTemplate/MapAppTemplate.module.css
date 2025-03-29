@@ -1,9 +1,3 @@
-.appHeader {
-    @media (min-width: 701px) {
-        display: none !important;
-    }
-}
-
 .wrapper {
     display: flex;
     flex-grow: 1;
