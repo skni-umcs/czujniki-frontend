@@ -1,5 +1,6 @@
 import { useState } from "react";
 import { IoClose } from "react-icons/io5";
+import clsx from "clsx/lite";
 
 import styles from "./MniswBar.module.css";
 import IconButton from "../IconButton/IconButton";
@@ -10,7 +11,11 @@ const getMniswState = () => {
     return mniswHidden === "true" ? true : false;
 };
 
-const MniswBar: React.FC = () => {
+interface IProps {
+    className?: string;
+}
+
+const MniswBar: React.FC<IProps> = ({ className }) => {
     const [mniswHidden, setMniswHidden] = useState(getMniswState);
 
     if (mniswHidden) return null;
@@ -21,7 +26,7 @@ const MniswBar: React.FC = () => {
     };
 
     return (
-        <div className={styles.root}>
+        <div className={clsx(styles.root, className)}>
             <div className={styles.firstRowMobile}>
                 <MniswLogo className={styles.logo} height={51} width={163} />
                 <IconButton title="Zamknij" onClick={hideMnisw}>

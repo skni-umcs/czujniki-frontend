@@ -1,12 +1,17 @@
 import { IoHelpOutline, IoHeartOutline, IoList, IoAccessibilityOutline } from "react-icons/io5";
 import { Link } from "react-router-dom";
+import clsx from "clsx/lite";
 
 import styles from "./Navbar.module.css";
 import skniLogo from "../../assets/skni_logo.svg";
 
-const Navbar: React.FC = () => {
+interface IProps {
+    className?: string;
+}
+
+const Navbar: React.FC<IProps> = ({ className }) => {
     return (
-        <div className={styles.root}>
+        <div className={clsx(styles.root, className)}>
             <img
                 className={styles.logo}
                 src={skniLogo}

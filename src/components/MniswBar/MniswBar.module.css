@@ -1,9 +1,9 @@
 .root {
     display: flex;
-    padding: 4px 16px;
+    padding: 2px 16px;
     align-items: center;
     background-color: var(--appheader-bg);
-    border-bottom: 1px solid var(--border-color);
+    border-top: 1px solid var(--border-color);
     width: 100%;
     gap: 0 16px;
 

@@ -5,13 +5,13 @@ import MniswBar from "../MniswBar/MniswBar";
 const MainAppTemplate: React.FC<React.PropsWithChildren> = ({ children }) => {
     return (
         <>
-            <MniswBar />
             <div className={styles.wrapper}>
-                <Navbar />
+                <Navbar className={styles.navbar} />
                 <div className={styles.leftRight}>
                     {children}
                 </div>
             </div>
+            <MniswBar className={styles.mniswBar} />
         </>
     );
 };

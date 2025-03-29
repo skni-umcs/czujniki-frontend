@@ -3,8 +3,16 @@
     flex-grow: 1;
 
     @media (max-width: 700px) {
-        flex-direction: column-reverse;
+        display: contents;
+
+        .navbar {
+            order: 2;
+        }
     }
+    }
+
+.mniswBar {
+    order: 1;
 }
 
 .leftRight {
@@ -12,6 +20,8 @@
     flex-direction: row;
     flex-grow: 1;
     contain: strict;
+    order: 0;
+
 }
 
 .mapContainer {
