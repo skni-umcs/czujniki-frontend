@@ -22,13 +22,15 @@ const MniswBar: React.FC = () => {
 
     return (
         <div className={styles.root}>
-            <MniswLogo className={styles.logo} height={51} width={163} />
+            <div className={styles.firstRowMobile}>
+                <MniswLogo className={styles.logo} height={51} width={163} />
+                <IconButton title="Zamknij" onClick={hideMnisw}>
+                    <IoClose size={24} />
+                </IconButton>
+            </div>
             <div className={styles.text}>
                 Projekt finansowany ze środków budżetu państwa, przyznanych przez Ministra Nauki w ramach Programu „Studenckie koła naukowe tworzą innowacje”.
             </div>
-            <IconButton title="Zamknij" onClick={hideMnisw}>
-                <IoClose size={24} />
-            </IconButton>
         </div>
     );
 };

@@ -1,23 +1,45 @@
 .root {
     display: flex;
-    padding: 8px;
+    padding: 4px 16px;
     align-items: center;
     background-color: var(--appheader-bg);
     border-bottom: 1px solid var(--border-color);
     width: 100%;
+    gap: 0 16px;
+
+    @media (max-width: 700px) {
+        padding: 8px 16px;
+    }
 
     @media (max-width: 480px) {
         flex-direction: column;
     }
 }
 
+.firstRowMobile {
+    display: flex;
+    justify-content: space-between;
+    padding: 4px 0;
+    width: 100%;
+
+    &>button {
+        order: 1;
+        margin-right: -8px;
+    }
+
+    @media (min-width: 481px) {
+        display: contents;
+    }
+}
+
 .logo {
-    margin-inline-end: 8px;
+    margin: -6px -8px;
     flex-shrink: 0;
     flex-grow: 0;
+    order: 0;
 }
 
 .text {
-    font-size: 0.8em;
+    font-size: 0.75em;
     flex-grow: 1;
 }
