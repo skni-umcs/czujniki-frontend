@@ -8,6 +8,13 @@ import "./SensorMap.css";
 
 export const mapID = "mapA";
 
+const locale = {
+    "Map.Title": "Mapa",
+    "NavigationControl.ZoomIn": "Powiększ",
+    "NavigationControl.ZoomOut": "Pomniejsz",
+    "AttributionControl.ToggleAttribution": "Przełącz atrybucję",
+};
+
 const center = [22.542066, 51.245487] as [number, number];
 const padding = 1.5;
 
@@ -19,6 +26,7 @@ const SensorMap: React.FC = () => {
             id={mapID}
             className={theme === "light" ? "" : "dark"}
             initialCenter={center}
+            initialLocale={locale}
             initialZoom={16}
             minZoom={15}
             maxBounds={[
