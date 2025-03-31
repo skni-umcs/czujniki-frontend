@@ -32,8 +32,14 @@
     }
 }
 
+.logoContainer {
+    display: flex;
+    flex-shrink: 0;
+    overflow: hidden;
+}
+
 .logo {
-    margin: -6px -8px;
+    margin: -8px -8px;
     flex-shrink: 0;
     flex-grow: 0;
     order: 0;

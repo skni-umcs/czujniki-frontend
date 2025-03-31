@@ -28,7 +28,9 @@ const MniswBar: React.FC<IProps> = ({ className }) => {
     return (
         <div className={clsx(styles.root, className)}>
             <div className={styles.firstRowMobile}>
-                <MniswLogo className={styles.logo} height={51} width={163} />
+                <div className={styles.logoContainer}>
+                    <MniswLogo className={styles.logo} height={51} width={163} />
+                </div>
                 <IconButton title="Zamknij" onClick={hideMnisw}>
                     <IoClose size={24} />
                 </IconButton>
