@@ -35,12 +35,12 @@ const SensorSideView: React.FC = () => {
 
     useEffect(() => {
         const evtSource = new EventSource(`/live-api/sensor/${s.id.toString()}`);
-        evtSource.onmessage = (event: MessageEvent<string>) => {
+        evtSource.addEventListener("sensor-update", (event: MessageEvent<string>) => {
             void submit(event.data, {
                 method: "post",
                 encType: "application/json",
             });
-        };
+        });
 
         return () => {
             evtSource.close();
