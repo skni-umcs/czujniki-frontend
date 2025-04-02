@@ -38,7 +38,11 @@ class DataProvider {
     async getAllSensors() {
         if (this.#sensorList) return this.#sensorList;
 
-        this.#sensorList = await this.fetcher<Sensor[]>("/api/sensor/all");
+        const url = new URL("/api/sensor/all", window.location.origin);
+        url.searchParams.set("size", "80");
+
+        const pageableData = await this.fetcher<Pageable<Sensor>>(url);
+        this.#sensorList = pageableData.content;
         return this.#sensorList;
     }
 
