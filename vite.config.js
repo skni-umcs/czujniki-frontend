@@ -8,6 +8,7 @@ export default defineConfig(env => ({
     server: {
         proxy: {
             "/api": "https://back.dev.skni.umcs.pl",
+            "/live-api": "https://back.dev.skni.umcs.pl",
         },
     },
     plugins: [react()],
