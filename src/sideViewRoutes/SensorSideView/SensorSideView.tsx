@@ -34,7 +34,7 @@ const SensorSideView: React.FC = () => {
     const [isRefreshing, setIsRefreshing] = useState(false);
 
     useEffect(() => {
-        const evtSource = new EventSource(`/live-api/sensor/${s.id.toString()}`);
+        const evtSource = new EventSource(`/live-api/sensors/${s.id.toString()}`);
         evtSource.addEventListener("sensor-update", (event: MessageEvent<string>) => {
             void submit(event.data, {
                 method: "post",

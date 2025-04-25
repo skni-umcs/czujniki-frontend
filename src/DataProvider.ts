@@ -38,7 +38,7 @@ class DataProvider {
     async getAllSensors() {
         if (this.#sensorList) return this.#sensorList;
 
-        const url = new URL("/api/sensor/all", window.location.origin);
+        const url = new URL("/api/sensors", window.location.origin);
         url.searchParams.set("size", "80");
 
         const pageableData = await this.fetcher<Pageable<Sensor>>(url);
@@ -50,11 +50,11 @@ class DataProvider {
         const cached = this.#sensorList?.find(s => s.id === id);
         if (cached) return cached;
 
-        return this.fetcher<Sensor>(`/api/sensor/${id.toString()}`);
+        return this.fetcher<Sensor>(`/api/sensors/${id.toString()}`);
     }
 
     async findSensors(query: string) {
-        const url = new URL(`/api/sensor/all/search`, window.location.origin);
+        const url = new URL(`/api/sensors`, window.location.origin);
         url.searchParams.set("searchTerm", query);
 
         return this.fetcher<Pageable<Sensor>>(url);
@@ -77,7 +77,7 @@ class DataProvider {
 
         const fixedStartDate = startDate ? new Date(startDate) : fallbackDate;
 
-        const url = new URL(`/api/sensor/${id.toString()}/data`, window.location.origin);
+        const url = new URL(`/api/sensors/${id.toString()}/data`, window.location.origin);
         url.searchParams.set("startDate", fixedStartDate.toISOString());
         if (endDate) url.searchParams.set("endDate", new Date(endDate).toISOString());
         url.searchParams.set("page", "0");
