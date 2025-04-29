@@ -1,4 +1,4 @@
-import { Suspense, useEffect, useMemo, useState } from "react";
+import { Suspense, useMemo, useState } from "react";
 import { useFetcher, useLoaderData } from "react-router-dom";
 import { IoHeart, IoHeartOutline } from "react-icons/io5";
 import { RiCheckLine, RiErrorWarningLine, RiRestTimeFill, RiSpeedUpFill, RiTempHotLine, RiWaterPercentFill } from "react-icons/ri";
@@ -16,6 +16,7 @@ import IconButton from "../../components/IconButton/IconButton.tsx";
 import CurrentCondition from "../../components/CurrentCondition/CurrentCondition.tsx";
 import { useFavorites } from "../../contexts/FavoritesProvider.tsx";
 import Charts from "./Charts.tsx";
+import useSensorUpdateEvents from "./useSensorUpdateEvents.ts";
 
 export interface ISensorSideViewLoaderData {
     sensorList: Sensor[];
@@ -33,19 +34,7 @@ const SensorSideView: React.FC = () => {
     const { submit } = useFetcher();
     const [isRefreshing, setIsRefreshing] = useState(false);
 
-    useEffect(() => {
-        const evtSource = new EventSource(`/live-api/sensors/${s.id.toString()}`);
-        evtSource.addEventListener("sensor-update", (event: MessageEvent<string>) => {
-            void submit(event.data, {
-                method: "post",
-                encType: "application/json",
-            });
-        });
-
-        return () => {
-            evtSource.close();
-        };
-    }, [s.id, submit]);
+    useSensorUpdateEvents(s.id.toString());
 
     const isFavorite = useMemo(() => favorites.includes(s.id), [favorites, s.id]);
 
