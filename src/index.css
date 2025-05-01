@@ -40,6 +40,9 @@
     --searchbar-text-color: hsl(240, 14%, 90%);
     --searchbar-border-color: transparent;
     --alt-navbar-bg: var(--bg-secondary);
+
+    --safe-area-max-inset-bottom: env(safe-area-max-inset-bottom, 0px);
+    --bottom-bar-height: 78px;
 }
 
 .lightTheme:root {
@@ -140,10 +143,12 @@ body {
     line-height: 1.5;
     color: var(--text-color-primary);
     background-color: var(--bg-tertiary);
+    padding-bottom: calc(var(--bottom-bar-height) + var(--safe-area-max-inset-bottom));
+    height: 100vh;
 }
 
 #root {
-    height: 100vh;
+    height: 100%;
     display: flex;
     flex-direction: column;
 }
