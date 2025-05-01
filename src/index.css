@@ -143,8 +143,11 @@ body {
     line-height: 1.5;
     color: var(--text-color-primary);
     background-color: var(--bg-tertiary);
-    padding-bottom: calc(var(--bottom-bar-height) + var(--safe-area-max-inset-bottom));
     height: 100vh;
+
+    @media (max-width: 700px) {
+        padding-bottom: calc(var(--bottom-bar-height) + var(--safe-area-max-inset-bottom));
+    }
 }
 
 #root {
