@@ -8,7 +8,7 @@ interface TThemeContext {
     setTheme: React.Dispatch<React.SetStateAction<TTheme>>;
 }
 
-export const getSystemPreferedTheme = (): TTheme => {
+const getSystemPreferedTheme = (): TTheme => {
     if (window.matchMedia("(prefers-color-scheme: dark)").matches) return "dark";
 
     if (window.matchMedia("(prefers-contrast: forced)").matches
