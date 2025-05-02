@@ -1,5 +1,5 @@
 import { StyleSpecification } from "maplibre-gl";
-import { RMap, RNavigationControl } from "maplibre-react-components";
+import { RMap, RAttributionControl, RNavigationControl } from "maplibre-react-components";
 
 import { useTheme } from "../../contexts/ThemeProvider";
 
@@ -19,12 +19,13 @@ const center = [22.542066, 51.245487] as [number, number];
 const padding = 1.5;
 
 const SensorMap: React.FC = () => {
-    const { theme } = useTheme();
+    const { actualTheme } = useTheme();
 
     return (
         <RMap
             id={mapID}
-            className={theme === "light" ? "" : "dark"}
+            className={actualTheme === "light" ? "" : "dark"}
+            initialAttributionControl={false}
             initialCenter={center}
             initialLocale={locale}
             initialZoom={16}
@@ -36,6 +37,7 @@ const SensorMap: React.FC = () => {
             mapStyle={osmLib as StyleSpecification}
             maxPitch={40}
         >
+            <RAttributionControl position="top-left" />
             <RNavigationControl position="top-right" showCompass={false} />
         </RMap>
     );
