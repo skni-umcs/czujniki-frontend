@@ -1,3 +1,4 @@
+import { useEffect, useState } from "react";
 import { CartesianGrid, Line, LineChart, ResponsiveContainer, Tooltip, XAxis, YAxis, ReferenceArea } from "recharts";
 import { AxisDomain } from "recharts/types/util/types";
 import { CategoricalChartFunc } from "recharts/types/chart/generateCategoricalChart";
@@ -5,9 +6,18 @@ import { RiDeleteBack2Fill } from "react-icons/ri";
 import clsx from "clsx/lite";
 
 import styles from "./SensorChart.module.css";
-import { useChartZoom } from "./useChartZoom";
+import useChartZoom from "./useChartZoom";
 import CustomizedAxisTick from "./CustomizedAxisTick";
 import IconButton from "../IconButton/IconButton";
+import SensorData from "../../types/SensorData";
+
+function getOptimalDataPoints<T extends object = object>(data: T[], containerWidth: number) {
+    const maxPoints = Math.floor(containerWidth / 2);
+    const factor = Math.ceil(data.length / maxPoints);
+
+    const filtered = data.filter((_, index) => index % factor === 0);
+    return [...filtered, data[data.length - 1]];
+};
 
 interface IProps<T extends object = object> {
     className?: string;
@@ -19,7 +29,35 @@ interface IProps<T extends object = object> {
 }
 
 function SensorChart<T extends object = object>({ className, height, data, dataKey, unit, domain }: IProps<T>) {
-    const { viewport, selection, setSelectionState, handleZoom, resetZoom } = useChartZoom();
+    const {
+        viewport,
+        selection,
+        setSelectionState,
+        setViewportState,
+        handleZoom,
+        resetZoom,
+        calculateDomain,
+    } = useChartZoom();
+
+    const [historicalData, setHistoricalData] = useState<T[]>(data);
+
+    useEffect(() => {
+        const isZoomed = viewport.left !== "dataMin" || viewport.right !== "dataMax";
+        if (isZoomed) {
+            const visibleData = (data as SensorData[]).filter(d =>
+                d.timestamp >= Number(viewport.left) && d.timestamp <= Number(viewport.right));
+
+            const optimalData = getOptimalDataPoints(visibleData as T[], 80);
+            setViewportState({
+                left: viewport.left,
+                right: viewport.right,
+                ...calculateDomain(optimalData, dataKey),
+            });
+            setHistoricalData(optimalData);
+        } else {
+            setHistoricalData(getOptimalDataPoints(data, 80));
+        }
+    }, [data, viewport.left, viewport.right, dataKey, setViewportState, calculateDomain]);
 
     const onMouseDownHandler: CategoricalChartFunc = (e) => {
         if (e.activeLabel && e.activeTooltipIndex) {
@@ -53,16 +91,17 @@ function SensorChart<T extends object = object>({ className, height, data, dataK
             <ResponsiveContainer width="100%" height={height}>
                 <LineChart
                     margin={{ bottom: 50, top: 0, left: 4, right: 32 }}
-                    data={data}
+                    data={historicalData}
                     className={clsx(styles.chart, className)}
                     onMouseDown={onMouseDownHandler}
                     onMouseMove={onMouseMoveHandler}
-                    onMouseUp={() => { handleZoom(data, dataKey); }}
+                    onMouseUp={() => { handleZoom(historicalData, dataKey); }}
                 >
                     <Line
-                        type="linear"
+                        type="monotone"
                         dataKey={dataKey as string | number}
                         stroke="var(--primary-btn-color)"
+                        isAnimationActive={false}
                         dot={false}
                     />
                     <XAxis

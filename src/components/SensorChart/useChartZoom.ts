@@ -31,7 +31,20 @@ const initialSelectionState = {
 
 const asc = (a: number, b: number) => a - b;
 
-export const useChartZoom = () => {
+function calculateDomain<T extends object>(data: T[], key: keyof T) {
+    if (!data.length) return { top: 0, bottom: 0 };
+
+    const values = data.map(d => d[key]).filter(d => Number.isFinite(d)) as number[];
+    const min = Math.min(...values);
+    const max = Math.max(...values);
+
+    return {
+        bottom: Math.floor(min) - 1,
+        top: Math.ceil(max) + 1,
+    };
+};
+
+const useChartZoom = () => {
     const [viewport, setViewportState] = useState<ViewportState>(initialViewportState);
     const [selection, setSelectionState] = useState<SelectionState>(initialSelectionState);
 
@@ -67,20 +80,10 @@ export const useChartZoom = () => {
         selection,
         viewport,
         setSelectionState,
+        setViewportState,
         handleZoom,
         resetZoom,
+        calculateDomain,
     };
 };
-
-function calculateDomain<T extends object>(data: T[], key: keyof T) {
-    if (!data.length) return { top: 0, bottom: 0 };
-
-    const values = data.map(d => d[key]).filter(d => Number.isFinite(d)) as number[];
-    const min = Math.min(...values);
-    const max = Math.max(...values);
-
-    return {
-        bottom: Math.floor(min) - 1,
-        top: Math.ceil(max) + 1,
-    };
-};
+export default useChartZoom;
