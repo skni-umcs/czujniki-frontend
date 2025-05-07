@@ -81,7 +81,7 @@ class DataProvider {
         url.searchParams.set("startDate", fixedStartDate.toISOString());
         if (endDate) url.searchParams.set("endDate", new Date(endDate).toISOString());
         url.searchParams.set("page", "0");
-        url.searchParams.set("size", "300");
+        url.searchParams.set("size", "2000");
         url.searchParams.set("sort", "timestamp,desc");
 
         const data = await this.fetcher<Pageable<SensorDataUnparsed>>(url);
