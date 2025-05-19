@@ -54,26 +54,26 @@
 }
 
 .dateFilters {
-    padding: 8px 24px;
-    padding-top: 0;
+    padding: 0 32px;
     display: flex;
     flex-direction: column;
-    row-gap: 8px;
+    row-gap: 4px;
+
+    @media (max-width: 380px) {
+        padding: 0 24px;
+    }
 }
 
 .dateFilters>label {
     display: flex;
     justify-content: space-between;
-
-    @media (max-width: 380px) {
-        flex-direction: column;
-    }
+    flex-direction: column;
 }
 
 .dateTimeInput {
     font-family: inherit;
     font-size: inherit;
-    padding: 8px 4px;
+    padding: 10px 8px;
     border-radius: 8px;
     border: 0;
     background-color: var(--searchbar-bg);
