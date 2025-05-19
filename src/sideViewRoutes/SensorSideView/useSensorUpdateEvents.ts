@@ -12,7 +12,6 @@ const useSensorUpdateEvents = (sensorID: string) => {
                 encType: "application/json",
             });
         });
-
         return () => {
             evtSource.close();
         };
