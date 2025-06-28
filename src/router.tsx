@@ -53,6 +53,14 @@ const router = createBrowserRouter([
                 },
             },
             {
+                path: "/sensor/:id",
+                // eslint-disable-next-line @typescript-eslint/require-await
+                loader: async ({ params }) => {
+                    if (!params.id) return redirect("/") as never;
+                    return redirect(`/sensors/${params.id}`);
+                },
+            },
+            {
                 path: "/sensors/:id",
                 Component: SensorSideView,
                 ErrorBoundary: ErrorSideView,
