@@ -4,8 +4,8 @@ import { getFavorites } from "./contexts/FavoritesProvider.tsx";
 import ErrorRouteFallback from "./routes/ErrorRouteFallback.tsx";
 import MapAppRoute from "./routes/MapAppRoute/MapAppRoute.tsx";
 import MapAppRouteSkeleton from "./routes/MapAppRouteSkeleton/MapAppRouteSkeleton.tsx";
-import LoginRoute from "./routes/LoginRoute/LoginRoute.tsx";
-import RegisterRoute from "./routes/RegisterRoute/RegisterRoute.tsx";
+// import LoginRoute from "./routes/LoginRoute/LoginRoute.tsx";
+// import RegisterRoute from "./routes/RegisterRoute/RegisterRoute.tsx";
 
 import HiddenSideView, { IHiddenSideViewLoaderData } from "./sideViewRoutes/HiddenSideView/HiddenSideView.tsx";
 import SensorListSideView, { ISensorListSideViewLoaderData } from "./sideViewRoutes/SensorListSideView/SensorListSideView.tsx";
@@ -133,16 +133,16 @@ const router = createBrowserRouter([
             },
         ],
     },
-    {
-        path: "/login",
-        Component: LoginRoute,
-        ErrorBoundary: ErrorRouteFallback,
-    },
-    {
-        path: "/register",
-        Component: RegisterRoute,
-        ErrorBoundary: ErrorRouteFallback,
-    },
+    // {
+    //     path: "/login",
+    //     Component: LoginRoute,
+    //     ErrorBoundary: ErrorRouteFallback,
+    // },
+    // {
+    //     path: "/register",
+    //     Component: RegisterRoute,
+    //     ErrorBoundary: ErrorRouteFallback,
+    // },
 ]);
 
 export default router;
