@@ -10,6 +10,10 @@
         font-size: 0.875em;
     }
 
+    b {
+        font-weight: 600;
+    }
+
     &:is(:link, :visited) {
         color: currentColor;
     }

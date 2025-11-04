@@ -29,11 +29,12 @@
     --primary-btn-color: hsl(217, 89%, 82%);
     --primary-btn-hover-color: hsl(217, 89%, 86%);
     --primary-btn-active-color: hsl(217, 89%, 89%);
-    --primary-btn-text-color: var(--text-color-inverted);
+    --primary-btn-text-color: black;
     --icon-btn-hover-color: var(--bg-secondary);
     --icon-btn-active-color: hsl(0, 0%, 21%);
     --input-border-color: hsl(140, 1%, 56%);
     --shadow-color: var(--border-color);
+    --chart-line-color: var(--primary-btn-color);
 
     --login-panel-bg: var(--bg-secondary);
     --appheader-bg: var(--bg-secondary);
@@ -70,14 +71,15 @@
     --border-color2: hsl(0, 0%, 92%);
     --border-layer-color: transparent;
 
-    --primary-btn-color: hsl(217, 62%, 47%);
-    --primary-btn-hover-color: hsl(217, 62%, 52%);
-    --primary-btn-active-color: hsl(217, 62%, 45%);
-    --primary-btn-text-color: white;
+    --primary-btn-color: var(--bg-secondary);
+    --primary-btn-hover-color: color-mix(in oklab, var(--bg-secondary), #000 7%);
+    --primary-btn-active-color: color-mix(in oklab, var(--bg-secondary), #000 15%);
+    --primary-btn-text-color: var(--text-color-primary);
     --icon-btn-hover-color: var(--bg-secondary);
     --icon-btn-active-color: hsl(213, 43%, 92%);
     --input-border-color: hsl(140, 1%, 56%);
     --shadow-color: hsl(0, 0%, 28%);
+    --chart-line-color: hsl(217, 62%, 47%);
 
     --login-panel-bg: var(--bg-primary);
     --appheader-bg: var(--bg-primary);
@@ -111,6 +113,7 @@
     --icon-btn-active-color: transparent;
     --input-border-color: white;
     --shadow-color: hsl(0, 0%, 0%);
+    --chart-line-color: var(--primary-btn-color);
 
     --login-panel-bg: var(--bg-primary);
     --appheader-bg: var(--bg-primary);
@@ -121,7 +124,6 @@
     --alt-navbar-bg: var(--bg-secondary);
 
     a,
-    button,
     label {
         color: yellow;
     }
@@ -140,7 +142,7 @@
 
 input[type="radio"],
 input[type="checkbox"] {
-    accent-color: var(--primary-btn-color);
+    accent-color: var(--chart-line-color);
 }
 
 body {

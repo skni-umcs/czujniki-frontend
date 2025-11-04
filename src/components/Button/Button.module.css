@@ -1,0 +1,23 @@
+.root {
+    padding: 8px 12px;
+    background-color: var(--primary-btn-color);
+    border-radius: 8px;
+    border: 0;
+    color: var(--primary-btn-text-color);
+    font-size: 0.9em;
+    font-weight: 500;
+    cursor: pointer;
+    display: flex;
+    align-items: center;
+    gap: 1ch;
+    transition: .2s background-color;
+    width: fit-content;
+}
+
+.root:hover {
+    background-color: var(--primary-btn-hover-color);
+}
+
+.root:active {
+    background-color: var(--primary-btn-active-color);
+}

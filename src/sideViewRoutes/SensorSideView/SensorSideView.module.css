@@ -57,7 +57,7 @@
     padding: 0 32px;
     display: flex;
     flex-direction: column;
-    row-gap: 4px;
+    row-gap: 8px;
 
     @media (max-width: 380px) {
         padding: 0 24px;
@@ -81,26 +81,6 @@
     :global :root.highContrastTheme :local(&) {
         border: 1px solid;
     }
-}
-
-.dateFilterButton {
-    font-family: inherit;
-    font-size: inherit;
-    width: fit-content;
-    padding: 4px 8px;
-    background-color: var(--primary-btn-color);
-    color: var(--primary-btn-text-color);
-    border: 0;
-    border-radius: 4px;
-    cursor: pointer;
-}
-
-.dateFilterButton:hover {
-    background-color: var(--primary-btn-hover-color);
-}
-
-.dateFilterButton:active {
-    background-color: var(--primary-btn-active-color);
 }
 
 .rotate {

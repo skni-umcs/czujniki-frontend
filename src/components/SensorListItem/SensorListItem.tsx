@@ -22,16 +22,20 @@ const SensorListItem: React.FC<IProps> = ({ sensor: s }) => {
 
             <div>{s.location.facultyName}</div>
 
+            {s.lastUpdate && (
+                <div>Zaktualizowano: <b>{new Date(s.lastUpdate).toLocaleString()}</b></div>
+            )}
+
             {s.status === "ONLINE" && s.temperature !== undefined && (
-                <div>Temperatura: {s.temperature}° C</div>
+                <div>Temperatura: <b>{s.temperature}° C</b></div>
             )}
 
             {s.status === "ERROR" && (
-                <div>Status: <span className={styles.statusError}>{Status[s.status]}</span></div>
+                <div className={styles.statusError}>{Status[s.status]}</div>
             )}
 
             {s.status === "OFFLINE" && (
-                <div>Status: <span className={styles.statusOffline}>{Status[s.status]}</span></div>
+                <div className={styles.statusOffline}>{Status[s.status]}</div>
             )}
         </Link>
     );

@@ -100,7 +100,7 @@ function SensorChart<T extends object = object>({ className, height, data, dataK
                     <Line
                         type="monotone"
                         dataKey={dataKey as string | number}
-                        stroke="var(--primary-btn-color)"
+                        stroke="var(--chart-line-color)"
                         isAnimationActive={false}
                         dot={false}
                     />

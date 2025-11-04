@@ -4,6 +4,8 @@ import { Form, useParams } from "react-router-dom";
 import styles from "./SensorSideView.module.css";
 import SensorData from "../../types/SensorData";
 import SensorChart from "../../components/SensorChart/SensorChart";
+import Button from "../../components/Button/Button";
+import { VscFilter } from "react-icons/vsc";
 
 const chartHeight = 235;
 
@@ -55,7 +57,10 @@ const Charts: React.FC<IChartsProps> = ({ historicalDataPromise }) => {
                         defaultValue={endDate.toISOString().slice(0, -8)}
                     />
                 </label>
-                <input className={styles.dateFilterButton} type="submit" value="Filtruj" />
+                <Button type="submit">
+                    <VscFilter size={16} />
+                    Filtruj
+                </Button>
             </Form>
             {!historicalData[0] && (
                 <div className={styles.noChartsMessage}>Brak danych w tym zakresie dat.</div>
