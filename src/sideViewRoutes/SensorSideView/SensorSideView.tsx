@@ -47,7 +47,7 @@ const SensorSideView: React.FC = () => {
         if (isRefreshing) return;
         void (async () => {
             setIsRefreshing(true);
-            await submit("forceUpdate=1", { method: "get" });
+            await submit({ forceUpdate: "1" }, { method: "get" });
             await new Promise(resolve => setTimeout(resolve, 1700));
             setIsRefreshing(false);
         })();

@@ -7,10 +7,15 @@ const useSensorUpdateEvents = (sensorID: string) => {
     useEffect(() => {
         const evtSource = new EventSource(`/live-api/sensors/${sensorID}`);
         evtSource.addEventListener("sensor-update", (event: MessageEvent<string>) => {
-            void submit(event.data, {
-                method: "post",
-                encType: "application/json",
-            });
+            try {
+                void submit(event.data, {
+                    method: "post",
+                    encType: "application/json",
+                    action: `/sensors/${sensorID}`,
+                });
+            } catch {
+                // Ignore malformed events
+            }
         });
         return () => {
             evtSource.close();

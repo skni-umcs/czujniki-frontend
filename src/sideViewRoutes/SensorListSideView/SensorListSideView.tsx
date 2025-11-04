@@ -23,7 +23,7 @@ const SensorListSideView: React.FC<IProps> = ({ title }) => {
 
     useEffect(() => {
         const intervalId = window.setInterval(() => {
-            void submit("forceUpdate=1", { method: "get" });
+            void submit({ forceUpdate: "1" }, { method: "get" });
         }, 3 * 60 * 1000); // 3 minutes
 
         return () => {
@@ -39,7 +39,7 @@ const SensorListSideView: React.FC<IProps> = ({ title }) => {
                 {effectiveSensorList.map(s => <SensorMarker key={s.id} sensor={s} />)}
             </MapPortal>
             <div className={styles.root}>
-                <Form className={styles.searchBarContainer}>
+                <Form method="get" className={styles.searchBarContainer}>
                     <input
                         name="q"
                         type="search"
