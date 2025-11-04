@@ -27,17 +27,9 @@
 }
 
 .statusError {
-    color: red;
-
-    :global :root.highContrastTheme :local(&) {
-        color: var(--text-color-primary);
-    }
+    color: var(--text-color-status-outdated);
 }
 
 .statusOffline {
-    color: gray;
-
-    :global :root.highContrastTheme :local(&) {
-        color: var(--text-color-primary);
-    }
+    color: var(--text-color-status-offline);
 }

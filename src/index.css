@@ -16,6 +16,8 @@
     --text-color-primary: hsla(0, 0%, 100%, 0.90);
     --text-color-secondary: hsla(0, 0%, 100%, 0.67);
     --text-color-inverted: hsl(208, 37%, 20%);
+    --text-color-status-outdated: hsl(0, 74%, 74%);
+    --text-color-status-offline: grey;
     --bg-primary: var(--color-surface-2);
     --bg-secondary: var(--color-surface-3);
     --bg-tertiary: hsl(300, 8%, 7%);
@@ -57,6 +59,8 @@
     --text-color-primary: hsl(208, 37%, 20%);
     --text-color-secondary: hsl(207, 5%, 45%);
     --text-color-inverted: hsla(0, 0%, 100%, 0.87);
+    --text-color-status-outdated: hsl(0, 28%, 51%);
+    --text-color-status-offline: grey;
     --bg-primary: white;
     --bg-secondary: var(--color-surface-3);
     --bg-tertiary: var(--color-surface-1);
@@ -89,6 +93,8 @@
 
     --text-color-primary: white;
     --text-color-inverted: black;
+    --text-color-status-outdated: var(--text-color-primary);
+    --text-color-status-offline: var(--text-color-primary);
     --bg-primary: black;
     --bg-secondary: black;
     --bg-tertiary: grey;
