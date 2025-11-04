@@ -3,6 +3,24 @@ import Pageable from "./types/Pageable";
 import Sensor from "./types/Sensor";
 import SensorData, { SensorDataUnparsed } from "./types/SensorData";
 
+export enum DataProviderError {
+    INVALID_RESPONSE = "1000",
+    FETCH_ERROR = "1001",
+    API_ERROR = "1002",
+    NETWORK_ERROR = "1003",
+}
+
+export class FetchError extends Error {
+    code: DataProviderError;
+    constructor(
+        message: string,
+        options: { cause: unknown; code: DataProviderError },
+    ) {
+        super(message, { cause: options.cause });
+        this.code = options.code;
+    }
+}
+
 class DataProvider {
     #sensorList: Sensor[] | null = null;
     #historicalData = new Map<number, {
@@ -12,27 +30,43 @@ class DataProvider {
     }>();
 
     async fetcher<T extends object>(endpoint: RequestInfo | URL) {
+        let res: Response;
         try {
-            const res = await fetch(endpoint, {
+            res = await fetch(endpoint, {
                 signal: AbortSignal.timeout(30000),
             });
-
-            let data: T | ApiError;
-            try {
-                data = await res.json() as T | ApiError;
-            } catch (err) {
-                throw new Error("Invalid response", { cause: err });
-            }
-
-            if ("errorMessage" in data) {
-                throw new Error(data.errorMessage);
-            }
-
-            return data;
         } catch (err) {
-            const msg = `Fetch error: ${err instanceof Error ? err.message : String(err)}`;
-            throw new Error(msg, { cause: err });
+            if (err instanceof Error && err.message.startsWith("NetworkError")) {
+                throw new FetchError(
+                    "Network error",
+                    { cause: err, code: DataProviderError.NETWORK_ERROR },
+                );
+            }
+
+            throw new FetchError(
+                `Fetch error: ${err instanceof Error ? err.message : String(err)}`,
+                { cause: err, code: DataProviderError.FETCH_ERROR },
+            );
         }
+
+        let data: T | ApiError;
+        try {
+            data = await res.json() as T | ApiError;
+        } catch (err) {
+            throw new FetchError(
+                "Invalid response",
+                { cause: err, code: DataProviderError.INVALID_RESPONSE },
+            );
+        }
+
+        if ("errorMessage" in data) {
+            throw new FetchError(
+                data.errorMessage,
+                { cause: data, code: DataProviderError.API_ERROR },
+            );
+        }
+
+        return data;
     }
 
     async getAllSensors(forceUpdate = false) {

@@ -35,6 +35,9 @@ export default tseslint.config(
             "react-hooks/rules-of-hooks": "warn",
             "react-hooks/exhaustive-deps": "warn",
             "@stylistic/jsx-one-expression-per-line": 0,
+            "@typescript-eslint/restrict-template-expressions": ["error", {
+                allowNumber: true,
+            }],
         },
         settings: {
             react: {

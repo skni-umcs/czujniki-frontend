@@ -1,11 +1,9 @@
 import { createBrowserRouter, redirect } from "react-router-dom";
 
 import { getFavorites } from "./contexts/FavoritesProvider.tsx";
-import ErrorRouteFallback from "./routes/ErrorRouteFallback.tsx";
+import ErrorRouteFallback from "./routes/ErrorRouteFallback/ErrorRouteFallback.tsx";
 import MapAppRoute from "./routes/MapAppRoute/MapAppRoute.tsx";
 import MapAppRouteSkeleton from "./routes/MapAppRouteSkeleton/MapAppRouteSkeleton.tsx";
-// import LoginRoute from "./routes/LoginRoute/LoginRoute.tsx";
-// import RegisterRoute from "./routes/RegisterRoute/RegisterRoute.tsx";
 
 import HiddenSideView, { IHiddenSideViewLoaderData } from "./sideViewRoutes/HiddenSideView/HiddenSideView.tsx";
 import SensorListSideView, { ISensorListSideViewLoaderData } from "./sideViewRoutes/SensorListSideView/SensorListSideView.tsx";
