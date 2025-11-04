@@ -7,8 +7,8 @@ import react from "@vitejs/plugin-react-swc";
 export default defineConfig(env => ({
     server: {
         proxy: {
-            "/api": "https://back.dev.skni.umcs.pl",
-            "/live-api": "https://back.dev.skni.umcs.pl",
+            "/api": "https://czujniki.skni.umcs.pl",
+            "/live-api": "https://czujniki.skni.umcs.pl",
         },
     },
     plugins: [react()],
