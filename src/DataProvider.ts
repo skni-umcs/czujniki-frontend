@@ -35,8 +35,8 @@ class DataProvider {
         }
     }
 
-    async getAllSensors() {
-        if (this.#sensorList) return this.#sensorList;
+    async getAllSensors(forceUpdate = false) {
+        if (!forceUpdate && this.#sensorList) return this.#sensorList;
 
         const url = new URL("/api/sensors", window.location.origin);
         url.searchParams.set("size", "80");
@@ -46,9 +46,9 @@ class DataProvider {
         return this.#sensorList;
     }
 
-    async getSensor(id: Sensor["id"]) {
+    async getSensor(id: Sensor["id"], forceUpdate = false) {
         const cached = this.#sensorList?.find(s => s.id === id);
-        if (cached) return cached;
+        if (!forceUpdate && cached) return cached;
 
         return this.fetcher<Sensor>(`/api/sensors/${id.toString()}`);
     }

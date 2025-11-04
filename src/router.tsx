@@ -105,10 +105,11 @@ const router = createBrowserRouter([
                 loader: async ({ request }): Promise<ISensorListSideViewLoaderData> => {
                     const url = new URL(request.url);
                     const query = url.searchParams.get("q") ?? "";
+                    const forceUpdate = url.searchParams.get("forceUpdate") === "1";
 
                     const sensorList = query
                         ? (await repo.findSensors(query)).content
-                        : await repo.getAllSensors();
+                        : await repo.getAllSensors(forceUpdate);
 
                     return { sensorList, query };
                 },
@@ -120,10 +121,13 @@ const router = createBrowserRouter([
                 loader: async ({ request }): Promise<ISensorListSideViewLoaderData> => {
                     const url = new URL(request.url);
                     const query = url.searchParams.get("q") ?? "";
+                    const forceUpdate = url.searchParams.get("forceUpdate") === "1";
 
                     const sensorList = query
                         ? (await repo.findSensors(query)).content
-                        : await repo.getAllSensors();
+                        : forceUpdate
+                            ? (await repo.findSensors("")).content
+                            : await repo.getAllSensors(forceUpdate);
 
                     const favIds = getFavorites();
                     const favorites = sensorList.filter(el => favIds.includes(el.id));
@@ -133,16 +137,6 @@ const router = createBrowserRouter([
             },
         ],
     },
-    // {
-    //     path: "/login",
-    //     Component: LoginRoute,
-    //     ErrorBoundary: ErrorRouteFallback,
-    // },
-    // {
-    //     path: "/register",
-    //     Component: RegisterRoute,
-    //     ErrorBoundary: ErrorRouteFallback,
-    // },
 ]);
 
 export default router;

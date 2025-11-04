@@ -1,4 +1,5 @@
-import { Form, useLoaderData } from "react-router-dom";
+import { Form, useLoaderData, useFetcher } from "react-router-dom";
+import { useEffect } from "react";
 
 import styles from "./SensorListSideView.module.css";
 import Sensor from "../../types/Sensor";
@@ -12,17 +13,30 @@ export interface ISensorListSideViewLoaderData {
     query?: string;
 };
 
-export interface IProps {
+interface IProps {
     title?: string;
 };
 
 const SensorListSideView: React.FC<IProps> = ({ title }) => {
     const { sensorList, query } = useLoaderData<ISensorListSideViewLoaderData>();
+    const { submit, data: fetcherData } = useFetcher<ISensorListSideViewLoaderData>();
+
+    useEffect(() => {
+        const intervalId = window.setInterval(() => {
+            void submit("forceUpdate=1", { method: "get" });
+        }, 3 * 60 * 1000); // 3 minutes
+
+        return () => {
+            window.clearInterval(intervalId);
+        };
+    }, [submit]);
+
+    const effectiveSensorList = fetcherData?.sensorList ?? sensorList;
 
     return (
         <SideView title={title ?? "Lista czujników"}>
             <MapPortal>
-                {sensorList.map(s => <SensorMarker key={s.id} sensor={s} />)}
+                {effectiveSensorList.map(s => <SensorMarker key={s.id} sensor={s} />)}
             </MapPortal>
             <div className={styles.root}>
                 <Form className={styles.searchBarContainer}>
@@ -34,13 +48,15 @@ const SensorListSideView: React.FC<IProps> = ({ title }) => {
                         className={styles.searchBar}
                     />
                 </Form>
-                {sensorList.map(sensor => (
+                {effectiveSensorList.map(sensor => (
                     <SensorListItem
                         sensor={sensor}
                         key={sensor.id}
                     />
                 ))}
-                {sensorList.length === 0 && <div className={styles.emptyList}>Lista jest pusta</div>}
+                {effectiveSensorList.length === 0 && (
+                    <div className={styles.emptyList}>Lista jest pusta</div>
+                )}
             </div>
         </SideView>
     );
