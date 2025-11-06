@@ -1,7 +1,7 @@
 export enum Status {
     ONLINE = "Działa",
     OFFLINE = "Wyłączony",
-    ERROR = "Nieaktualny",
+    ERROR = "Błąd",
 };
 
 export type TStatus = keyof typeof Status;

@@ -4,10 +4,10 @@ import { TStatus } from "./Status";
 export default interface Sensor {
     id: number;
     status: TStatus;
-    lastUpdate?: string;
-    temperature?: number;
-    humidity?: number;
-    pressure?: number;
+    lastUpdate: string | null;
+    temperature: number | null;
+    humidity: number | null;
+    pressure: number | null;
     location: Location;
-    floor?: number | null;
+    floor: number | null;
 }
