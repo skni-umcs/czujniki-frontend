@@ -28,8 +28,9 @@ const SensorMap: React.FC = () => {
             initialAttributionControl={false}
             initialCenter={center}
             initialLocale={locale}
-            initialZoom={16}
+            initialZoom={17}
             minZoom={15}
+            maxZoom={21}
             maxBounds={[
                 [center[0] - padding * 0.015967, center[1] - padding * 0.01],
                 [center[0] + padding * 0.015967, center[1] + padding * 0.01],

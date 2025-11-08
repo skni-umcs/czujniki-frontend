@@ -18,7 +18,7 @@ const useFlyToWithRestore = (isActive: boolean, lat: number, lng: number) => {
         map.flyTo({
             padding: { left: 400 },
             center: { lat, lng },
-            zoom: 18,
+            zoom: Math.max(prevZoom, 19),
         });
         void map.once("moveend", () => {
             isCameraStateValid.current = true;
