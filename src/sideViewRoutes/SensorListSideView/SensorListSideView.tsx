@@ -1,5 +1,6 @@
 import { Form, useLoaderData, useFetcher } from "react-router-dom";
 import { useEffect } from "react";
+import { MdOutlineSearch } from "react-icons/md";
 
 import styles from "./SensorListSideView.module.css";
 import Sensor from "../../types/Sensor";
@@ -40,6 +41,7 @@ const SensorListSideView: React.FC<IProps> = ({ title }) => {
             </MapPortal>
             <div className={styles.root}>
                 <Form method="get" className={styles.searchBarContainer}>
+                    <MdOutlineSearch className={styles.searchIcon} size={18} />
                     <input
                         name="q"
                         type="search"

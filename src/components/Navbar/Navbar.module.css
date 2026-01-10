@@ -6,6 +6,7 @@
     flex-wrap: nowrap;
     align-items: center;
     background-color: var(--alt-navbar-bg);
+    color: var(--text-color-grey-300);
 }
 
 .item {
@@ -21,9 +22,8 @@
 }
 
 .item:hover {
-    transition: .1s background-color, color;
-    background-color: var(--accent-color);
-    color: var(--accent-text-color);
+    transition: .1s color;
+    color: var(--text-color-primary);
 }
 
 .item>div {

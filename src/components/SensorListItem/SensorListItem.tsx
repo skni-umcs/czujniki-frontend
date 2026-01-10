@@ -1,6 +1,5 @@
 import { Link } from "react-router-dom";
-import { MdErrorOutline, MdOutlineDoNotDisturbOn } from "react-icons/md";
-
+import { MdErrorOutline, MdOutlineDoNotDisturbOn, MdOutlineLocationOn, MdOutlineThermostat, MdOutlineWaterDrop, MdAccessTime } from "react-icons/md";
 import Sensor from "../../types/Sensor";
 import { Status } from "../../types/Status";
 import styles from "./SensorListItem.module.css";
@@ -17,37 +16,54 @@ const SensorListItem: React.FC<IProps> = ({ sensor: s }) => {
             to={`/sensors/${s.id.toString()}`}
             className={styles.root}
         >
-            <div className={styles.heading}>
-                {s.location.facultyAbbreviation} {s.id}
-                {s.status === "ERROR" && (
-                    <MdErrorOutline
-                        size={20}
-                        title="Wystąpił błąd"
-                    />
-                )}
-                {s.status === "OFFLINE" && (
-                    <MdOutlineDoNotDisturbOn
-                        size={20}
-                        title={Status[s.status]}
-                    />
-                )}
-            </div>
-
             <div>
-                <i>{s.location.facultyName}</i>
-                {s.floor !== null && (
-                    <i> – Piętro {s.floor}</i>
-                )}
-            </div>
+                <div className={styles.col1}>
+                    <div className={styles.heading}>
+                        {s.location.facultyAbbreviation} {s.id}
+                        {s.status === "ERROR" && (
+                            <MdErrorOutline
+                                size={17}
+                                title="Wystąpił błąd"
+                            />
+                        )}
+                        {s.status === "OFFLINE" && (
+                            <MdOutlineDoNotDisturbOn
+                                size={17}
+                                title={Status[s.status]}
+                            />
+                        )}
+                    </div>
 
-            <div>Zaktualizowano: <b>{lastUpdate ?? "brak danych"}</b></div>
-
-            {s.status !== "OFFLINE" && (
-                <div>
-                    <span>Temperatura: </span>
-                    <b>{s.temperature ? `${s.temperature}° C` : "brak danych"}</b>
+                    <div className={styles.locationLine}>
+                        <MdOutlineLocationOn size={17} />
+                        <div>
+                            <span>{s.location.facultyName}</span>
+                            {s.floor !== null && (
+                                <span> – Piętro {s.floor}</span>
+                            )}
+                        </div>
+                    </div>
+                    <div className={styles.timeLine}>
+                        <MdAccessTime size={17} />
+                        {lastUpdate ?? "brak danych"}
+                    </div>
                 </div>
-            )}
+                <div className={styles.col2}>
+
+                    {s.status !== "OFFLINE" && (
+                        <>
+                            <div className={styles.iconValue}>
+                                <MdOutlineThermostat size={20} />
+                                <b>{s.temperature ? `${s.temperature.toFixed(1)}°C` : "brak danych"}</b>
+                            </div>
+                            <div className={styles.iconValue}>
+                                <MdOutlineWaterDrop size={20} />
+                                <b>{s.temperature ? `${s.humidity}%` : "brak danych"}</b>
+                            </div>
+                        </>
+                    )}
+                </div>
+            </div>
         </Link>
     );
 };
