@@ -16,7 +16,7 @@ const SearchInput: React.FC<IProps> = ({ currentValue }) => {
 
     useEffect(() => {
         if (!searchInputRef.current || searchInputRef.current.value === currentValue) return;
-        searchInputRef.current.value = currentValue ?? "";
+        searchInputRef.current.defaultValue = currentValue ?? "";
     }, [currentValue]);
 
     const handleSearchChange = async (event: React.ChangeEvent<HTMLInputElement>) => {
@@ -33,6 +33,7 @@ const SearchInput: React.FC<IProps> = ({ currentValue }) => {
     const handleReset = () => {
         if (!searchInputRef.current || !searchFormRef.current) return;
         setInputValue("");
+        searchInputRef.current.defaultValue = "";
         searchFormRef.current.reset();
         searchFormRef.current.requestSubmit();
     };
