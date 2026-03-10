@@ -41,7 +41,7 @@
     --login-panel-bg: var(--bg-secondary);
     --appheader-bg: var(--bg-primary);
     --sidebar-bg: var(--bg-primary);
-    --searchbar-bg: inherit;
+    --searchbar-bg: var(--bg-tertiary);
     --searchbar-text-color: hsl(240, 14%, 90%);
     --searchbar-border-color: #2A3445;
     --alt-navbar-bg: var(--bg-primary);
