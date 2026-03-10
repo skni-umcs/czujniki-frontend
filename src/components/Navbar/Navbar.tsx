@@ -1,5 +1,13 @@
-import { IoHelpOutline, IoHeartOutline, IoList, IoAccessibilityOutline } from "react-icons/io5";
-import { Link } from "react-router-dom";
+import {
+    IoHelpOutline,
+    IoHelp,
+    IoHeartOutline,
+    IoHeart,
+    IoList,
+    IoAccessibilityOutline,
+    IoAccessibility,
+} from "react-icons/io5";
+import { NavLink } from "react-router-dom";
 import clsx from "clsx/lite";
 
 import styles from "./Navbar.module.css";
@@ -19,46 +27,60 @@ const Navbar: React.FC<IProps> = ({ className }) => {
                 height={51}
                 width={76}
             />
-            <Link
-                className={styles.item}
+
+            <NavLink
                 to="/sensors"
+                className={({ isActive }) => clsx(styles.item, isActive && styles.active)}
                 title="Lista czujników"
             >
                 <IoList size={24} />
-                <div>
-                    Czujniki
-                </div>
-            </Link>
-            <Link
-                className={styles.item}
+                <div>Czujniki</div>
+            </NavLink>
+
+            <NavLink
                 to="/favorites"
+                className={({ isActive }) => clsx(styles.item, isActive && styles.active)}
                 title="Ulubione czujniki"
             >
-                <IoHeartOutline size={24} />
-                <div>
-                    Ulubione
-                </div>
-            </Link>
-            <Link
-                className={styles.item}
+                {({ isActive }) => (
+                    <>
+                        {isActive ? <IoHeart size={24} /> : <IoHeartOutline size={24} />}
+                        <div>Ulubione</div>
+                    </>
+                )}
+            </NavLink>
+
+            <NavLink
                 to="/about"
+                className={({ isActive }) => clsx(styles.item, isActive && styles.active)}
                 title="O projekcie"
             >
-                <IoHelpOutline size={24} />
-                <div>
-                    O projekcie
-                </div>
-            </Link>
-            <Link
-                className={styles.item}
+                {({ isActive }) => (
+                    <>
+                        {isActive ? <IoHelp size={24} /> : <IoHelpOutline size={24} />}
+                        <div>O projekcie</div>
+                    </>
+                )}
+            </NavLink>
+
+            <NavLink
                 to="/accessibility"
+                className={({ isActive }) => clsx(styles.item, isActive && styles.active)}
                 title="Ustawienia dostępności"
             >
-                <IoAccessibilityOutline size={24} />
-                <div>
-                    Dostępność
-                </div>
-            </Link>
+                {({ isActive }) => (
+                    <>
+                        {isActive
+                            ? (
+                                    <IoAccessibility size={24} />
+                                )
+                            : (
+                                    <IoAccessibilityOutline size={24} />
+                                )}
+                        <div>Dostępność</div>
+                    </>
+                )}
+            </NavLink>
         </div>
     );
 };

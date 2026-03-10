@@ -1,5 +1,5 @@
-import { Form, useLoaderData, useFetcher } from "react-router-dom";
-import { useEffect } from "react";
+import { useLoaderData, useFetcher } from "react-router-dom";
+import { useEffect, useRef } from "react";
 
 import styles from "./SensorListSideView.module.css";
 import Sensor from "../../types/Sensor";
@@ -7,6 +7,7 @@ import SensorListItem from "../../components/SensorListItem/SensorListItem";
 import SideView from "../../components/SideView/SideView";
 import MapPortal from "../../components/MapPortal/MapPortal";
 import SensorMarker from "../../components/SensorMarker/SensorMarker";
+import SearchInput from "../../components/SearchInput/SearchInput";
 
 export interface ISensorListSideViewLoaderData {
     sensorList: Sensor[];
@@ -20,16 +21,25 @@ interface IProps {
 const SensorListSideView: React.FC<IProps> = ({ title }) => {
     const { sensorList, query } = useLoaderData<ISensorListSideViewLoaderData>();
     const { submit, data: fetcherData } = useFetcher<ISensorListSideViewLoaderData>();
+    const lastQueryRef = useRef<string>("");
+    const intervalIdRef = useRef<number>(undefined);
 
     useEffect(() => {
-        const intervalId = window.setInterval(() => {
-            void submit({ forceUpdate: "1" }, { method: "get" });
-        }, 3 * 60 * 1000); // 3 minutes
+        if (lastQueryRef.current !== query) {
+            lastQueryRef.current = query ?? "";
+            window.clearInterval(intervalIdRef.current);
 
+            intervalIdRef.current = window.setInterval(() => {
+                void submit(
+                    { forceUpdate: "1", q: query ?? "" },
+                    { method: "get" },
+                );
+            }, 3 * 60 * 1000); // 3 minutes
+        }
         return () => {
-            window.clearInterval(intervalId);
+            window.clearInterval(intervalIdRef.current);
         };
-    }, [submit]);
+    }, [query, submit]);
 
     const effectiveSensorList = fetcherData?.sensorList ?? sensorList;
 
@@ -39,15 +49,7 @@ const SensorListSideView: React.FC<IProps> = ({ title }) => {
                 {effectiveSensorList.map(s => <SensorMarker key={s.id} sensor={s} />)}
             </MapPortal>
             <div className={styles.root}>
-                <Form method="get" className={styles.searchBarContainer}>
-                    <input
-                        name="q"
-                        type="search"
-                        placeholder="Szukaj..."
-                        defaultValue={query}
-                        className={styles.searchBar}
-                    />
-                </Form>
+                <SearchInput currentValue={query} />
                 {effectiveSensorList.map(sensor => (
                     <SensorListItem
                         sensor={sensor}

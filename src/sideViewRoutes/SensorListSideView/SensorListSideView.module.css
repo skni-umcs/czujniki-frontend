@@ -1,25 +1,9 @@
 .root {
     flex-grow: 1;
-}
-
-.searchBarContainer {
-    padding: 8px 16px;
-    padding-top: 0;
-}
-
-.searchBar {
-    width: 100%;
-    padding: 12px 16px;
-    border-radius: 99px;
-    border: 1px solid var(--searchbar-border-color);
-    color: var(--searchbar-text-color);
-    background-color: var(--searchbar-bg);
-    font-size: 0.9em;
-}
-
-.searchBar::placeholder {
-    opacity: 0.8;
-    color: inherit;
+    padding: 0 24px;
+    gap: 16px;
+    display: flex;
+    flex-direction: column;
 }
 
 .emptyList {

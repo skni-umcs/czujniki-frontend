@@ -12,20 +12,22 @@
     --color-surface-3: hsl(300, 2%, 16%);
     --color-surface-4: hsl(300, 2%, 21%);
     --color-surface-5: hsl(300, 2%, 21%);
+    --text-color-grey-300: rgb(176, 183, 197);
+    --text-color-grey-400: rgb(167, 175, 190);
+    --text-color-grey-500: rgb(151, 158, 172);
 
-    --text-color-primary: hsla(0, 0%, 100%, 0.90);
+    --text-color-primary: #e2e2e4;
     --text-color-secondary: hsla(0, 0%, 100%, 0.67);
     --text-color-inverted: hsl(208, 37%, 20%);
-    --text-color-status-outdated: hsl(0, 74%, 74%);
     --text-color-status-offline: grey;
-    --bg-primary: var(--color-surface-2);
+    --bg-primary: #0F121B;
     --bg-secondary: var(--color-surface-3);
-    --bg-tertiary: hsl(300, 8%, 7%);
-    --accent-color: #45455a;
+    --bg-tertiary: #12161F;
+    --accent-color: #1e2435;
     /* --accent-text-color: hsl(213, 81%, 21%); */
     --border-color: rgb(68 71 78);
     --border-color2: hsl(0, 0%, 20%);
-    --border-layer-color: transparent;
+    --border-layer-color: rgb(29, 40, 58);
     --primary-btn-color: hsl(217, 89%, 82%);
     --primary-btn-hover-color: hsl(217, 89%, 86%);
     --primary-btn-active-color: hsl(217, 89%, 89%);
@@ -37,12 +39,13 @@
     --chart-line-color: var(--primary-btn-color);
 
     --login-panel-bg: var(--bg-secondary);
-    --appheader-bg: var(--bg-secondary);
+    --appheader-bg: var(--bg-primary);
     --sidebar-bg: var(--bg-primary);
-    --searchbar-bg: hsl(223, 17%, 8%);
+    --searchbar-bg: inherit;
     --searchbar-text-color: hsl(240, 14%, 90%);
-    --searchbar-border-color: transparent;
-    --alt-navbar-bg: var(--bg-secondary);
+    --searchbar-border-color: #2A3445;
+    --alt-navbar-bg: var(--bg-primary);
+    --list-item-hover-bg: var(--accent-color);
 
     --safe-area-max-inset-bottom: env(safe-area-max-inset-bottom, 0px);
     --bottom-bar-height: 78px;
@@ -56,6 +59,9 @@
     --color-surface-3: #ece7e9;
     --color-surface-4: #e6e1e3;
     --color-surface-5: #e6e1e3;
+    --text-color-grey-300: rgb(77, 80, 89);
+    --text-color-grey-400: rgb(82, 85, 93);
+    --text-color-grey-500: rgb(88, 92, 103);
 
     --text-color-primary: hsl(208, 37%, 20%);
     --text-color-secondary: hsl(207, 5%, 45%);
@@ -88,10 +94,15 @@
     --searchbar-text-color: hsl(270, 4%, 11%);
     --searchbar-border-color: transparent;
     --alt-navbar-bg: var(--bg-secondary);
+    --list-item-hover-bg: #e7e5fa;
 }
 
 .highContrastTheme:root {
     color-scheme: dark;
+
+    --text-color-grey-300: white;
+    --text-color-grey-400: white;
+    --text-color-grey-500: white;
 
     --text-color-primary: white;
     --text-color-inverted: black;
@@ -99,7 +110,7 @@
     --text-color-status-offline: var(--text-color-primary);
     --bg-primary: black;
     --bg-secondary: black;
-    --bg-tertiary: grey;
+    --bg-tertiary: black;
     --accent-color: transparent;
     --accent-text-color: var(--text-color-primary);
     --border-color: white;
@@ -122,6 +133,7 @@
     --searchbar-text-color: var(--text-color-primary);
     --searchbar-border-color: var(--text-color-primary);
     --alt-navbar-bg: var(--bg-secondary);
+    --list-item-hover-bg: var(--accent-color);
 
     a,
     label {

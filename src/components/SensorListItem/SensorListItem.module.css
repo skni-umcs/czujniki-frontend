@@ -2,32 +2,65 @@
     display: block;
     text-decoration: none;
     width: 100%;
-    padding-inline: 32px;
-    padding-block: 16px;
+    padding-inline: 16px;
+    padding-block: 12px;
     transition: .1s background-color, color;
+
+    border: 1px solid var(--border-layer-color);
+    border-radius: 12px;
+    background-color: var(--bg-tertiary);
+
+    &>div {
+
+        display: flex;
+        justify-content: space-between;
+        gap: 8px;
+    }
 
     > :not(.heading) {
         font-size: 0.875em;
     }
 
-    b {
-        font-weight: 600;
-    }
-
     &:is(:link, :visited) {
         color: currentColor;
+    }
+
+    svg {
+        flex-shrink: 0;
     }
 }
 
 .root:hover {
-    background-color: var(--accent-color);
+    background-color: var(--list-item-hover-bg);
     color: var(--accent-text-color);
     cursor: pointer;
 }
 
+.col1 {
+    flex-grow: 1;
+    display: flex;
+    flex-direction: column;
+    gap: 4px;
+}
+
+.col2 {
+    display: flex;
+    flex-direction: column;
+    gap: 4px;
+    justify-content: center;
+    font-size: 1.1em;
+}
+
+.iconValue {
+    display: flex;
+    align-items: center;
+    gap: 1ch;
+}
+
 .heading {
     font-weight: bold;
-    margin-block-end: 0.3em;
+    font-size: 1.1em;
+    margin-block-end: 0.1em;
     display: flex;
     align-items: center;
     gap: .5ch;
@@ -39,4 +72,18 @@
 
 .statusOffline {
     color: var(--text-color-status-offline);
+}
+
+.locationLine {
+    display: flex;
+    align-items: center;
+    gap: 1ch;
+    color: var(--text-color-grey-400);
+}
+
+.timeLine {
+    display: flex;
+    align-items: center;
+    gap: 1ch;
+    color: var(--text-color-grey-500);
 }
