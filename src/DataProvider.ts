@@ -89,6 +89,7 @@ class DataProvider {
 
     async findSensors(query: string) {
         const url = new URL(`/api/sensors`, window.location.origin);
+        url.searchParams.set("size", "80");
         url.searchParams.set("searchTerm", query);
 
         return this.fetcher<Pageable<Sensor>>(url);
