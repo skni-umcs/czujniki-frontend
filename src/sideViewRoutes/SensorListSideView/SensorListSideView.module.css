@@ -6,33 +6,6 @@
     flex-direction: column;
 }
 
-.searchBarContainer {
-    position: relative;
-}
-
-.searchIcon {
-    position: absolute;
-    top: calc(50%);
-    left: 12px;
-    transform: translateY(-50%);
-}
-
-.searchBar {
-    width: 100%;
-    padding: 12px 36px;
-    border-radius: 99px;
-    border: 1px solid var(--searchbar-border-color);
-    color: var(--searchbar-text-color);
-    background-color: var(--searchbar-bg);
-    font-size: 0.9em;
-    border-radius: 12px;
-}
-
-.searchBar::placeholder {
-    opacity: 0.8;
-    color: inherit;
-}
-
 .emptyList {
     font-size: 1.3em;
     display: flex;

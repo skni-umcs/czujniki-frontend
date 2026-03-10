@@ -105,7 +105,7 @@ const router = createBrowserRouter([
                     const query = url.searchParams.get("q") ?? "";
                     const forceUpdate = url.searchParams.get("forceUpdate") === "1";
 
-                    const sensorList = query
+                    const sensorList = query.length > 0
                         ? (await repo.findSensors(query)).content
                         : await repo.getAllSensors(forceUpdate);
 
