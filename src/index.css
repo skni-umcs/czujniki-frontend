@@ -12,9 +12,9 @@
     --color-surface-3: hsl(300, 2%, 16%);
     --color-surface-4: hsl(300, 2%, 21%);
     --color-surface-5: hsl(300, 2%, 21%);
-    --text-color-grey-300: rgb(167, 175, 190);
-    --text-color-grey-400: rgb(151, 158, 172);
-    --text-color-grey-500: rgb(109, 117, 132);
+    --text-color-grey-300: rgb(176, 183, 197);
+    --text-color-grey-400: rgb(167, 175, 190);
+    --text-color-grey-500: rgb(151, 158, 172);
 
     --text-color-primary: #e2e2e4;
     --text-color-secondary: hsla(0, 0%, 100%, 0.67);
@@ -100,13 +100,17 @@
 .highContrastTheme:root {
     color-scheme: dark;
 
+    --text-color-grey-300: white;
+    --text-color-grey-400: white;
+    --text-color-grey-500: white;
+
     --text-color-primary: white;
     --text-color-inverted: black;
     --text-color-status-outdated: var(--text-color-primary);
     --text-color-status-offline: var(--text-color-primary);
     --bg-primary: black;
     --bg-secondary: black;
-    --bg-tertiary: grey;
+    --bg-tertiary: black;
     --accent-color: transparent;
     --accent-text-color: var(--text-color-primary);
     --border-color: white;
