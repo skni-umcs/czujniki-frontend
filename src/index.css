@@ -20,12 +20,12 @@
     --text-color-secondary: hsla(0, 0%, 100%, 0.67);
     --text-color-inverted: hsl(208, 37%, 20%);
     --text-color-status-offline: grey;
-    --bg-primary: #0F121B;
-    --bg-secondary: var(--color-surface-3);
-    --bg-tertiary: #12161F;
+    --bg-primary: hsl(225, 29%, 8%);
+    --bg-secondary: hsl(222.9, 25%, 9%);
+    --bg-tertiary: hsl(221.5, 26.5%, 11%);
     --accent-color: #1e2435;
     /* --accent-text-color: hsl(213, 81%, 21%); */
-    --border-color: rgb(68 71 78);
+    --border-color: hsl(218, 24%, 22%);
     --border-color2: hsl(0, 0%, 20%);
     --border-layer-color: rgb(29, 40, 58);
     --primary-btn-color: hsl(217, 89%, 82%);
@@ -41,11 +41,13 @@
     --login-panel-bg: var(--bg-secondary);
     --appheader-bg: var(--bg-primary);
     --sidebar-bg: var(--bg-primary);
-    --searchbar-bg: var(--bg-tertiary);
+    --searchbar-bg: inherit;
     --searchbar-text-color: hsl(240, 14%, 90%);
-    --searchbar-border-color: #2A3445;
-    --alt-navbar-bg: var(--bg-primary);
+    --searchbar-border-color: hsl(218, 24%, 22%);
+    --alt-navbar-bg: var(--bg-secondary);
     --list-item-hover-bg: var(--accent-color);
+    --datetime-border: hsl(220, 8%, 45.7%);
+    --navbar-active-color: white;
 
     --safe-area-max-inset-bottom: env(safe-area-max-inset-bottom, 0px);
     --bottom-bar-height: 78px;
@@ -75,7 +77,7 @@
     /* --accent-text-color: white; */
     --border-color: hsl(0, 0%, 86%);
     --border-color2: hsl(0, 0%, 92%);
-    --border-layer-color: transparent;
+    --border-layer-color: #00000008;
 
     --primary-btn-color: var(--bg-secondary);
     --primary-btn-hover-color: color-mix(in oklab, var(--bg-secondary), #000 7%);
@@ -90,11 +92,13 @@
     --login-panel-bg: var(--bg-primary);
     --appheader-bg: var(--bg-primary);
     --sidebar-bg: var(--bg-primary);
-    --searchbar-bg: hsl(0, 0%, 95%);
+    --searchbar-bg: var(--bg-tertiary);
     --searchbar-text-color: hsl(270, 4%, 11%);
-    --searchbar-border-color: transparent;
-    --alt-navbar-bg: var(--bg-secondary);
+    --searchbar-border-color: hsla(0, 0%, 0%, 0.02);
+    --alt-navbar-bg: var(--bg-tertiary);
     --list-item-hover-bg: #e7e5fa;
+    --datetime-border: var(--border-layer-color);
+    --navbar-active-color: black;
 }
 
 .highContrastTheme:root {
@@ -134,6 +138,7 @@
     --searchbar-border-color: var(--text-color-primary);
     --alt-navbar-bg: var(--bg-secondary);
     --list-item-hover-bg: var(--accent-color);
+    --datetime-border: var(--border-layer-color);
 
     a,
     label {

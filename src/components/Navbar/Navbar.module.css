@@ -19,11 +19,15 @@
     font-size: 0.75em;
     color: inherit;
     text-decoration: inherit;
+    transition: .1s color;
 }
 
 .item:hover {
-    transition: .1s color;
-    color: var(--text-color-primary);
+    text-decoration: underline;
+}
+
+.active {
+    color: var(--navbar-active-color) !important;
 }
 
 .item>div {
@@ -61,8 +65,4 @@
     .logo {
         display: none;
     }
-}
-
-.active {
-    color: var(--text-color-primary);
 }
