@@ -1,7 +1,7 @@
 import { useEffect, useState } from "react";
 import { CartesianGrid, Line, LineChart, ResponsiveContainer, Tooltip, XAxis, YAxis, ReferenceArea } from "recharts";
 import { AxisDomain } from "recharts/types/util/types";
-import { CategoricalChartFunc } from "recharts/types/chart/generateCategoricalChart";
+import { CategoricalChartFunc } from "recharts/types/chart/types";
 import { RiDeleteBack2Fill } from "react-icons/ri";
 import clsx from "clsx/lite";
 
@@ -63,7 +63,7 @@ function SensorChart<T extends object = object>({ className, height, data, dataK
         if (e.activeLabel && e.activeTooltipIndex) {
             setSelectionState({
                 left: e.activeLabel,
-                leftIndex: e.activeTooltipIndex,
+                leftIndex: e.activeTooltipIndex as number,
                 right: null,
                 rightIndex: null,
             });
@@ -71,12 +71,12 @@ function SensorChart<T extends object = object>({ className, height, data, dataK
     };
 
     const onMouseMoveHandler: CategoricalChartFunc = (e) => {
-        if (selection.left && e.activeLabel && e.activeTooltipIndex) {
+        if (selection.left && selection.leftIndex !== null && e.activeLabel && e.activeTooltipIndex) {
             setSelectionState({
                 left: selection.left,
                 leftIndex: selection.leftIndex,
                 right: e.activeLabel,
-                rightIndex: e.activeTooltipIndex,
+                rightIndex: e.activeTooltipIndex as number,
             });
         }
     };
@@ -124,8 +124,8 @@ function SensorChart<T extends object = object>({ className, height, data, dataK
                     />
                     <Tooltip
                         contentStyle={{ backgroundColor: "var(--bg-primary)", lineHeight: "1.5" }}
-                        formatter={value => [`${value.toString()}${unit ?? ""}`]}
-                        labelFormatter={(value: number) => new Date(value).toLocaleString()}
+                        formatter={value => [`${value?.toString()}${unit ?? ""}`]}
+                        labelFormatter={value => new Date(value as number).toLocaleString()}
                         allowEscapeViewBox={{ x: false, y: true }}
                         itemStyle={{ padding: 0 }}
                     />

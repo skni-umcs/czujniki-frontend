@@ -121,7 +121,7 @@ class DataProvider {
 
         const data = await this.fetcher<Pageable<SensorDataUnparsed>>(url);
         const historicalData = data.content
-            .map(el => ({ ...el, timestamp: new Date(el.timestamp).getTime() } as SensorData))
+            .map(el => ({ ...el, timestamp: new Date(el.timestamp).getTime() }))
             .sort((a, b) => a.timestamp - b.timestamp);
 
         this.#historicalData.set(id, {

@@ -17,7 +17,7 @@ const AccessibilitySideView: React.FC = () => {
     const { theme, setTheme } = useTheme();
     const { fontSize, setFontSize } = useFontSize();
 
-    const handleChange = (event: React.FormEvent<HTMLFormElement>) => {
+    const handleChange = (event: React.ChangeEvent<HTMLFormElement>) => {
         const e = event.target as HTMLFormElement & { value: string };
         if (e.name === "theme") setTheme(e.value as TTheme);
         if (e.name === "font-size") setFontSize(e.value as TFontSize);
