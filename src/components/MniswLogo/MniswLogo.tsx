@@ -1,4 +1,4 @@
-import { useTheme } from "../../contexts/ThemeProvider";
+import { useTheme } from "../../contexts/themeContext";
 import mniswLogoLight from "../../assets/mnisw_light.png";
 import mniswLogoDark from "../../assets/mnisw_dark.png";
 import mniswLogoMono from "../../assets/mnisw_mono.png";

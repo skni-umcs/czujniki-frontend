@@ -4,8 +4,8 @@ import styles from "./AccessibilitySideView.module.css";
 import SideView from "../../components/SideView/SideView.tsx";
 import MapPortal from "../../components/MapPortal/MapPortal.tsx";
 import SensorMarker from "../../components/SensorMarker/SensorMarker.tsx";
-import { TTheme, useTheme } from "../../contexts/ThemeProvider.tsx";
-import { TFontSize, useFontSize } from "../../contexts/FontSizeProvider.tsx";
+import { TTheme, useTheme } from "../../contexts/themeContext.ts";
+import { TFontSize, useFontSize } from "../../contexts/fontSizeContext.ts";
 import Sensor from "../../types/Sensor.ts";
 
 export interface IAccessibilitySideViewLoaderData {

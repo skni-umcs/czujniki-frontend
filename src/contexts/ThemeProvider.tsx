@@ -1,12 +1,6 @@
-import { createContext, useState, useLayoutEffect, PropsWithChildren, useContext, useMemo } from "react";
+import { useState, useLayoutEffect, PropsWithChildren, useMemo } from "react";
 
-export type TTheme = "system" | "light" | "dark" | "highContrast";
-
-interface TThemeContext {
-    theme: TTheme;
-    actualTheme: Omit<TTheme, "system">;
-    setTheme: React.Dispatch<React.SetStateAction<TTheme>>;
-}
+import { ThemeContext, TTheme } from "./themeContext";
 
 const getSystemPreferedTheme = (): TTheme => {
     if (window.matchMedia("(prefers-color-scheme: dark)").matches) return "dark";
@@ -23,14 +17,8 @@ const getPersistedTheme = () => {
     return theme ?? getSystemPreferedTheme();
 };
 
-export const ThemeContext = createContext<TThemeContext>({
-    theme: "system",
-    actualTheme: getPersistedTheme(),
-    setTheme: () => void 0,
-});
-
 const ThemeProvider: React.FC<PropsWithChildren> = ({ children }) => {
-    const [theme, setTheme] = useState(getPersistedTheme);
+    const [theme, setTheme] = useState<TTheme>(getPersistedTheme);
 
     const actualTheme = useMemo(() => {
         return theme === "system" ? getSystemPreferedTheme() : theme;
@@ -47,7 +35,5 @@ const ThemeProvider: React.FC<PropsWithChildren> = ({ children }) => {
         </ThemeContext>
     );
 };
-
-export const useTheme = () => useContext(ThemeContext);
 
 export default ThemeProvider;

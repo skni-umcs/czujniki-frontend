@@ -1,33 +1,15 @@
-import { createContext, useState, useLayoutEffect, PropsWithChildren, useContext } from "react";
+import { useState, useLayoutEffect, PropsWithChildren } from "react";
 
-interface TFavoritesContext {
-    favorites: number[];
-    addFavorite: (id: number) => void;
-    removeFavorite: (id: number) => void;
-}
-
-export const getFavorites = () => {
-    const json = localStorage.getItem("favorites");
-    if (!json) return [];
-
-    const favorites = JSON.parse(json) as number[] | null;
-    return favorites ?? [];
-};
-
-export const FavoritesContext = createContext<TFavoritesContext>({
-    favorites: getFavorites(),
-    addFavorite: () => void 0,
-    removeFavorite: () => void 0,
-});
+import { FavoritesContext, getFavorites } from "./favoritesContext";
 
 const FavoritesProvider: React.FC<PropsWithChildren> = ({ children }) => {
     const [favorites, setFavorites] = useState(getFavorites);
 
-    const addFavorite: TFavoritesContext["addFavorite"] = (id) => {
+    const addFavorite = (id: number) => {
         setFavorites(favs => [...favs, id]);
     };
 
-    const removeFavorite: TFavoritesContext["removeFavorite"] = (id) => {
+    const removeFavorite = (id: number) => {
         setFavorites(favs => favs.filter(val => val !== id));
     };
 
@@ -41,7 +23,5 @@ const FavoritesProvider: React.FC<PropsWithChildren> = ({ children }) => {
         </FavoritesContext>
     );
 };
-
-export const useFavorites = () => useContext(FavoritesContext);
 
 export default FavoritesProvider;

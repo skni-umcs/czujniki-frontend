@@ -14,7 +14,7 @@ import MapPortal from "../../components/MapPortal/MapPortal.tsx";
 import SensorMarker from "../../components/SensorMarker/SensorMarker.tsx";
 import IconButton from "../../components/IconButton/IconButton.tsx";
 import CurrentCondition from "../../components/CurrentCondition/CurrentCondition.tsx";
-import { useFavorites } from "../../contexts/FavoritesProvider.tsx";
+import { useFavorites } from "../../contexts/favoritesContext.ts";
 import Charts from "./Charts.tsx";
 import useSensorUpdateEvents from "./useSensorUpdateEvents.ts";
 

@@ -1,24 +1,9 @@
-import { createContext, useState, useLayoutEffect, PropsWithChildren, useContext } from "react";
+import { useState, useLayoutEffect, PropsWithChildren } from "react";
 
-export type TFontSize = "normal" | "large" | "larger";
-
-interface TFontSizeContext {
-    fontSize: TFontSize;
-    setFontSize: React.Dispatch<React.SetStateAction<TFontSize>>;
-}
-
-const getFontSize = () => {
-    const fontSize = localStorage.getItem("fontSize") as TFontSize | null;
-    return fontSize ?? "normal";
-};
-
-export const FontSizeContext = createContext<TFontSizeContext>({
-    fontSize: getFontSize(),
-    setFontSize: () => void 0,
-});
+import { FontSizeContext, TFontSize } from "./fontSizeContext";
 
 const FontSizeProvider: React.FC<PropsWithChildren> = ({ children }) => {
-    const [fontSize, setFontSize] = useState(getFontSize);
+    const [fontSize, setFontSize] = useState<TFontSize>("normal");
 
     useLayoutEffect(() => {
         localStorage.setItem("fontSize", fontSize);
@@ -42,7 +27,5 @@ const FontSizeProvider: React.FC<PropsWithChildren> = ({ children }) => {
         </FontSizeContext>
     );
 };
-
-export const useFontSize = () => useContext(FontSizeContext);
 
 export default FontSizeProvider;

@@ -1,6 +1,6 @@
 import { createBrowserRouter, redirect } from "react-router-dom";
 
-import { getFavorites } from "./contexts/FavoritesProvider.tsx";
+import { getFavorites } from "./contexts/favoritesContext";
 import ErrorRouteFallback from "./routes/ErrorRouteFallback/ErrorRouteFallback.tsx";
 import MapAppRoute from "./routes/MapAppRoute/MapAppRoute.tsx";
 import MapAppRouteSkeleton from "./routes/MapAppRouteSkeleton/MapAppRouteSkeleton.tsx";

@@ -1,22 +1,11 @@
 import { StyleSpecification } from "maplibre-gl";
 import { RMap, RAttributionControl, RNavigationControl } from "maplibre-react-components";
 
-import { useTheme } from "../../contexts/ThemeProvider";
+import { useTheme } from "../../contexts/themeContext";
 
 import osmLib from "./osm_liberty.json";
 import "./SensorMap.css";
-
-export const mapID = "mapA";
-
-const locale = {
-    "Map.Title": "Mapa",
-    "NavigationControl.ZoomIn": "Powiększ",
-    "NavigationControl.ZoomOut": "Pomniejsz",
-    "AttributionControl.ToggleAttribution": "Przełącz atrybucję",
-};
-
-const center = [22.542066, 51.245487] as [number, number];
-const padding = 1.5;
+import { mapID, locale, center, padding } from "./mapConstants";
 
 const SensorMap: React.FC = () => {
     const { actualTheme } = useTheme();

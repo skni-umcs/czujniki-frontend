@@ -2,7 +2,7 @@ import { createPortal } from "react-dom";
 import { CurrentMapIdContext, useMap } from "maplibre-react-components";
 
 import styles from "./MapPortal.module.css";
-import { mapID } from "../SensorMap/SensorMap";
+import { mapID } from "../SensorMap/mapConstants";
 
 const MapPortal: React.FC<React.PropsWithChildren> = ({ children }) => {
     const mapContainerEl = useMap(mapID)?.getContainer();
